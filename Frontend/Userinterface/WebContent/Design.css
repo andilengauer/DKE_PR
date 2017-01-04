@@ -1,0 +1,180 @@
+@CHARSET "ISO-8859-1";
+
+
+input {
+	margin: 0 0 1em 10em;
+	width: 250px;
+}
+
+label {
+	float: left;
+	text-align: right;
+	width: 1em;
+}
+
+#Fieldset_Flugzeuginformationen {
+	border: 2px solid green;	
+	font-size: 120%;
+}
+
+#Legend_Flugzeuginformationen {
+	font-size: 140%;
+	font-weight: bold;
+}
+
+#Fieldset_Flugroute {
+	border: 2px solid green;	
+	font-size: 120%;
+}
+
+#Legend_Flugroute {
+	font-size: 140%;
+	font-weight: bold;
+}
+
+#Fieldset_Abflugflughafen {
+	border: 1px solid black;	
+	font-size: 100%;
+}
+#Legend_Abflugflughafen {
+	font-size: 120%;
+	font-weight: bold;
+}
+
+#Fieldset_Zielflughafen {
+	border: 1px solid black;	
+	font-size: 100%;
+}
+
+#Legend_Zielflughafen {
+	font-size: 120%;
+	font-weight: bold;
+}
+
+#Fieldset_Area {
+	border: 1px solid black;	
+	font-size: 100%;
+}
+
+#Legend_Area {
+	font-size: 120%;
+	font-weight: bold;
+}
+
+#Fieldset_Segment {
+	border: 1px solid black;	
+	font-size: 100%;
+}
+
+#Legend_Segment {
+	font-size: 120%;
+	font-weight: bold;
+}
+
+#datepicker1 { 
+    vertical-align : top;
+    width: 100px;
+}
+
+#datepicker2 { 
+    vertical-align : top;
+    width: 100px;
+}
+
+#datepicker3 { 
+    vertical-align : top;
+    width: 100px;
+}
+
+#datepicker4 { 
+    vertical-align : top;
+    width: 100px;
+}
+
+#datepicker5 { 
+    vertical-align : top;
+    width: 100px;
+}
+
+#datepicker6 { 
+    vertical-align : top;
+    width: 100px;
+}
+
+#datepicker7 { 
+    vertical-align : top;
+    width: 100px;
+}
+
+#datepicker8 { 
+    vertical-align : top;
+    width: 100px;
+}
+
+#Label_Datum_Anfang {
+	width: 1em;
+	float: left;
+}
+
+#Label_Uhrzeit_Anfang {
+	position: absolute;
+	left: 10cm;
+}
+
+#Textfield_Uhrzeit_Anfang {
+	position: absolute;
+	left: 10cm;
+	width: 100px;
+}
+
+#Label_Datum_Ende {
+	width: 1em;
+	float: left;
+}
+
+#Label_Uhrzeit_Ende {
+	position: absolute;
+	left: 10cm;
+}
+
+#Textfield_Uhrzeit_Ende {
+	position: absolute;
+	left: 10cm;
+	width: 100px;
+}
+
+#Auswahl_Flugregeln {
+	position: absolute;
+	left: 6cm;
+	width: 70px;
+}
+
+#Auswahl_Wetterbedingungen {
+	position: absolute;
+	left: 6cm;
+	width: 70px;
+}
+
+#Auswahl_Optionen {
+	position: absolute;
+	left: 3cm;
+	width: 100px;
+}
+
+#Karte {
+	height: 400px;
+}
+
+#Button_Filtern {
+	height: 40px;
+	width: 100px;
+	font-weight: bold;
+	font-size: 150%;
+}
+
+#Label_Optionen {
+	font-size: 100%;
+}
+
+
+
