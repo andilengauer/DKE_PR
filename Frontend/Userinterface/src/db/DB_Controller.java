@@ -1,9 +1,24 @@
 package db;
 
 import java.io.File;
-import java.util.Collection;	 
+import java.io.OutputStreamWriter;
+import java.util.Properties;
 
-import javax.xml.transform.OutputKeys;	
+import javax.xml.transform.OutputKeys;
+
+import org.exist.storage.serializers.EXistOutputKeys;
+import org.exist.util.serializer.SAXSerializer;
+import org.exist.util.serializer.SerializerPool;
+import org.exist.xmldb.EXistResource;
+import org.exist.xmldb.XQueryService;
+import org.exist.xmldb.XmldbURI;
+import org.xmldb.api.DatabaseManager;
+import org.xmldb.api.base.Collection;
+import org.xmldb.api.base.CompiledExpression;
+import org.xmldb.api.base.Database;
+import org.xmldb.api.base.ResourceSet;
+import org.xmldb.api.modules.CollectionManagementService;
+import org.xmldb.api.modules.XMLResource;
 
 public class DB_Controller {
 	protected static String driver = "org.exist.xmldb.DatabaseImpl";
