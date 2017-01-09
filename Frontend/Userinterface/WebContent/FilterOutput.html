@@ -12,87 +12,6 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://openlayers.org/en/v3.20.1/build/ol.js"></script>
-<script>
- $(function() {
-     $( "#datepicker1" ).datepicker({
-         showOn: "both",
-         buttonImage: "C:/Users/lukas/workspace/Test1/Kalender.png",
-         buttonImageOnly: true,
-         buttonText: "Kalender",
-         dateFormat: 'dd-mm-yy'  
-     });
- });
- 
- $(function() {
-     $( "#datepicker2" ).datepicker({
-    	 showOn: "both",
-         buttonImage: "C:/Users/lukas/workspace/Test1/Kalender.png",
-         buttonImageOnly: true,
-         buttonText: "Kalender",
-         dateFormat: 'dd-mm-yy'  
-     });
- });
- 
- $(function() {
-     $( "#datepicker3" ).datepicker({
-    	 showOn: "both",
-         buttonImage: "C:/Users/lukas/workspace/Test1/Kalender.png",
-         buttonImageOnly: true,
-         buttonText: "Kalender",
-         dateFormat: 'dd-mm-yy'  
-     });
- });
- 
- $(function() {
-     $( "#datepicker4" ).datepicker({
-    	 showOn: "both",
-         buttonImage: "C:/Users/lukas/workspace/Test1/Kalender.png",
-         buttonImageOnly: true,
-         buttonText: "Kalender",
-         dateFormat: 'dd-mm-yy'  
-     });
- });
- 
- $(function() {
-     $( "#datepicker5" ).datepicker({
-    	 showOn: "both",
-         buttonImage: "C:/Users/lukas/workspace/Test1/Kalender.png",
-         buttonImageOnly: true,
-         buttonText: "Kalender",
-         dateFormat: 'dd-mm-yy'  
-     });
- });
- 
- $(function() {
-     $( "#datepicker6" ).datepicker({
-    	 showOn: "both",
-         buttonImage: "C:/Users/lukas/workspace/Test1/Kalender.png",
-         buttonImageOnly: true,
-         buttonText: "Kalender",
-         dateFormat: 'dd-mm-yy'  
-     });
- });
- 
- $(function() {
-     $( "#datepicker7" ).datepicker({
-    	 showOn: "both",
-         buttonImage: "C:/Users/lukas/workspace/Test1/Kalender.png",
-         buttonImageOnly: true,
-         buttonText: "Kalender",
-         dateFormat: 'dd-mm-yy'  
-     });
- });
- 
- $(function() {
-     $( "#datepicker8" ).datepicker({
-    	 showOn: "both",
-         buttonImage: "C:/Users/lukas/workspace/Test1/Kalender.png",
-         buttonImageOnly: true,
-         buttonText: "Kalender",
-         dateFormat: 'dd-mm-yy'  
-     });
- });
-</script>
 </head>
 <body>
 
@@ -117,7 +36,7 @@
 				<fieldset id="Fieldset_Abflugflughafen">
 					<legend id="Legend_Abflugflughafen">Abflugflughafen</legend><br>
 					<label> ID:</label>
-					<input type="text" id="Id"><br>
+					<input type="text" name="Id_Abflughafen"/><br>
 					<label id="Label_Datum_Anfang">Startdatum:</label>
 					<input type="text" id="datepicker1">
 					<label id="Label_Uhrzeit_Anfang">Startuhrzeit:</label>
@@ -229,7 +148,7 @@
     	     layers: [raster, vector],
     	     target: 'Karte',
     	     view: new ol.View({
-    	     center: [-11000000, 4600000],
+    	     center: ol.proj.fromLonLat([16.37, 48.209]),
     	     zoom: 4
     	     })
     	});

@@ -18,7 +18,7 @@
  $(function() {
      $( "#datepicker1" ).datepicker({
          showOn: "both",
-         buttonImage: "C:/Users/lukas/workspace/Test1/Kalender.png",
+         buttonImage: "Kalender.png",
          buttonImageOnly: true,
          buttonText: "Kalender",
          dateFormat: 'dd-mm-yy'  

@@ -71,93 +71,224 @@ label {
 	font-weight: bold;
 }
 
-#datepicker1 { 
+#datepicker1_Abflugflughafen { 
     vertical-align : top;
     width: 100px;
 }
 
-#datepicker2 { 
+#datepicker2_Abflugflughafen { 
     vertical-align : top;
     width: 100px;
 }
 
-#datepicker3 { 
+#datepicker3_Area { 
     vertical-align : top;
     width: 100px;
 }
 
-#datepicker4 { 
+#datepicker4_Area { 
     vertical-align : top;
     width: 100px;
 }
 
-#datepicker5 { 
+#datepicker5_Segment { 
     vertical-align : top;
     width: 100px;
 }
 
-#datepicker6 { 
+#datepicker6_Segment { 
     vertical-align : top;
     width: 100px;
 }
 
-#datepicker7 { 
+#datepicker7_Zielflughafen { 
     vertical-align : top;
     width: 100px;
 }
 
-#datepicker8 { 
+#datepicker8_Zielflughafen { 
     vertical-align : top;
     width: 100px;
 }
 
-#Label_Datum_Anfang {
+#Label_Datum_Anfang_Abflugflughafen {
 	width: 1em;
 	float: left;
 }
 
-#Label_Uhrzeit_Anfang {
+#Label_Uhrzeit_Anfang_Abflugflughafen {
 	position: absolute;
 	left: 10cm;
 }
 
-#Textfield_Uhrzeit_Anfang {
+#Textfield_Uhrzeit_Anfang_Abflugflughafen {
 	position: absolute;
 	left: 10cm;
 	width: 100px;
 }
 
-#Label_Datum_Ende {
+#Label_Datum_Ende_Abflugflughafen {
 	width: 1em;
 	float: left;
 }
 
-#Label_Uhrzeit_Ende {
+#Label_Uhrzeit_Ende_Abflugflughafen {
 	position: absolute;
 	left: 10cm;
 }
 
-#Textfield_Uhrzeit_Ende {
+#Textfield_Uhrzeit_Ende_Abflugflughafen {
 	position: absolute;
 	left: 10cm;
 	width: 100px;
 }
 
-#Auswahl_Flugregeln {
+#Label_Datum_Anfang_Area {
+	width: 1em;
+	float: left;
+}
+
+#Label_Uhrzeit_Anfang_Area {
+	position: absolute;
+	left: 10cm;
+}
+
+#Textfield_Uhrzeit_Anfang_Area {
+	position: absolute;
+	left: 10cm;
+	width: 100px;
+}
+
+#Label_Datum_Ende_Area {
+	width: 1em;
+	float: left;
+}
+
+#Label_Uhrzeit_Ende_Area {
+	position: absolute;
+	left: 10cm;
+}
+
+#Textfield_Uhrzeit_Ende_Area {
+	position: absolute;
+	left: 10cm;
+	width: 100px;
+}
+
+#Label_Datum_Anfang_Segment {
+	width: 1em;
+	float: left;
+}
+
+#Label_Uhrzeit_Anfang_Segment {
+	position: absolute;
+	left: 10cm;
+}
+
+#Textfield_Uhrzeit_Anfang_Segment {
+	position: absolute;
+	left: 10cm;
+	width: 100px;
+}
+
+#Label_Datum_Ende_Segment {
+	width: 1em;
+	float: left;
+}
+
+#Label_Uhrzeit_Ende_Segment {
+	position: absolute;
+	left: 10cm;
+}
+
+#Textfield_Uhrzeit_Ende_Segment {
+	position: absolute;
+	left: 10cm;
+	width: 100px;
+}
+
+#Label_Datum_Anfang_Zielflughafen {
+	width: 1em;
+	float: left;
+}
+
+#Label_Uhrzeit_Anfang_Zielflughafen {
+	position: absolute;
+	left: 10cm;
+}
+
+#Textfield_Uhrzeit_Anfang_Zielflughafen {
+	position: absolute;
+	left: 10cm;
+	width: 100px;
+}
+
+#Label_Datum_Ende_Zielflughafen {
+	width: 1em;
+	float: left;
+}
+
+#Label_Uhrzeit_Ende_Zielflughafen {
+	position: absolute;
+	left: 10cm;
+}
+
+#Textfield_Uhrzeit_Ende_Zielflughafen {
+	position: absolute;
+	left: 10cm;
+	width: 100px;
+}
+
+#Auswahl_Flugregeln_Abflugflughafen {
 	position: absolute;
 	left: 6cm;
 	width: 70px;
 }
 
-#Auswahl_Wetterbedingungen {
+#Auswahl_Wetterbedingungen_Abflugflughafen {
 	position: absolute;
 	left: 6cm;
 	width: 70px;
 }
 
-#Auswahl_Optionen {
+#Auswahl_Flugregeln_Area {
 	position: absolute;
-	left: 3cm;
+	left: 6cm;
+	width: 70px;
+}
+
+#Auswahl_Wetterbedingungen_Area {
+	position: absolute;
+	left: 6cm;
+	width: 70px;
+}
+
+#Auswahl_Flugregeln_Segment {
+	position: absolute;
+	left: 6cm;
+	width: 70px;
+}
+
+#Auswahl_Wetterbedingungen_Segment {
+	position: absolute;
+	left: 6cm;
+	width: 70px;
+}
+
+#Auswahl_Flugregeln_Zielflughafen {
+	position: absolute;
+	left: 6cm;
+	width: 70px;
+}
+
+#Auswahl_Wetterbedingungen_Zielflughafen {
+	position: absolute;
+	left: 6cm;
+	width: 70px;
+}
+#Auswahl_Optionen_Karte {
+	position: absolute;
+	left: 11cm;
 	width: 100px;
 }
 
@@ -165,15 +296,65 @@ label {
 	height: 400px;
 }
 
-#Button_Filtern {
+#Label_Optionen_Karte {
+	font-size: 100%;
+}
+
+#Submit {
 	height: 40px;
 	width: 100px;
 	font-weight: bold;
 	font-size: 150%;
+	left: 1cm;
+	position: absolute;
 }
 
-#Label_Optionen {
-	font-size: 100%;
+#Textfield_Auswahl_Flugregeln_Ablugflughafen {
+	position: absolute;
+	left: 2cm;
+	width: 70px;
+}
+
+#Textfield_Auswahl_Wetterbedingungen_Ablugflughafen {
+	position: absolute;
+	left: 2cm;
+	width: 70px;
+}
+
+#Textfield_Auswahl_Flugregeln_Area{
+	position: absolute;
+	left: 2cm;
+	width: 70px;
+}
+
+#Textfield_Auswahl_Wetterbedingungen_Area {
+	position: absolute;
+	left: 2cm;
+	width: 70px;
+}
+
+#Textfield_Auswahl_Flugregeln_Segment {
+	position: absolute;
+	left: 2cm;
+	width: 70px;
+}
+
+#Textfield_Auswahl_Wetterbedingungen_Segment {
+	position: absolute;
+	left: 2cm;
+	width: 70px;
+}
+
+#Textfield_Auswahl_Flugregeln_Zielflughafen {
+	position: absolute;
+	left: 2cm;
+	width: 70px;
+}
+
+#Textfield_Auswahl_Wetterbedingungen_Zielflughafen {
+	position: absolute;
+	left: 2cm;
+	width: 70px;
 }
 
 

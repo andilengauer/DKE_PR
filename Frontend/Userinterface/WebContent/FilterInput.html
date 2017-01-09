@@ -16,7 +16,7 @@
  $(function() {
      $( "#datepicker1" ).datepicker({
          showOn: "both",
-         buttonImage: "C:/Users/lukas/workspace/Test1/Kalender.png",
+         buttonImage: "C:/Users/lukas/workspace/Userinterface/Kalender.png",
          buttonImageOnly: true,
          buttonText: "Kalender",
          dateFormat: 'dd-mm-yy'  
@@ -26,7 +26,7 @@
  $(function() {
      $( "#datepicker2" ).datepicker({
     	 showOn: "both",
-         buttonImage: "C:/Users/lukas/workspace/Test1/Kalender.png",
+         buttonImage: "C:/Users/lukas/workspace/Userinterface/Kalender.png",
          buttonImageOnly: true,
          buttonText: "Kalender",
          dateFormat: 'dd-mm-yy'  
@@ -36,7 +36,7 @@
  $(function() {
      $( "#datepicker3" ).datepicker({
     	 showOn: "both",
-         buttonImage: "C:/Users/lukas/workspace/Test1/Kalender.png",
+         buttonImage: "C:/Users/lukas/workspace/Userinterface/Kalender.png",
          buttonImageOnly: true,
          buttonText: "Kalender",
          dateFormat: 'dd-mm-yy'  
@@ -46,7 +46,7 @@
  $(function() {
      $( "#datepicker4" ).datepicker({
     	 showOn: "both",
-         buttonImage: "C:/Users/lukas/workspace/Test1/Kalender.png",
+         buttonImage: "C:/Users/lukas/workspace/Userinterface/Kalender.png",
          buttonImageOnly: true,
          buttonText: "Kalender",
          dateFormat: 'dd-mm-yy'  
@@ -56,7 +56,7 @@
  $(function() {
      $( "#datepicker5" ).datepicker({
     	 showOn: "both",
-         buttonImage: "C:/Users/lukas/workspace/Test1/Kalender.png",
+         buttonImage: "C:/Users/lukas/workspace/Userinterface/Kalender.png",
          buttonImageOnly: true,
          buttonText: "Kalender",
          dateFormat: 'dd-mm-yy'  
@@ -66,7 +66,7 @@
  $(function() {
      $( "#datepicker6" ).datepicker({
     	 showOn: "both",
-         buttonImage: "C:/Users/lukas/workspace/Test1/Kalender.png",
+         buttonImage: "C:/Users/lukas/workspace/Userinterface/Kalender.png",
          buttonImageOnly: true,
          buttonText: "Kalender",
          dateFormat: 'dd-mm-yy'  
@@ -76,7 +76,7 @@
  $(function() {
      $( "#datepicker7" ).datepicker({
     	 showOn: "both",
-         buttonImage: "C:/Users/lukas/workspace/Test1/Kalender.png",
+         buttonImage: "C:/Users/lukas/workspace/Userinterface/Kalender.png",
          buttonImageOnly: true,
          buttonText: "Kalender",
          dateFormat: 'dd-mm-yy'  
@@ -86,7 +86,7 @@
  $(function() {
      $( "#datepicker8" ).datepicker({
     	 showOn: "both",
-         buttonImage: "C:/Users/lukas/workspace/Test1/Kalender.png",
+         buttonImage: "C:/Users/lukas/workspace/Userinterface/Kalender.png",
          buttonImageOnly: true,
          buttonText: "Kalender",
          dateFormat: 'dd-mm-yy'  
@@ -211,7 +211,7 @@
 				</fieldset><br>
 				
 			<div id="Karte" class="Karte"></div><br>
-			<label id="Label_Optionen">Optionen:</label>
+			<label id="Label_Optionen">Wählen&nbsp;Sie&nbsp;bitte&nbsp;die&nbsp;gewünschte&nbsp;Option&nbsp;aus:</label>
       		<select id="Auswahl_Optionen">  
         		<option value="LineString">Linie</option>
         		<option value="Polygon">Polygon</option>
@@ -240,7 +240,7 @@
     	     layers: [raster, vector],
     	     target: 'Karte',
     	     view: new ol.View({
-    	     center: [-11000000, 4600000],
+    	     center: ol.proj.fromLonLat([16.37, 48.209]),
     	     zoom: 4
     	     })
     	});
