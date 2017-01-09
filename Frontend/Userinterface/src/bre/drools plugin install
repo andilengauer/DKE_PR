@@ -1,0 +1,9 @@
+Help -> install new software -> work with:
+
+In the Work With: or Site: input field, enter: 
+"http://download.jboss.org/drools/release/<VERSION>.Final/org.drools.updatesite/", 
+replace "<VERSION>" with appropriate version and click the "Add" button
+VERSION 6.5.0.
+
+Name : Drools
+Drools & jBPM Checkboxen Haken setzen
