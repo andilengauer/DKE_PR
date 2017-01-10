@@ -122,21 +122,21 @@ pageEncoding="ISO-8859-1"%>
 					<label> ID:</label>
 					<input type="text" name="Id_Abflugflughafen" id="Id_Abflugflughafen"><br>
 					<label name="Label_Datum_Anfang_Abflugflughafen" id="Id_Abflugflughafen">Startdatum:</label>
-					<input type="text" name="datepicker1_Abflugflughafen" id="datepicker1_Abflugflughafen">
+					<input type="text" name="Datum_Anfang_Abflugflughafen" id="datepicker1_Abflugflughafen">
 					<label name="Label_Uhrzeit_Anfang_Abflugflughafen" id="Label_Uhrzeit_Anfang_Abflugflughafen">Startuhrzeit:</label>
-					<input type="text" name="Textfield_Uhrzeit_Anfang_Abflugflughafen" id="Textfield_Uhrzeit_Anfang_Abflugflughafen" placeholder="example: 15:30"><br>
+					<input type="text" name="Uhrzeit_Anfang_Abflugflughafen" id="Textfield_Uhrzeit_Anfang_Abflugflughafen" placeholder="example: 15:30"><br>
 					<label name="Label_Datum_Ende_Abflugflughafen" id="Label_Datum_Ende_Abflugflughafen">Endedatum:</label>
-					<input type="text" name="datepicker2_Abflugflughafen" id="datepicker2_Abflugflughafen">
+					<input type="text" name="Datum_Ende_Abflugflughafen" id="datepicker2_Abflugflughafen">
 					<label name="Label_Uhrzeit_Ende_Abflugflughafen" id="Label_Uhrzeit_Ende_Abflugflughafen">Endeuhrzeit:</label>
-					<input type="text" name="Textfield_Uhrzeit_Ende_Abflugflughafen" id="Textfield_Uhrzeit_Ende_Abflugflughafen" placeholder="example: 17:30"><br>
+					<input type="text" name="Uhrzeit_Ende_Abflugflughafen" id="Textfield_Uhrzeit_Ende_Abflugflughafen" placeholder="example: 17:30"><br>
 					<label name="Flugregeln_Abflugflughafen" id="Flugregeln_Abflugflughafen">Flugregeln:</label>
-					<select onClick="this.form.Textfield_Auswahl_Flugregeln_Ablugflughafen.value=this.options[this.selectedIndex].text;" name="Auswahl_Flugregeln_Abflugflughafen" id="Auswahl_Flugregeln_Abflugflughafen">
+					<select onClick="this.form.Textfield_Auswahl_Flugregeln_Ablugflughafen.value=this.options[this.selectedIndex].text;" name="Flugregel_Abflugflughafen" id="Auswahl_Flugregeln_Abflugflughafen">
  						<option value="IFR">IFR</option>
   						<option value="VFR">VFR</option>
 					</select><br><br>
 					<input type="hidden" name="Textfield_Auswahl_Flugregeln_Ablugflughafen"></input>
 					<label name="Wetterbedingungen_Abflugflughafen" id="Wetterbedingungen_Abflugflughafen">Wetterbedingungen:</label>
-					<select onClick="this.form.Textfield_Auswahl_Wetterbedingungen_Ablugflughafen.value=this.options[this.selectedIndex].text;" name="Auswahl_Wetterbedingungen_Abflugflughafen" id="Auswahl_Wetterbedingungen_Abflugflughafen">
+					<select onClick="this.form.Textfield_Auswahl_Wetterbedingungen_Ablugflughafen.value=this.options[this.selectedIndex].text;" name="Wetter_Abflugflughafen" id="Auswahl_Wetterbedingungen_Abflugflughafen">
  						<option value="IMC">IMC</option>
   						<option value="VMC">VMC</option>
 					</select> 

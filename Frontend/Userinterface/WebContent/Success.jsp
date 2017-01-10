@@ -1,4 +1,4 @@
-<%@page import="frontend.AppController"%>
+<%@page import="frontend.AppController,java.util.*,com.frequentis.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -10,12 +10,14 @@
 <body>
 <%
 String eingabe = request.getParameter("Id_Flugzeug");
+Map<String,String[]> params = request.getParameterMap();
 
 out.println("Sie haben folgende ID eingegeben: " + eingabe);
 AppController controller = AppController.getInstance();
-controller.setCurrentId(eingabe);
+controller.handleInputData(params);
 
-response.sendRedirect("FilterOutput.jsp");
+//response.sendRedirect("FilterOutput.jsp");
+
 %>
 </body>
 </html>
