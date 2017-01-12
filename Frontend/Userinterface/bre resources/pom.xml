@@ -6,4 +6,6 @@
   <groupId>Praktikum.group</groupId>
   <artifactId>Praktikum.artifact</artifactId>
   <version>1.0</version>
+  <dependencies>
+  </dependencies>
 </project>

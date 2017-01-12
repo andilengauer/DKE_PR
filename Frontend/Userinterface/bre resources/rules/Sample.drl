@@ -1,3 +1,5 @@
+package com.sample
+ 
 import com.sample.DroolsTest.Message;
  
 rule "Hello World"
@@ -15,4 +17,4 @@ rule "GoodBye"
         Message( status == Message.GOODBYE, myMessage : message )
     then
         System.out.println( myMessage );
-end	
+end
