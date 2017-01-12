@@ -101,16 +101,25 @@ pageEncoding="ISO-8859-1"%>
 </script>
 </head>
 <body>
+
 	<form action="Success.jsp" method ="get">
+		<ul>
+			<li><a href="Flugzeuginformationen.jsp">Flugzeuginformationen</a></li>
+			<li><a href="Abflugflughafen.jsp">Abflugflughafen</a></li>
+			<li><a href="Zielflughafen.jsp">Zielflughafen</a></li>
+			<li><a href="Area.jsp">Area</a></li>
+			<li><a href="Segment.jsp">Segment</a></li>
+		</ul><br></br><br></br>
+		
 		<fieldset id="Fieldset_Flugzeuginformationen">
 			<legend id="Legend_Flugzeuginformationen">Flugzeuginformationen</legend><br>
 			<label>ID:</label> 
 			<input type="text" name="Id_Flugzeug" id="Id_Flugzeug"><br>
 			<label>Typ:</label>
-					<select onClick="this.form.Typ_Flugzeug.value=this.options[this.selectedIndex].text;" name="Typ_Flugzeug" id="Typ_Flugzeug">
- 						<option value=<%=AircraftTypeType.HELICOPTER %>><%=AircraftTypeType.HELICOPTER %></option>
-  						<option value=<%=AircraftTypeType.LANDPLANE %>><%=AircraftTypeType.LANDPLANE %></option>
-					</select><br>
+			<select onClick="this.form.Typ_Flugzeug.value=this.options[this.selectedIndex].text;" name="Typ_Flugzeug" id="Typ_Flugzeug">
+ 				<option value=<%=AircraftTypeType.HELICOPTER %>><%=AircraftTypeType.HELICOPTER %></option>
+  				<option value=<%=AircraftTypeType.LANDPLANE %>><%=AircraftTypeType.LANDPLANE %></option>
+			</select><br>
 			<label>Spannweite:</label>
 			<input type="text" name="Spannweite_Flugzeug" id="Spannweite_Flugzeug"><br>
 			<label>Maximalgewicht:</label>
@@ -176,17 +185,42 @@ pageEncoding="ISO-8859-1"%>
 					
 				<fieldset id="Fieldset_Segment">
 					<legend id="Legend_Segment">Segment</legend><br>
-					<table border="3px">
-					<tr><td>Bezeichnung</td><td>Startpunkt</td><td>Endpunkt</td></tr>
-					<tr><td><input type="text"></input></td><td></td><td></td></tr>
-					</table>
-					<label>Bezeichnung:</label>
-					<input type="text" name="Segment_bezeichnung" id="Id_Segment"><br>
+					<label> ID:</label>
+					<input type="text" name="Id_Segment" id="Id_Segment"><br></br>
+					<label name="Label_Datum_Anfang_Segment" id="Label_Datum_Anfang_Segment">Startdatum:</label>
+					<input type="text" name="datepicker5_Segment" id="datepicker5_Segment">
+					<label name="Label_Uhrzeit_Anfang_Segment" id="Label_Uhrzeit_Anfang_Segment">Startuhrzeit:</label>
+					<input type="text" name="Textfield_Uhrzeit_Anfang_Segment" id="Textfield_Uhrzeit_Anfang_Segment" placeholder="example: 15:30"><br>
 					<label>Startpunkt:</label>
-					<input type="text" name="Segment_startpunkt" id="Segment_startpunkt"><br>
+					<input type="text" name="Startpunkt_Segment" id="Startpunkt_Segment"></input><br></br>
+					<label name="Label_Datum_Ende_Segment" id="Label_Datum_Ende_Segment">Endedatum:</label>
+					<input type="text" name="datepicker6_Segment" id="datepicker6_Segment">
+					<label name="Label_Uhrzeit_Ende_Segment" id="Label_Uhrzeit_Ende_Segment">Endeuhrzeit:</label>
+					<input type="text" name="Textfield_Uhrzeit_Ende_Segment" id="Textfield_Uhrzeit_Ende_Segment" placeholder="example: 17:30"><br>
 					<label>Endpunkt:</label>
-					<input type="text" name="Segment_endpunkt" id="Segment_endpunkt">
-					</fieldset><br>
+					<input type="text" name="Endpunkt_Segment" id="Endpunkt_Segment"></input><br></br>
+					<label name="Flugregeln_Segment" id="Flugregeln_Segment">Flugregeln:</label>
+					<select onClick="this.form.Textfield_Auswahl_Flugregeln_Segment.value=this.options[this.selectedIndex].text;" name="Auswahl_Flugregeln_Segment" id="Auswahl_Flugregeln_Segment">
+ 						<option value="IFR">IFR</option>
+  						<option value="VFR">VFR</option>
+					</select><br><br>
+					<input type="hidden" name="Textfield_Auswahl_Flugregeln_Segment"></input>
+					<label name="Wetterbedingungen_Segment" id="Wetterbedingungen_Segment">Wetterbedingungen:</label>
+					<select onClick="this.form.Textfield_Auswahl_Wetterbedingungen_Segment.value=this.options[this.selectedIndex].text;" name="Auswahl_Wetterbedingungen_Segment" id="Auswahl_Wetterbedingungen_Segment">
+ 						<option value="IMC">IMC</option>
+  						<option value="VMC">VMC</option>
+					</select> 
+					<input type="hidden" name="Textfield_Auswahl_Wetterbedingungen_Segment"></input><br></br><br></br>
+
+					<button type="button" id="Segment_speichern" onclick="addRow()">Segment hinzufügen</button><br></br>
+					<table id="Tabelle">
+					<tr>
+						<th>ID</th>
+						<th>Startpunkt</th>
+						<th>Endpunkt</th>
+					</tr>
+					</table>
+				</fieldset><br>
 					
 				<fieldset id="Fieldset_Zielflughafen">
 					<legend id="Legend_Zielflughafen">Zielflughafen</legend><br>
@@ -268,7 +302,47 @@ pageEncoding="ISO-8859-1"%>
    		};
 
     	addInteraction();
+    	
+    	/**
+       	* Add a click handler to the map to render the popup.
+       */
+       
+       
+      	map.on('click', function(evt) {
+        	var coordinate = evt.coordinate;
+        	var lonlat = ol.coordinate.toStringXY(ol.proj.toLonLat(
+            coordinate, 'EPSG:3857', 'EPSG:4326'));
+			if(document.getElementById('Startpunkt_Segment').value != "")
+			{    		
+				document.getElementById('Endpunkt_Segment').value = lonlat;
+			}
+			else 
+			{
+			    document.getElementById('Startpunkt_Segment').value = lonlat;
+			}	
+      	});
+       
    	</script>	
+   	
+   	<script>
+   		function addRow() {
+   			var tabelle = document.getElementById("Tabelle");
+   	   		var reihe = tabelle.insertRow(-1);
+   	   		var id = reihe.insertCell(0);
+   	   		var startpunkt = reihe.insertCell(1);
+   	 		var endpunkt = reihe.insertCell(2);
+   	   		
+   	   		id.innerHTML = document.getElementById("Id_Segment").value;
+   	   		startpunkt.innerHTML = document.getElementById("Startpunkt_Segment").value;
+   	 		endpunkt.innerHTML = document.getElementById("Endpunkt_Segment").value;
+   	 		
+   	 		document.getElementById("Id_Segment").value = "";
+   	 		document.getElementById("Startpunkt_Segment").value = "";
+   	 		document.getElementById("Endpunkt_Segment").value = "";
+   		}
+   		
+   		
+   	</script>
    	
 </body>
 </html>
