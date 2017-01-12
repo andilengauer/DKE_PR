@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
+<%@page import="com.frequentis.semnotam.pr.AircraftTypeType"%>
+<%@page import="com.frequentis.semnotam.pr.AerodromeType"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -105,7 +107,10 @@ pageEncoding="ISO-8859-1"%>
 			<label>ID:</label> 
 			<input type="text" name="Id_Flugzeug" id="Id_Flugzeug"><br>
 			<label>Typ:</label>
-			<input type="text" name="Typ_Flugzeug" id="Typ_Flugzeug"><br>
+					<select onClick="this.form.Typ_Flugzeug.value=this.options[this.selectedIndex].text;" name="Typ_Flugzeug" id="Typ_Flugzeug">
+ 						<option value=<%=AircraftTypeType.HELICOPTER %>><%=AircraftTypeType.HELICOPTER %></option>
+  						<option value=<%=AircraftTypeType.LANDPLANE %>><%=AircraftTypeType.LANDPLANE %></option>
+					</select><br>
 			<label>Spannweite:</label>
 			<input type="text" name="Spannweite_Flugzeug" id="Spannweite_Flugzeug"><br>
 			<label>Maximalgewicht:</label>
@@ -148,21 +153,21 @@ pageEncoding="ISO-8859-1"%>
 					<label> ID:</label>
 					<input type="text" name="Id_Area" id="Id_Area"><br>
 					<label name="Label_Datum_Anfang_Area" id="Label_Datum_Anfang_Area">Startdatum:</label>
-					<input type="text" name="datepicker3_Area" id="datepicker3_Area">
+					<input type="text" name="Datum_Anfang_Area" id="datepicker3_Area">
 					<label name="Label_Uhrzeit_Anfang_Area" id="Label_Uhrzeit_Anfang_Area">Startuhrzeit:</label>
-					<input type="text" name="Textfield_Uhrzeit_Anfang_Area" id="Textfield_Uhrzeit_Anfang_Area" placeholder="example: 15:30"><br>
+					<input type="text" name="Uhrzeit_Anfang_Area" id="Textfield_Uhrzeit_Anfang_Area" placeholder="example: 15:30"><br>
 					<label name="Label_Datum_Ende_Area" id="Label_Datum_Ende_Area">Endedatum:</label>
-					<input type="text" name="datepicker4_Area" id="datepicker4_Area">
+					<input type="text" name="Datum_Ende_Area" id="datepicker4_Area">
 					<label name="Label_Uhrzeit_Ende_Area" id="Label_Uhrzeit_Ende_Area">Endeuhrzeit:</label>
-					<input type="text" name="Textfield_Uhrzeit_Ende_Area" id="Textfield_Uhrzeit_Ende_Area" placeholder="example: 17:30"><br>
+					<input type="text" name="Uhrzeit_Ende_Area" id="Textfield_Uhrzeit_Ende_Area" placeholder="example: 17:30"><br>
 					<label name="Flugregeln_Area" id="Flugregeln_Area">Flugregeln:</label>
-					<select onClick="this.form.Textfield_Auswahl_Flugregeln_Area.value=this.options[this.selectedIndex].text;"name="Auswahl_Flugregeln_Area" id="Auswahl_Flugregeln_Area">
+					<select onClick="this.form.Textfield_Auswahl_Flugregeln_Area.value=this.options[this.selectedIndex].text;"name="Flugregeln_Area" id="Auswahl_Flugregeln_Area">
  						<option value="IFR">IFR</option>
   						<option value="VFR">VFR</option>
 					</select><br><br>
 					<input type="hidden" name="Textfield_Auswahl_Flugregeln_Area"></input>
 					<label name="Wetterbedingungen_Area" id="Wetterbedingungen_Area">Wetterbedingungen:</label>
-					<select onClick="this.form.Textfield_Auswahl_Wetterbedingungen_Area.value=this.options[this.selectedIndex].text;" name="Auswahl_Wetterbedingungen_Area" id="Auswahl_Wetterbedingungen_Area">
+					<select onClick="this.form.Textfield_Auswahl_Wetterbedingungen_Area.value=this.options[this.selectedIndex].text;" name="Wetterbedingungen_Area" id="Auswahl_Wetterbedingungen_Area">
  						<option value="IMC">IMC</option>
   						<option value="VMC">VMC</option>
 					</select> 
@@ -171,29 +176,17 @@ pageEncoding="ISO-8859-1"%>
 					
 				<fieldset id="Fieldset_Segment">
 					<legend id="Legend_Segment">Segment</legend><br>
-					<label> ID:</label>
-					<input type="text" name="Id_Segment" id="Id_Segment"><br>
-					<label name="Label_Datum_Anfang_Segment" id="Label_Datum_Anfang_Segment">Startdatum:</label>
-					<input type="text" name="datepicker5_Segment" id="datepicker5_Segment">
-					<label name="Label_Uhrzeit_Anfang_Segment" id="Label_Uhrzeit_Anfang_Segment">Startuhrzeit:</label>
-					<input type="text" name="Textfield_Uhrzeit_Anfang_Segment" id="Textfield_Uhrzeit_Anfang_Segment" placeholder="example: 15:30"><br>
-					<label name="Label_Datum_Ende_Segment" id="Label_Datum_Ende_Segment">Endedatum:</label>
-					<input type="text" name="datepicker6_Segment" id="datepicker6_Segment">
-					<label name="Label_Uhrzeit_Ende_Segment" id="Label_Uhrzeit_Ende_Segment">Endeuhrzeit:</label>
-					<input type="text" name="Textfield_Uhrzeit_Ende_Segment" id="Textfield_Uhrzeit_Ende_Segment" placeholder="example: 17:30"><br>
-					<label name="Flugregeln_Segment" id="Flugregeln_Segment">Flugregeln:</label>
-					<select onClick="this.form.Textfield_Auswahl_Flugregeln_Segment.value=this.options[this.selectedIndex].text;" name="Auswahl_Flugregeln_Segment" id="Auswahl_Flugregeln_Segment">
- 						<option value="IFR">IFR</option>
-  						<option value="VFR">VFR</option>
-					</select><br><br>
-					<input type="hidden" name="Textfield_Auswahl_Flugregeln_Segment"></input>
-					<label name="Wetterbedingungen_Segment" id="Wetterbedingungen_Segment">Wetterbedingungen:</label>
-					<select onClick="this.form.Textfield_Auswahl_Wetterbedingungen_Segment.value=this.options[this.selectedIndex].text;" name="Auswahl_Wetterbedingungen_Segment" id="Auswahl_Wetterbedingungen_Segment">
- 						<option value="IMC">IMC</option>
-  						<option value="VMC">VMC</option>
-					</select> 
-					<input type="hidden" name="Textfield_Auswahl_Wetterbedingungen_Segment"></input>
-				</fieldset><br>
+					<table border="3px">
+					<tr><td>Bezeichnung</td><td>Startpunkt</td><td>Endpunkt</td></tr>
+					<tr><td><input type="text"></input></td><td></td><td></td></tr>
+					</table>
+					<label>Bezeichnung:</label>
+					<input type="text" name="Segment_bezeichnung" id="Id_Segment"><br>
+					<label>Startpunkt:</label>
+					<input type="text" name="Segment_startpunkt" id="Segment_startpunkt"><br>
+					<label>Endpunkt:</label>
+					<input type="text" name="Segment_endpunkt" id="Segment_endpunkt">
+					</fieldset><br>
 					
 				<fieldset id="Fieldset_Zielflughafen">
 					<legend id="Legend_Zielflughafen">Zielflughafen</legend><br>

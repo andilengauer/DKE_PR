@@ -7,11 +7,15 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Map;
 
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import net.opengis.gml.PointPropertyType;
+import net.opengis.gml.PointType;
 import tools.JaxbHelper;
 import aero.aixm.CodeFlightRuleType;
+import aero.aixm.SurfacePropertyType;
 
 import com.frequentis.semnotam.pr.AerodromeType;
 import com.frequentis.semnotam.pr.AircraftPropertyType;
@@ -22,6 +26,8 @@ import com.frequentis.semnotam.pr.DestinationAerodromePropertyType;
 import com.frequentis.semnotam.pr.FilterInputType;
 import com.frequentis.semnotam.pr.FlightPathPropertyType;
 import com.frequentis.semnotam.pr.FlightPathType;
+import com.frequentis.semnotam.pr.SegmentPropertyType;
+import com.frequentis.semnotam.pr.SegmentType;
 import com.frequentis.semnotam.pr.TimePeriodPropertyType;
 import com.frequentis.semnotam.pr.TimePeriodType;
 import com.frequentis.semnotam.pr.jaxb.JaxbTest;
@@ -56,7 +62,9 @@ public class AppController {
 		filterInput.setHasAircraft(getPreparedAircraft(inputData));
 		filterInput.setHasFlightPath(getPreparedFlightPath(inputData));
 		
-		File outputFile = new File("/Users/Andreas/Documents/output.xml");
+		
+		//File outputFile = new File("/Users/Andreas/Documents/output.xml");
+		File outputFile = new File("output.xml");
 		
 		try {
 			JaxbHelper.marshalFilterInput(filterInput, outputFile);
@@ -98,13 +106,40 @@ public class AppController {
 		destinationAerodrome = new DestinationAerodromePropertyType();
 		destinationAerodrome.setDestinationAerodrome(depature);
 		
+		
+		//Set Flight Path
 		fpType.setId("RouteID");
 		fpType.setRouteName("RoutenName");
 		fpType.setHasDepartureAerodrome(departureAerodrome);
 		fpType.setHasDestinationAerodrome(destinationAerodrome);
 		
+		//Set Area
+		SurfacePropertyType surface = new SurfacePropertyType();
+		//surface.setSurface(new JAXBElement<>());
+		//fpType.getHasArea().add(new)
+		
+		//Set Segment
+		SegmentType segment = new SegmentType();
+		segment.setDesignator(inputData.get("Segment_bezeichnung")[0]);
+		segment.setStartPoint(getPreparedPoint(inputData.get("Segment_startpunkt")[0]));
+		segment.se
+		SegmentPropertyType segmentProperty = new SegmentPropertyType();
+		segmentProperty.setSegment(segment);
+		
+		
+		fpType.getHasSegment().add(segmentProperty);
+		
 		flightpath.setFlightPath(fpType);
+		
 		return flightpath;
+	}
+
+	private PointPropertyType getPreparedPoint(String string) {
+		//PointPropertyType pointProperty = new PointPropertyType();
+		//JAXBElement<? extends PointType> pt = new JAXBElement<? extends PointType>();
+		//pointProperty.setPoint();
+		
+		return pointProperty;
 	}
 
 	private TimePeriodPropertyType getPreparedTimePeriod(String begindate, String begintime, String enddate, String endtime) {
