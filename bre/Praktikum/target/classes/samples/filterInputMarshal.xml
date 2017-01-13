@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns11:FilterInput xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:aixm="http://www.aixm.aero/schema/5.1" xmlns:message="http://www.aixm.aero/schema/5.1/message" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gss="http://www.isotc211.org/2005/gss" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gsr="http://www.isotc211.org/2005/gsr" xmlns:event="http://www.aixm.aero/schema/5.1/event" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:ns10="http://www.w3.org/1999/xlink" xmlns:ns11="http://semnotam.frequentis.com/pr" id="fi1">
+    <ns11:hasAircraft>
+        <ns11:Aircraft id="ac1">
+            <ns11:designator>B747-400</ns11:designator>
+            <ns11:type>HELICOPTER</ns11:type>
+            <ns11:wingspan_ft>213.0</ns11:wingspan_ft>
+            <ns11:maxWeight_lb>875000.0</ns11:maxWeight_lb>
+            <ns11:minWeight_lb>406900.0</ns11:minWeight_lb>
+        </ns11:Aircraft>
+    </ns11:hasAircraft>
+    <ns11:hasTimePeriod>
+        <ns11:TimePeriod>
+            <ns11:beginPosition>2017-03-10T12:00:00</ns11:beginPosition>
+            <ns11:endPosition>2017-03-10T18:00:00</ns11:endPosition>
+        </ns11:TimePeriod>
+    </ns11:hasTimePeriod>
+    <ns11:hasFlightPath>
+        <ns11:FlightPath id="fp1">
+            <ns11:routeName>LOWW-to-EBBR</ns11:routeName>
+            <ns11:hasDepartureAerodrome>
+                <ns11:DepartureAerodrome id="ad1">
+                    <ns11:designator>LOWW</ns11:designator>
+                </ns11:DepartureAerodrome>
+            </ns11:hasDepartureAerodrome>
+            <ns11:hasDestinationAerodrome>
+                <ns11:DestinationAerodrome id="ad2">
+                    <ns11:designator>EBBR</ns11:designator>
+                </ns11:DestinationAerodrome>
+            </ns11:hasDestinationAerodrome>
+            <ns11:hasSegment>
+                <ns11:Segment id="seg1">
+                    <ns11:designator>LOWW-to-LULAR</ns11:designator>
+                    <ns11:startPoint>
+                        <gml:Point srsName="urn:ogc:def:crs:EPSG::4326" srsDimension="2" gml:id="p1">
+                            <gml:pos>48.1102778 16.5697222</gml:pos>
+                        </gml:Point>
+                    </ns11:startPoint>
+                    <ns11:endPoint>
+                        <gml:Point srsName="urn:ogc:def:crs:EPSG::4326" srsDimension="2" gml:id="p2">
+                            <gml:pos>49.3658333 12.7588333</gml:pos>
+                        </gml:Point>
+                    </ns11:endPoint>
+                </ns11:Segment>
+            </ns11:hasSegment>
+            <ns11:hasSegment>
+                <ns11:Segment id="seg2">
+                    <ns11:designator>LULAR-to-LOHRE</ns11:designator>
+                    <ns11:startPoint>
+                        <gml:Point srsName="urn:ogc:def:crs:EPSG::4326" srsDimension="2" gml:id="p3">
+                            <gml:pos>49.3658333 12.7588333</gml:pos>
+                        </gml:Point>
+                    </ns11:startPoint>
+                    <ns11:endPoint>
+                        <gml:Point srsName="urn:ogc:def:crs:EPSG::4326" srsDimension="2" gml:id="p4">
+                            <gml:pos>50.067 9.4863333</gml:pos>
+                        </gml:Point>
+                    </ns11:endPoint>
+                </ns11:Segment>
+            </ns11:hasSegment>
+            <ns11:hasSegment>
+                <ns11:Segment id="seg3">
+                    <ns11:designator>LOHRE-to-TERLA</ns11:designator>
+                    <ns11:startPoint>
+                        <gml:Point srsName="urn:ogc:def:crs:EPSG::4326" srsDimension="2" gml:id="p5">
+                            <gml:pos>50.067 9.4863333</gml:pos>
+                        </gml:Point>
+                    </ns11:startPoint>
+                    <ns11:endPoint>
+                        <gml:Point srsName="urn:ogc:def:crs:EPSG::4326" srsDimension="2" gml:id="p6">
+                            <gml:pos>50.6825 5.6655</gml:pos>
+                        </gml:Point>
+                    </ns11:endPoint>
+                </ns11:Segment>
+            </ns11:hasSegment>
+            <ns11:hasSegment>
+                <ns11:Segment id="seg4">
+                    <ns11:designator>TERLA-to-EBBR</ns11:designator>
+                    <ns11:startPoint>
+                        <gml:Point srsName="urn:ogc:def:crs:EPSG::4326" srsDimension="2" gml:id="p7">
+                            <gml:pos>50.6825 5.6655</gml:pos>
+                        </gml:Point>
+                    </ns11:startPoint>
+                    <ns11:endPoint>
+                        <gml:Point srsName="urn:ogc:def:crs:EPSG::4326" srsDimension="2" gml:id="p8">
+                            <gml:pos>50.9013333 4.4845</gml:pos>
+                        </gml:Point>
+                    </ns11:endPoint>
+                </ns11:Segment>
+            </ns11:hasSegment>
+        </ns11:FlightPath>
+    </ns11:hasFlightPath>
+</ns11:FilterInput>
