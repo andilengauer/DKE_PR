@@ -1,8 +1,17 @@
 package com.sample;
 
+import java.io.File;
+
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
+
+import com.frequentis.semnotam.pr.FilterInputType;
+import com.frequentis.semnotam.pr.FlightPathPropertyType;
+import com.frequentis.semnotam.pr.FlightPathType;
+
+import net.opengis.wfs._2.FeatureCollectionType;
+import tools.JaxbHelper;
 
 /**
  * This is a sample class to launch a rule.
@@ -15,7 +24,20 @@ public class DroolsTest {
 	        KieServices ks = KieServices.Factory.get();
     	    KieContainer kContainer = ks.getKieClasspathContainer();
         	KieSession kSession = kContainer.newKieSession("ksession-rules");
-
+        	
+        	//unmarshall InputFile
+        	FilterInputType input = JaxbHelper.unmarshalFilterInput(new File("src/main/resources/samples/input_ex1.xml"));
+        	
+        	FlightPathType flightpath = input.getHasFlightPath().getFlightPath();
+        	String routeName = flightpath.getRouteName();
+        	String depatureAerodrome = flightpath.getHasDepartureAerodrome().getDepartureAerodrome().getDesignator();
+        	
+        	
+        	
+        	FeatureCollectionType collection = JaxbHelper.unmarshalFeatureCollection(new File("src/main/resources/samples/sample_dnotams.xml"));
+        	
+        	
+        	
             // go !
             Message message = new Message();
             message.setMessage("Hello World");

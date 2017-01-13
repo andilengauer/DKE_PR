@@ -98,7 +98,7 @@ public class JaxbHelper {
 	 * @return JAXBContext used for FeatureCollection
 	 * @throws JAXBException
 	 */
-	private static JAXBContext getWfsContext() throws JAXBException {
+	public static JAXBContext getWfsContext() throws JAXBException {
 		return JAXBContext.newInstance(net.opengis.wfs._2.ObjectFactory.class);
 	}	
 	
@@ -108,7 +108,7 @@ public class JaxbHelper {
 	 * @return JAXBContext used for FilterInput and FilterOutput
 	 * @throws JAXBException
 	 */
-	private static JAXBContext getPrContext() throws JAXBException {
+	public static JAXBContext getPrContext() throws JAXBException {
 		return JAXBContext.newInstance(com.frequentis.semnotam.pr.ObjectFactory.class);
 	}
 
@@ -119,7 +119,7 @@ public class JaxbHelper {
 	 * @param outputFile
 	 * @throws JAXBException
 	 */
-	private static void marshalAixmBasicMessage(AIXMBasicMessageType message, File outputFile) throws JAXBException {
+	public static void marshalAixmBasicMessage(AIXMBasicMessageType message, File outputFile) throws JAXBException {
 		Marshaller aixmMarshaller = getAixmContext().createMarshaller();
 		
 		aixmMarshaller.setProperty(javax.xml.bind.Marshaller.JAXB_ENCODING, "UTF-8"); //NOI18N
@@ -137,7 +137,7 @@ public class JaxbHelper {
 	 * @return
 	 * @throws JAXBException
 	 */
-	private static AIXMBasicMessageType unmarshalAixmBasicMessage(File input) throws JAXBException {
+	public static AIXMBasicMessageType unmarshalAixmBasicMessage(File input) throws JAXBException {
 		Unmarshaller aixmUnmarshaller = getAixmContext().createUnmarshaller();
 		
 		AIXMBasicMessageType message = (AIXMBasicMessageType) JAXBIntrospector.getValue(aixmUnmarshaller.unmarshal(input));
@@ -166,7 +166,7 @@ public class JaxbHelper {
 	 * @param outputFile
 	 * @throws JAXBException
 	 */
-	private static void marshalFeatureCollection(FeatureCollectionType collection, File outputFile) throws JAXBException {			
+	public static void marshalFeatureCollection(FeatureCollectionType collection, File outputFile) throws JAXBException {			
 		Marshaller wfsMarshaller = getWfsContext().createMarshaller();
 		
 		wfsMarshaller.setProperty(javax.xml.bind.Marshaller.JAXB_ENCODING, "UTF-8"); //NOI18N
@@ -201,7 +201,7 @@ public class JaxbHelper {
 	 * @return
 	 * @throws JAXBException
 	 */
-	private static FilterOutputType unmarshalFilterOutput(File input) throws JAXBException {
+	public static FilterOutputType unmarshalFilterOutput(File input) throws JAXBException {
 		//File input = new File("src/main/resources/sample_notams.xml");
 		
 		Unmarshaller prUnmarshaller = getPrContext().createUnmarshaller();		
@@ -238,7 +238,7 @@ public class JaxbHelper {
 	 * @param outputFile
 	 * @throws JAXBException
 	 */
-	private static void marshalFilterOutput(FilterOutputType filterOutput, File outputFile) throws JAXBException {			
+	public static void marshalFilterOutput(FilterOutputType filterOutput, File outputFile) throws JAXBException {			
 		Marshaller prMarshaller = getPrContext().createMarshaller();
 		
 		prMarshaller.setProperty(javax.xml.bind.Marshaller.JAXB_ENCODING, "UTF-8"); //NOI18N
