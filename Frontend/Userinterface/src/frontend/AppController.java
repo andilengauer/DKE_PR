@@ -59,12 +59,13 @@ public class AppController {
 	
 	public void handleInputData(Map<String,String[]> inputData)
 	{
+		
 		InputHandler inputHandler = new InputHandler();
 		FilterInputType filterInput = inputHandler.createFilterInput(inputData);
 		
 		
-		//File outputFile = new File("/Users/Andreas/Documents/output.xml");
-		File outputFile = new File("fi1.xml");
+		File outputFile = new File("/Users/Andreas/Documents/fi1.xml");
+		//File outputFile = new File("fi1.xml");
 		
 		try {
 			JaxbHelper.marshalFilterInput(filterInput, outputFile);

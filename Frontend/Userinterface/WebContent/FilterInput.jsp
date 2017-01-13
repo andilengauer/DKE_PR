@@ -8,15 +8,18 @@ pageEncoding="ISO-8859-1"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <meta charset="utf-8" />
+<meta charset="ISO-8859-1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>FilterInput</title>
-<link rel="stylesheet" href="Design.css"/>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
-<link rel="stylesheet" href="/resources/demos/style.css"/>
-<link rel="stylesheet" href="https://openlayers.org/en/v3.20.1/css/ol.css" type="text/css"/>
-<script src="https://code.jquery.com/jquery-1.12.4.js"/>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"/>
-<script src="https://openlayers.org/en/v3.20.1/build/ol.js"/>
+<link rel="stylesheet" href="Design.css"></link>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"></link>
+<link rel="stylesheet" href="/resources/demos/style.css"></link>
+<link rel="stylesheet" href="https://openlayers.org/en/v3.20.1/css/ol.css" type="text/css"></link>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://openlayers.org/en/v3.20.1/build/ol.js"></script>
 <script>
  $(function() {
      $( "#datepicker1_Abflugflughafen" ).datepicker({
@@ -228,21 +231,21 @@ pageEncoding="ISO-8859-1"%>
 					<label> ID:</label>
 					<input type="text" name="Id_Zielflughafen" id="Id_Zielflughafen"/><br/>
 					<label name="Label_Datum_Anfang_Zielflughafen" id="Label_Datum_Anfang_Zielflughafen">Startdatum:</label>
-					<input type="text" name="datepicker7_Zielflughafen" id="datepicker7_Zielflughafen">
+					<input type="text" name="Datum_Anfang_Zielflughafen" id="datepicker7_Zielflughafen">
 					<label name="Label_Uhrzeit_Anfang_Zielflughafen" id="Label_Uhrzeit_Anfang_Zielflughafen">Startuhrzeit:</label>
-					<input type="text" name="Textfield_Uhrzeit_Anfang_Zielflughafen" id="Textfield_Uhrzeit_Anfang_Zielflughafen" placeholder="example: 15:30"><br>
+					<input type="text" name="Uhrzeit_Anfang_Zielflughafen" id="Textfield_Uhrzeit_Anfang_Zielflughafen" placeholder="example: 15:30"><br>
 					<label name="Label_Datum_Ende_Zielflughafen" id="Label_Datum_Ende_Zielflughafen">Endedatum:</label>
-					<input type="text" name="datepicker8_Zielflughafen" id="datepicker8_Zielflughafen">
+					<input type="text" name="Datum_Ende_Zielflughafen" id="datepicker8_Zielflughafen">
 					<label name="Label_Uhrzeit_Ende_Zielflughafen" id="Label_Uhrzeit_Ende_Zielflughafen">Endeuhrzeit:</label>
-					<input type="text" name="Textfield_Uhrzeit_Ende_Zielflughafen" id="Textfield_Uhrzeit_Ende_Zielflughafen" placeholder="example: 17:30"><br>
+					<input type="text" name="Uhrzeit_Ende_Zielflughafen" id="Textfield_Uhrzeit_Ende_Zielflughafen" placeholder="example: 17:30"><br>
 					<label name="Flugregeln_Zielflughafen" id="Flugregeln_Zielflughafen">Flugregeln:</label>
-					<select onClick="this.form.Textfield_Auswahl_Flugregeln_Zielflughafen.value=this.options[this.selectedIndex].text;" name="Auswahl_Flugregeln_Zielflughafen" id="Auswahl_Flugregeln_Zielflughafen">
+					<select onClick="this.form.Textfield_Auswahl_Flugregeln_Zielflughafen.value=this.options[this.selectedIndex].text;" name="Flugregel_Zielflughafen" id="Auswahl_Flugregeln_Zielflughafen">
  						<option value="IFR">IFR</option>
   						<option value="VFR">VFR</option>
 					</select><br><br>
 					<input type="hidden" name="Textfield_Auswahl_Flugregeln_Zielflughafen"></input>
 					<label name="Wetterbedingungen_Zielflughafen" id="Wetterbedingungen_Zielflughafen">Wetterbedingungen:</label>
-					<select onClick="this.form.Textfield_Auswahl_Wetterbedingungen_Zielflughafen.value=this.options[this.selectedIndex].text;" name="Auswahl_Wetterbedingungen_Zielflughafen" id="Auswahl_Wetterbedingungen_Zielflughafen">
+					<select onClick="this.form.Textfield_Auswahl_Wetterbedingungen_Zielflughafen.value=this.options[this.selectedIndex].text;" name="Wetter_Zielflughafen" id="Auswahl_Wetterbedingungen_Zielflughafen">
  						<option value="IMC">IMC</option>
   						<option value="VMC">VMC</option>
 					</select> 
