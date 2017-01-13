@@ -7,17 +7,16 @@ pageEncoding="ISO-8859-1"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<meta charset="ISO-8859-1">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>FilterInput</title>
-<link rel="stylesheet" href="Design.css">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<link rel="stylesheet" href="https://openlayers.org/en/v3.20.1/css/ol.css" type="text/css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://openlayers.org/en/v3.20.1/build/ol.js"></script>
+<link rel="stylesheet" href="Design.css"/>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+<link rel="stylesheet" href="/resources/demos/style.css"/>
+<link rel="stylesheet" href="https://openlayers.org/en/v3.20.1/css/ol.css" type="text/css"/>
+<script src="https://code.jquery.com/jquery-1.12.4.js"/>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"/>
+<script src="https://openlayers.org/en/v3.20.1/build/ol.js"/>
 <script>
  $(function() {
      $( "#datepicker1_Abflugflughafen" ).datepicker({
@@ -102,7 +101,7 @@ pageEncoding="ISO-8859-1"%>
 </head>
 <body>
 
-	<form action="Success.jsp" method ="get">
+	
 		<ul>
 			<li><a href="Flugzeuginformationen.jsp">Flugzeuginformationen</a></li>
 			<li><a href="Abflugflughafen.jsp">Abflugflughafen</a></li>
@@ -111,6 +110,7 @@ pageEncoding="ISO-8859-1"%>
 			<li><a href="Segment.jsp">Segment</a></li>
 		</ul><br></br><br></br>
 		
+		<form action="Success.jsp" method ="get">
 		<fieldset id="Fieldset_Flugzeuginformationen">
 			<legend id="Legend_Flugzeuginformationen">Flugzeuginformationen</legend><br>
 			<label>ID:</label> 
@@ -213,7 +213,8 @@ pageEncoding="ISO-8859-1"%>
 					<input type="hidden" name="Textfield_Auswahl_Wetterbedingungen_Segment"></input><br></br><br></br>
 
 					<button type="button" id="Segment_speichern" onclick="addRow()">Segment hinzufügen</button><br></br>
-					<table id="Tabelle">
+					<table id="Segment_Tab">
+					<input type="text" name="SegmentList" id="SegmentList"></input>
 					<tr>
 						<th>ID</th>
 						<th>Startpunkt</th>
@@ -223,9 +224,9 @@ pageEncoding="ISO-8859-1"%>
 				</fieldset><br>
 					
 				<fieldset id="Fieldset_Zielflughafen">
-					<legend id="Legend_Zielflughafen">Zielflughafen</legend><br>
+					<legend id="Legend_Zielflughafen">Zielflughafen</legend><br/>
 					<label> ID:</label>
-					<input type="text" name="Id_Zielflughafen" id="Id_Zielflughafen"><br>
+					<input type="text" name="Id_Zielflughafen" id="Id_Zielflughafen"/><br/>
 					<label name="Label_Datum_Anfang_Zielflughafen" id="Label_Datum_Anfang_Zielflughafen">Startdatum:</label>
 					<input type="text" name="datepicker7_Zielflughafen" id="datepicker7_Zielflughafen">
 					<label name="Label_Uhrzeit_Anfang_Zielflughafen" id="Label_Uhrzeit_Anfang_Zielflughafen">Startuhrzeit:</label>
@@ -325,16 +326,28 @@ pageEncoding="ISO-8859-1"%>
    	</script>	
    	
    	<script>
-   		function addRow() {
-   			var tabelle = document.getElementById("Tabelle");
+   	var segments = [];
+   	
+   	function addRow() {
+   			var tabelle = document.getElementById("Segment_Tab");
    	   		var reihe = tabelle.insertRow(-1);
    	   		var id = reihe.insertCell(0);
    	   		var startpunkt = reihe.insertCell(1);
    	 		var endpunkt = reihe.insertCell(2);
    	   		
+   	 		var inputId = document.getElementById("Id_Segment").value;
+   	 		var inputStart = document.getElementById("Startpunkt_Segment").value;
+   	 		var inputEnd = document.getElementById("Endpunkt_Segment").value;
+   	 		
+   	 		//push into segment array
+   	 		var segment = {"id":inputId,start:inputStart,end:inputEnd};
+   	   		segments.push(segment);
+   	   		document.getElementById("SegmentList").value = JSON.stringify(segments);
+   	   		
    	   		id.innerHTML = document.getElementById("Id_Segment").value;
    	   		startpunkt.innerHTML = document.getElementById("Startpunkt_Segment").value;
    	 		endpunkt.innerHTML = document.getElementById("Endpunkt_Segment").value;
+   	 		
    	 		
    	 		document.getElementById("Id_Segment").value = "";
    	 		document.getElementById("Startpunkt_Segment").value = "";
