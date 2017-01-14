@@ -17,9 +17,9 @@ import com.frequentis.semnotam.pr.FlightPathType;
 import com.frequentis.semnotam.pr.SegmentPropertyType;
 import com.frequentis.semnotam.pr.SegmentType;
 
-
 import net.opengis.gml.*;
 import net.opengis.wfs._2.FeatureCollectionType;
+import net.opengis.wfs._2.MemberPropertyType;
 import tools.Aircraft;
 import tools.Flightpath;
 import tools.JaxbHelper;
@@ -73,20 +73,24 @@ public class DroolsTest {
         		
         		String segmentDesignator = st.getSegment().getDesignator();
         		
-        		String [] splitedCoordinates = sCoordinates.split("\\s+");
+        		String [] splitedCoordinates = sCoordinates.split(" ");
         		
+        		if(splitedCoordinates.length > 1)
+        		{
         		double startCoor = Double.parseDouble(splitedCoordinates[0]);
         		double endCoor= Double.parseDouble(splitedCoordinates[1]);
         		
         		Segment s = new Segment(segmentDesignator,startCoor, endCoor);
         		segments.add(s);
+        		}
         	}
         	
         	Flightpath flight = new Flightpath(routeName, depatureAerodrome, destinationAerodrome, null, segments);
         	
         	
         	FeatureCollectionType collection = JaxbHelper.unmarshalFeatureCollection(new File("src/main/resources/samples/sample_dnotams.xml"));
-        	
+        	List<MemberPropertyType> members = collection.getMember();
+        	System.out.println(members.get(0).getContent().get(0).toString());
         	
         	
         	
