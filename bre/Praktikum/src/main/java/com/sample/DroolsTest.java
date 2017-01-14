@@ -20,7 +20,9 @@ import com.frequentis.semnotam.pr.SegmentType;
 
 import net.opengis.gml.*;
 import net.opengis.wfs._2.FeatureCollectionType;
+import tools.Aircraft;
 import tools.JaxbHelper;
+import tools.TimePeriod;
 
 /**
  * This is a sample class to launch a rule.
@@ -44,9 +46,14 @@ public class DroolsTest {
         	double maxWeight = input.getHasAircraft().getAircraft().getMaxWeightLb().doubleValue();
         	double minWeight = input.getHasAircraft().getAircraft().getMinWeightLb().doubleValue();
         	
+        	Aircraft aircraft = new Aircraft(aircraftDesignator, aircraftType, wingspan, maxWeight, minWeight);
+        	
+        	
         	//get Time Period
         	GregorianCalendar beginTime = input.getHasTimePeriod().getTimePeriod().getBeginPosition().toGregorianCalendar();
         	GregorianCalendar endTime = input.getHasTimePeriod().getTimePeriod().getEndPosition().toGregorianCalendar();
+        	
+        	TimePeriod timePeriod = new TimePeriod(beginTime, endTime);
         	
         	//get Flight Path
         	FlightPathType flightpath = input.getHasFlightPath().getFlightPath();
@@ -62,6 +69,7 @@ public class DroolsTest {
         	
         		
         	}
+        	
         	
         	
         	
