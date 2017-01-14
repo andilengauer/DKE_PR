@@ -8,7 +8,7 @@ public class Flightpath {
 	private String depatureAerodrome;
 	private String destinationAerodrome;
 	private String alternateAerodrome;
-	private List<Segments> segments;
+	private List<Segment> segments;
 	
 	
 	
@@ -19,7 +19,7 @@ public class Flightpath {
 
 
 	public Flightpath(String routeName, String depatureAerodrome, String destinationAerodrome,
-			String alternateAerodrome, List<Segments> segments) {
+			String alternateAerodrome, List<Segment> segments) {
 		super();
 		this.routeName = routeName;
 		this.depatureAerodrome = depatureAerodrome;
@@ -78,13 +78,13 @@ public class Flightpath {
 
 
 
-	public List<Segments> getSegments() {
+	public List<Segment> getSegments() {
 		return segments;
 	}
 
 
 
-	public void setSegments(List<Segments> segments) {
+	public void setSegments(List<Segment> segments) {
 		this.segments = segments;
 	}
 	

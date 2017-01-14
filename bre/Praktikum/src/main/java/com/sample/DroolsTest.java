@@ -21,7 +21,9 @@ import com.frequentis.semnotam.pr.SegmentType;
 import net.opengis.gml.*;
 import net.opengis.wfs._2.FeatureCollectionType;
 import tools.Aircraft;
+import tools.Flightpath;
 import tools.JaxbHelper;
+import tools.Segment;
 import tools.TimePeriod;
 
 /**
@@ -60,20 +62,32 @@ public class DroolsTest {
         	String routeName = flightpath.getRouteName();
         	String depatureAerodrome = flightpath.getHasDepartureAerodrome().getDepartureAerodrome().getDesignator();
         	String destinationAerodrome = flightpath.getHasDestinationAerodrome().getDestinationAerodrome().getDesignator();
+        	//String altnernateAerodrome = flightpath.getHasAlternateAerodrome().
         	
-        	LinkedList<SegmentPropertyType> segments = new LinkedList<>();
+        	LinkedList<Segment> segments = new LinkedList<>();
         	
         	for(SegmentPropertyType st : flightpath.getHasSegment()){
-        		segments.add(st);
-        		PointPropertyType propertyPoint = st.getSegment().getStartPoint();
-        	
         		
+        		CoordinatesType coordinates = st.getSegment().getStartPoint().getPoint().getValue().getCoordinates();
+        		String sCoordinates = coordinates.toString();
+        		
+        		String segmentDesignator = st.getSegment().getDesignator();
+        		
+        		String [] splitedCoordinates = sCoordinates.split("\\s+");
+        		
+        		double startCoor = Double.parseDouble(splitedCoordinates[0]);
+        		double endCoor= Double.parseDouble(splitedCoordinates[1]);
+        		
+        		Segment s = new Segment(segmentDesignator,startCoor, endCoor);
+        		segments.add(s);
         	}
         	
-        	
+        	Flightpath flight = new Flightpath(routeName, depatureAerodrome, destinationAerodrome, null, segments);
         	
         	
         	FeatureCollectionType collection = JaxbHelper.unmarshalFeatureCollection(new File("src/main/resources/samples/sample_dnotams.xml"));
+        	
+        	
         	
         	
         	
@@ -82,6 +96,9 @@ public class DroolsTest {
             message.setMessage("Hello World");
             message.setStatus(Message.HELLO);
             kSession.insert(message);
+            kSession.insert(aircraft);
+            kSession.insert(timePeriod);
+            kSession.insert(flight);
             kSession.fireAllRules();
         } catch (Throwable t) {
             t.printStackTrace();
