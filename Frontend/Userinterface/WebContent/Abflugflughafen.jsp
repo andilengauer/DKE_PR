@@ -14,13 +14,14 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://openlayers.org/en/v3.20.1/build/ol.js"></script>
 <script>
+//Hier sind die Funktionen, welche den Datepicker realisieren, implementiert
  $(function() {
      $( "#datepicker1_Abflugflughafen" ).datepicker({
-         showOn: "both",
-         buttonImage: "Kalender.png",
-         buttonImageOnly: true,
-         buttonText: "Kalender",
-         dateFormat: 'dd-mm-yy'  
+         showOn: "both",	//Mit "both" ist es möglich, dass der Kalender angezeigr wird, wenn man auf das Kalender-Icon drückt oder auf das Textfeld
+         buttonImage: "Kalender.png",	//Ist das eigentliche Kalender-Icon
+         buttonImageOnly: true,	//Mit true wird das Bild angezeigt. MIt false würde das Bild nicht angezeigt werden
+         buttonText: "Kalender",	//Wenn man die Maus auf das Icon hält, dann wird der Text "Kalender angezeigt
+         dateFormat: 'dd-mm-yy'	//Hier wird das Ausgabeformat definiert
      });
  });
  
@@ -96,8 +97,14 @@
 </script>
 </head>
 <body>
+<!-- 	Im nachfolgenden wird ein Fieldset generiert.
+		In diesem Fieldset werden die Eingabefelder, Labels, Auswahllisten, Datepickers und Button definiert.
+		Der Datepicker ist eine Hilfestellung zur leichteren Auswahl eines Datums. Der Datepicker wird über ein CSS-File
+		und ein Java-Script-File im Header eingebunden.
+		Der Button dient dazu, dass wieder auf die Startseite zurückgesprungen werden kann.
+-->
 		<form action="FilterInput.jsp">
-				<fieldset id="Fieldset_Abflugflughafen">
+				<fieldset id="Fieldset_Abflugflughafen">	
 					<legend id="Legend_Abflugflughafen">Abflugflughafen</legend><br>
 					<label> ID:</label>
 					<input type="text" name="Id_Abflugflughafen" id="Id_Abflugflughafen"><br>

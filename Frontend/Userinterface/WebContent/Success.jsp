@@ -9,7 +9,7 @@
 </head>
 <body>
 <%
-//hhh
+
 String eingabe = request.getParameter("Id_Flugzeug");
 Map<String,String[]> params = request.getParameterMap();
 

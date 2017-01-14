@@ -101,6 +101,9 @@ pageEncoding="ISO-8859-1"%>
 </script>
 </head>
 <body>
+<!-- 	In diesem File kann zwischen den einzelnen Kategorien
+		(Flugzeuginformationen, Abflugflughafen, Zielflughafen, Area und Segment) hin und her gesprungen werden
+-->
 
 	<form action="Success.jsp" method ="get">
 		<ul>

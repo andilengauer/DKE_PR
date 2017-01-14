@@ -11,6 +11,10 @@
 <link rel="stylesheet" href="Design.css">
 </head>
 <body>
+<!-- 	Im nachfolgenden wird ein Fieldset generiert.
+		In diesem Fieldset werden die Eingabefelder, Labels und Buttons definiert.
+		Der Button dient dazu, dass wieder auf die Startseite zurückgesprungen werden kann.
+-->
 	<form action="FilterInput.jsp">
 		<fieldset id="Fieldset_Flugzeuginformationen">
 			<legend id="Legend_Flugzeuginformationen">Flugzeuginformationen</legend><br>

@@ -96,6 +96,12 @@
 </script>
 </head>
 <body>
+<!-- 	Im nachfolgenden wird ein Fieldset generiert.
+		In diesem Fieldset werden die Eingabefelder, Labels, Auswahllisten, Datepickers und Button definiert.
+		Der Datepicker ist eine Hilfestellung zur leichteren Auswahl eines Datums. Der Datepicker wird über ein CSS-File
+		und ein Java-Script-File im Header eingebunden.
+		Der Button dient dazu, dass wieder auf die Startseite zurückgesprungen werden kann.
+-->
 			<form action="FilterInput.jsp">
 				<fieldset id="Fieldset_Zielflughafen">
 					<legend id="Legend_Zielflughafen">Zielflughafen</legend><br>
