@@ -2,7 +2,6 @@
     <wb-module deploy-name="Userinterface">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/bre resources"/>
         <wb-resource deploy-path="/" source-path="/lib"/>
         <dependent-module archiveName="jaxb_dke_pr.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/Userinterface/lib/JAXB/jaxb_dke_pr.jar">
             <dependency-type>uses</dependency-type>
