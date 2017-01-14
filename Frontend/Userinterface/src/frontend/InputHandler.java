@@ -44,7 +44,7 @@ public class InputHandler {
 		filterInput.setId("fi1");
 		try {
 
-			// filterInput.setHasAircraft(getPreparedAircraft(inputData));
+			filterInput.setHasAircraft(getPreparedAircraft(inputData));
 			filterInput.setHasFlightPath(getPreparedFlightPath(inputData));
 
 		} catch (Exception e) {
@@ -164,7 +164,7 @@ public class InputHandler {
 		String[] splitted = coordinates.split(",");
 		if (splitted.length > 1) {
 			c1 = new BigDecimal(splitted[0]);
-			c2 = new BigDecimal(splitted[1]);
+			c2 = new BigDecimal(splitted[1].replace(" ", ""));
 
 			posType.getValue().add(c1.doubleValue());
 			posType.getValue().add(c2.doubleValue());
