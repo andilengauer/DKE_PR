@@ -23,6 +23,7 @@ import net.opengis.wfs._2.MemberPropertyType;
 import tools.Aircraft;
 import tools.Flightpath;
 import tools.JaxbHelper;
+import tools.MapInputFile;
 import tools.Segment;
 import tools.TimePeriod;
 
@@ -38,54 +39,20 @@ public class DroolsTest {
     	    KieContainer kContainer = ks.getKieClasspathContainer();
         	KieSession kSession = kContainer.newKieSession("ksession-rules");
         	
+        	
         	//unmarshall InputFile
         	FilterInputType input = JaxbHelper.unmarshalFilterInput(new File("src/main/resources/samples/input_ex1.xml"));
         	
         	//get Aircraft Properties
-        	String aircraftDesignator = input.getHasAircraft().getAircraft().getDesignator();
-        	String aircraftType = input.getHasAircraft().getAircraft().getType().toString();
-        	double wingspan = input.getHasAircraft().getAircraft().getWingspanFt().doubleValue();
-        	double maxWeight = input.getHasAircraft().getAircraft().getMaxWeightLb().doubleValue();
-        	double minWeight = input.getHasAircraft().getAircraft().getMinWeightLb().doubleValue();
-        	
-        	Aircraft aircraft = new Aircraft(aircraftDesignator, aircraftType, wingspan, maxWeight, minWeight);
+        	Aircraft aircraft = MapInputFile.getAircraftProperties(input);
+
         	
         	
         	//get Time Period
-        	GregorianCalendar beginTime = input.getHasTimePeriod().getTimePeriod().getBeginPosition().toGregorianCalendar();
-        	GregorianCalendar endTime = input.getHasTimePeriod().getTimePeriod().getEndPosition().toGregorianCalendar();
-        	
-        	TimePeriod timePeriod = new TimePeriod(beginTime, endTime);
+        	TimePeriod timePeriod = MapInputFile.getTimePeriod(input);
         	
         	//get Flight Path
-        	FlightPathType flightpath = input.getHasFlightPath().getFlightPath();
-        	String routeName = flightpath.getRouteName();
-        	String depatureAerodrome = flightpath.getHasDepartureAerodrome().getDepartureAerodrome().getDesignator();
-        	String destinationAerodrome = flightpath.getHasDestinationAerodrome().getDestinationAerodrome().getDesignator();
-        	//String altnernateAerodrome = flightpath.getHasAlternateAerodrome().
-        	
-        	LinkedList<Segment> segments = new LinkedList<>();
-        	
-        	for(SegmentPropertyType st : flightpath.getHasSegment()){
-        		
-        		CoordinatesType coordinates = st.getSegment().getStartPoint().getPoint().getValue().getCoordinates();
-        		String sCoordinates = coordinates.toString();
-        		
-        		String segmentDesignator = st.getSegment().getDesignator();
-        		
-        		String [] splitedCoordinates = sCoordinates.split(" ");
-        		
-        		if(splitedCoordinates.length > 1)
-        		{
-        		double startCoor = Double.parseDouble(splitedCoordinates[0]);
-        		double endCoor= Double.parseDouble(splitedCoordinates[1]);
-        		
-        		Segment s = new Segment(segmentDesignator,startCoor, endCoor);
-        		segments.add(s);
-        		}
-        	}
-        	
-        	Flightpath flight = new Flightpath(routeName, depatureAerodrome, destinationAerodrome, null, segments);
+        	Flightpath flightpath = MapInputFile.getFlightPath(input);
         	
         	
         	FeatureCollectionType collection = JaxbHelper.unmarshalFeatureCollection(new File("src/main/resources/samples/sample_dnotams.xml"));
@@ -102,7 +69,7 @@ public class DroolsTest {
             kSession.insert(message);
             kSession.insert(aircraft);
             kSession.insert(timePeriod);
-            kSession.insert(flight);
+            kSession.insert(flightpath);
             kSession.fireAllRules();
         } catch (Throwable t) {
             t.printStackTrace();
