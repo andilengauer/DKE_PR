@@ -38,6 +38,7 @@ public class DroolsTest {
     	    KieContainer kContainer = ks.getKieClasspathContainer();
         	KieSession kSession = kContainer.newKieSession("ksession-rules");
         	
+        	/*
         	//unmarshall InputFile
         	FilterInputType input = JaxbHelper.unmarshalFilterInput(new File("src/main/resources/samples/input_ex1.xml"));
         	
@@ -87,6 +88,7 @@ public class DroolsTest {
         	
         	Flightpath flight = new Flightpath(routeName, depatureAerodrome, destinationAerodrome, null, segments);
         	
+        	*/
         	
         	FeatureCollectionType collection = JaxbHelper.unmarshalFeatureCollection(new File("src/main/resources/samples/sample_dnotams.xml"));
         	List<MemberPropertyType> members = collection.getMember();
@@ -100,9 +102,9 @@ public class DroolsTest {
             message.setMessage("Hello World");
             message.setStatus(Message.HELLO);
             kSession.insert(message);
-            kSession.insert(aircraft);
-            kSession.insert(timePeriod);
-            kSession.insert(flight);
+            //kSession.insert(aircraft);
+            //kSession.insert(timePeriod);
+            //kSession.insert(flight);
             kSession.fireAllRules();
         } catch (Throwable t) {
             t.printStackTrace();
