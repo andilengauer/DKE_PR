@@ -1,11 +1,12 @@
 package tools;
 
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class TimePeriod {
 
-	private GregorianCalendar beginPosition;
-	private GregorianCalendar endPosition;
+	private Date beginPosition;
+	private Date endPosition;
 	
 	
 	
@@ -15,7 +16,7 @@ public class TimePeriod {
 
 
 
-	public TimePeriod(GregorianCalendar beginPosition, GregorianCalendar endPosition) {
+	public TimePeriod(Date beginPosition, Date endPosition) {
 		super();
 		this.beginPosition = beginPosition;
 		this.endPosition = endPosition;
@@ -23,25 +24,25 @@ public class TimePeriod {
 
 
 
-	public GregorianCalendar getBeginPosition() {
+	public Date getBeginPosition() {
 		return beginPosition;
 	}
 
 
 
-	public void setBeginPosition(GregorianCalendar beginPosition) {
+	public void setBeginPosition(Date beginPosition) {
 		this.beginPosition = beginPosition;
 	}
 
 
 
-	public GregorianCalendar getEndPosition() {
+	public Date getEndPosition() {
 		return endPosition;
 	}
 
 
 
-	public void setEndPosition(GregorianCalendar endPosition) {
+	public void setEndPosition(Date endPosition) {
 		this.endPosition = endPosition;
 	}
 	

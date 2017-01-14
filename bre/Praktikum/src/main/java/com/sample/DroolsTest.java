@@ -46,6 +46,8 @@ public class DroolsTest {
         	//get Aircraft Properties
         	Aircraft aircraft = MapInputFile.getAircraftProperties(input);
 
+        	
+        	
         	//get Time Period
         	TimePeriod timePeriod = MapInputFile.getTimePeriod(input);
         	

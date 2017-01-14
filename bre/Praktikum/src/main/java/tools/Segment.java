@@ -1,10 +1,13 @@
 package tools;
 
+import java.awt.Point;
+import java.awt.geom.Point2D;
+
 public class Segment {
 
 	private String designator;
-	private double startPoint;
-	private double endPoint;
+	private Point2D startPoint;
+	private Point2D endPoint;
 	
 	
 	
@@ -14,7 +17,7 @@ public class Segment {
 
 
 
-	public Segment(String designator, double startPoint, double endPoint) {
+	public Segment(String designator, Point2D startPoint, Point2D endPoint) {
 		super();
 		this.designator = designator;
 		this.startPoint = startPoint;
@@ -35,25 +38,25 @@ public class Segment {
 
 
 
-	public double getStartPoint() {
+	public Point2D getStartPoint() {
 		return startPoint;
 	}
 
 
 
-	public void setStartPoint(double startPoint) {
+	public void setStartPoint(Point startPoint) {
 		this.startPoint = startPoint;
 	}
 
 
 
-	public double getEndPoint() {
+	public Point2D getEndPoint() {
 		return endPoint;
 	}
 
 
 
-	public void setEndPoint(double endPoint) {
+	public void setEndPoint(Point endPoint) {
 		this.endPoint = endPoint;
 	}
 	
