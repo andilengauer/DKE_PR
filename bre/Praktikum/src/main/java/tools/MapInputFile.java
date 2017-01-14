@@ -36,7 +36,6 @@ public class MapInputFile {
 		Date eTime = endTime.getTime();
 		Date sTime = beginTime.getTime();
 
-		System.out.println(eTime);
 
 		TimePeriod timePeriod = new TimePeriod(sTime, eTime);
 
