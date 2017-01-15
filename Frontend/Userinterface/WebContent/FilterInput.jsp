@@ -1,15 +1,14 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <%@page import="com.frequentis.semnotam.pr.AircraftTypeType"%>
 <%@page import="com.frequentis.semnotam.pr.AerodromeType"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta charset="utf-8" />
-<meta charset="ISO-8859-1">
-<meta charset="utf-8">
+<!--  <meta charset="ISO-8859-1"> -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>FilterInput</title>
@@ -133,7 +132,7 @@ pageEncoding="ISO-8859-1"%>
 		
 		<fieldset id="Fieldset_Flugroute">
 			<legend id="Legend_Flugroute">Flugroute</legend><br>
-			
+			<label>Routenname:</label><input type="text" name="Route_name"></input>
 				<fieldset id="Fieldset_Abflugflughafen">
 					<legend id="Legend_Abflugflughafen">Abflugflughafen</legend><br>
 					<label> ID:</label>
@@ -214,8 +213,9 @@ pageEncoding="ISO-8859-1"%>
   						<option value="VMC">VMC</option>
 					</select> 
 					<input type="hidden" name="Textfield_Auswahl_Wetterbedingungen_Segment"></input><br></br><br></br>
-
-					<button type="button" id="Segment_speichern" onclick="addRow()">Segment hinzufügen</button><br></br>
+					
+					<div id="Karte" class="Karte"></div><br>
+					<button type="button" id="Segment_speichern" onclick="addRow()">Segment hinzufÃ¼gen</button><br></br>
 					<table id="Segment_Tab">
 					<input type="text" name="SegmentList" id="SegmentList"></input>
 					<tr>
@@ -252,8 +252,8 @@ pageEncoding="ISO-8859-1"%>
 					<input type="hidden" name="Textfield_Auswahl_Wetterbedingungen_Zielflughafen"></input>
 				</fieldset><br>
 				
-			<div id="Karte" class="Karte"></div><br>
-			<label name="Label_Optionen_Karte" id="Label_Optionen_Karte">Wählen&nbsp;Sie&nbsp;bitte&nbsp;die&nbsp;gewünschte&nbsp;Option&nbsp;aus:</label>
+			
+			<label name="Label_Optionen_Karte" id="Label_Optionen_Karte">WÃ¤hlen&nbsp;Sie&nbsp;bitte&nbsp;die&nbsp;gewÃ¼nschte&nbsp;Option&nbsp;aus:</label>
       		<select name="Auswahl_Optionen_Karte" id="Auswahl_Optionen_Karte">  
         		<option value="LineString">Linie</option>
         		<option value="Polygon">Polygon</option>

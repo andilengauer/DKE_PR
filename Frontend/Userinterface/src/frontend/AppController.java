@@ -5,8 +5,10 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 
+import javax.print.attribute.standard.DateTimeAtCompleted;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -34,6 +36,8 @@ import com.frequentis.semnotam.pr.TimePeriodPropertyType;
 import com.frequentis.semnotam.pr.TimePeriodType;
 import com.frequentis.semnotam.pr.jaxb.JaxbTest;
 import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
+
+import db.DB_Controller;
 
 public class AppController {
 	private static AppController controller = null;
@@ -63,8 +67,10 @@ public class AppController {
 		InputHandler inputHandler = new InputHandler();
 		FilterInputType filterInput = inputHandler.createFilterInput(inputData);
 		
+		Date now = new Date();
+		String fileName = "fi1.xml";
 		
-		File outputFile = new File("/Users/Andreas/Documents/fi1.xml");
+		File outputFile = new File("/Users/Andreas/Documents/" + fileName);
 		//File outputFile = new File("fi1.xml");
 		
 		try {
@@ -73,6 +79,12 @@ public class AppController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
+		//push file into exist database
+		DB_Controller existDb = new DB_Controller();
+		existDb.initDB();
+		existDb.putFile("db/DKE_PR/FilterInput", outputFile);
 		
 	}
 	

@@ -128,14 +128,15 @@ public class InputHandler {
 		// System.out.println(segments.);
 
 		// Set Flight Path
-		fpType.setId("RouteID");
-		fpType.setRouteName("RoutenName");
+		fpType.setId("fp1");
+		fpType.setRouteName(inputData.get("Route_name")[0]);
 		fpType.setHasDepartureAerodrome(departureAerodrome);
 		fpType.setHasDestinationAerodrome(destinationAerodrome);
 
 		fpType.getHasSegment().addAll(segmentPropertyList);
 
 		flightpath.setFlightPath(fpType);
+		System.out.println("Routenname: "+ fpType.getRouteName());
 
 		return flightpath;
 	}
