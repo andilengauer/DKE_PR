@@ -29,6 +29,15 @@ ul {
     top: 0;
     width: 100%;
 }
+#cmdFilterHead
+{
+	display: block;
+    padding: 16px;
+    text-decoration: none;
+    margin: 1em 0 0 0;
+	width: 100%;
+	z-index: 0;
+}
 
 li {
     position: relative;

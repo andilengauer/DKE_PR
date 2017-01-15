@@ -103,6 +103,7 @@ $(function() {
 </script>
 </head>
 <body>
+<<<<<<< HEAD
 <!-- 	Im nachfolgenden wird ein Fieldset generiert.
 		In diesem Fieldset werden die Eingabefelder, Labels, Auswahllisten, Datepickers und Buttons definiert.
 		Der Datepicker ist eine Hilfestellung zur leichteren Auswahl eines Datums. Der Datepicker wird über ein CSS-File
@@ -115,6 +116,19 @@ $(function() {
 			<li><input type="submit" name="Filtern" id="Filtern" value="Filtern"></input></li>
 
 		</ul><br></br><br>
+=======
+
+		<form action="Submit.jsp" method ="get" id="InputForm">
+		
+		<ul>
+			<li><a href="Flugzeuginformationen.jsp">Flugzeuginformationen</a></li>
+			<li><a href="Abflugflughafen.jsp">Abflugflughafen</a></li>
+			<li><a href="Zielflughafen.jsp">Zielflughafen</a></li>
+			<li><a href="Area.jsp">Area</a></li>
+			<li><a href="Segment.jsp">Segment</a></li>
+			<li><a href="javascript:{}" onclick="document.getElementById('InputForm').submit()">Filterung abschließen</a></li>
+		</ul><br></br><br></br>
+>>>>>>> 1894c283ba220a68e695235244f730db0cd78b43
 		
 		<fieldset id="Fieldset_Flugzeuginformationen">
 			<legend id="Legend_Flugzeuginformationen">Flugzeuginformationen</legend><br>
