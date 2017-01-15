@@ -6,8 +6,8 @@ import java.awt.geom.Point2D;
 public class Segment {
 
 	private String designator;
-	private Point2D startPoint;
-	private Point2D endPoint;
+	private Coordinate startPoint;
+	private Coordinate endPoint;
 	
 	
 	
@@ -17,7 +17,7 @@ public class Segment {
 
 
 
-	public Segment(String designator, Point2D startPoint, Point2D endPoint) {
+	public Segment(String designator, Coordinate startPoint, Coordinate endPoint) {
 		super();
 		this.designator = designator;
 		this.startPoint = startPoint;
@@ -38,25 +38,25 @@ public class Segment {
 
 
 
-	public Point2D getStartPoint() {
+	public Coordinate getStartPoint() {
 		return startPoint;
 	}
 
 
 
-	public void setStartPoint(Point2D startPoint) {
+	public void setStartPoint(Coordinate startPoint) {
 		this.startPoint = startPoint;
 	}
 
 
 
-	public Point2D getEndPoint() {
+	public Coordinate getEndPoint() {
 		return endPoint;
 	}
 
 
 
-	public void setEndPoint(Point2D endPoint) {
+	public void setEndPoint(Coordinate endPoint) {
 		this.endPoint = endPoint;
 	}
 	

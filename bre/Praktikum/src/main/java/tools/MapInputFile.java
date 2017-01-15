@@ -58,12 +58,11 @@ public class MapInputFile {
 			List<Double> startCoordinates = st.getSegment().getStartPoint().getPoint().getValue().getPos().getValue();
 			List<Double> endCoordinates = st.getSegment().getEndPoint().getPoint().getValue().getPos().getValue();
 
-			Point2D startCoor = new Point();
-			startCoor.setLocation(startCoordinates.get(0), startCoordinates.get(1));
+			Coordinate startCoor = new Coordinate(startCoordinates.get(0), startCoordinates.get(1));
+			Coordinate endCoor= new Coordinate(endCoordinates.get(0), endCoordinates.get(1));
 
-			Point2D endCoor = new Point();
-			startCoor.setLocation(endCoordinates.get(0), endCoordinates.get(1));
-
+			System.out.println(endCoor);
+			
 			Segment s = new Segment(segmentDesignator, startCoor, endCoor);
 			segments.add(s);
 
