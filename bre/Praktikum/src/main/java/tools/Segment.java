@@ -44,7 +44,7 @@ public class Segment {
 
 
 
-	public void setStartPoint(Point startPoint) {
+	public void setStartPoint(Point2D startPoint) {
 		this.startPoint = startPoint;
 	}
 
@@ -56,7 +56,7 @@ public class Segment {
 
 
 
-	public void setEndPoint(Point endPoint) {
+	public void setEndPoint(Point2D endPoint) {
 		this.endPoint = endPoint;
 	}
 	

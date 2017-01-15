@@ -1,8 +1,17 @@
 package com.sample
  
-import com.sample.DroolsTest.Message;
+
+import tools.Aircraft;
  
-rule "Hello World"
+rule "Test"
+	when
+		$a : Aircraft (wingSpan == 213.0)
+		
+		then
+		System.out.println("rule erfolgreich"); 
+end
+ 
+/*rule "Hello World"
     when
         m : Message( status == Message.HELLO, myMessage : message )
     then
@@ -18,4 +27,4 @@ rule "GoodBye"
     then
         System.out.println( myMessage );
 end
-
+*/
