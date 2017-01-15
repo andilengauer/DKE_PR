@@ -4,6 +4,7 @@
 input {
 	margin: 0 0 1em 10em;
 	width: 250px;
+	z-index: -1;
 }
 
 label {
@@ -30,16 +31,9 @@ ul {
 }
 
 li {
-    float: left;
+    position: relative;
+    left: 4cm;
 }
-
-li a {
-    display: block;
-    color: white;
-    padding: 16px;
-    text-decoration: none;
-}
-
 
 #Fieldset_Flugzeuginformationen {
 	border: 2px solid green;	
@@ -63,7 +57,7 @@ li a {
 
 #Fieldset_Abflugflughafen {
 	border: 2px solid green;	
-	font-size: 120%;
+	font-size: 100%;
 }
 #Legend_Abflugflughafen {
 	font-size: 120%;
@@ -72,7 +66,7 @@ li a {
 
 #Fieldset_Zielflughafen {
 	border: 2px solid green;	
-	font-size: 120%;
+	font-size: 100%;
 }
 
 #Legend_Zielflughafen {
@@ -82,7 +76,7 @@ li a {
 
 #Fieldset_Area {
 	border: 2px solid green;	
-	font-size: 120%;
+	font-size: 100%;
 }
 
 #Legend_Area {
@@ -92,7 +86,7 @@ li a {
 
 #Fieldset_Segment {
 	border: 2px solid green;	
-	font-size: 120%;
+	font-size: 100%;
 }
 
 #Legend_Segment {
@@ -315,27 +309,46 @@ li a {
 	left: 6cm;
 	width: 70px;
 }
-#Auswahl_Optionen_Karte {
+#Auswahl_Optionen_Karte_Area {
 	position: absolute;
 	left: 11cm;
 	width: 100px;
+	display: none;
 }
 
-#Karte {
-	height: 400px;
-}
-
-#Label_Optionen_Karte {
-	font-size: 120%;
-}
-
-#Submit {
-	height: 40px;
-	width: 100px;
-	font-weight: bold;
-	font-size: 150%;
-	left: 1cm;
+#Auswahl_Optionen_Karte_Segment {
 	position: absolute;
+	left: 11cm;
+	width: 100px;
+	display: none;
+}
+
+#Karte_Segment {
+	height: 60%;
+	width: 60%;
+	position: absolute;
+	left: 1cm;
+	top: 48cm;
+	z-index: -1;
+}
+
+#Karte_Area {
+	height: 60%;
+	width: 60%;
+	position: absolute;
+	left: 1cm;
+	top: 28cm;
+	z-index: -1;
+}
+
+#Label_Optionen_Karte_Area {
+	font-size: 100%;
+	display: none;
+}
+
+#Label_Optionen_Karte_Segment {
+	font-size: 100%;
+	display: none;
 }
 
 #Textfield_Auswahl_Flugregeln_Ablugflughafen {
@@ -399,9 +412,49 @@ li a {
 	width: 60px;
 }
 
+#Startpunkt_Area {
+	width: 60px;
+}
+
+#Endpunkt_Area {
+	width: 60px;
+}
+
 #Startseite {
 	font-weight: bold;
 }
+
+#Filtern {
+	width: 250px;
+	height: 30px;
+	font-weight: bold;
+	font-size: 100%;
+}
+
+#Karte_oeffnen {
+	font-weight: bold;
+}
+
+#Segment_speichern {
+	font-weight: bold;
+}
+
+#Area_speichern {
+	font-weight: bold;
+}
+
+#Segment_Tab {
+	display: none;
+}
+
+#Karte_Segment {
+	display: none;
+}
+
+#Karte_Area {
+	display: none;
+}
+
 
 
 

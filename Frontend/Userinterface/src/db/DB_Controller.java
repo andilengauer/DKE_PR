@@ -21,8 +21,8 @@ import org.xmldb.api.modules.CollectionManagementService;
 import org.xmldb.api.modules.XMLResource;
 
 public class DB_Controller {
-	protected static String driver = "org.exist.xmldb.DatabaseImpl";
-	protected static String URI = "xmldb:exist://localhost:8080/exist/xmlrpc";
+	private String driver = "org.exist.xmldb.DatabaseImpl";
+	private String URI = "xmldb:exist://localhost:8089/exist/xmlrpc";
 	
 	private Database database;
 	
@@ -79,7 +79,7 @@ public class DB_Controller {
 		
         // try to get collection
 		Collection col = 
-			DatabaseManager.getCollection(URI + collection);
+			DatabaseManager.getCollection(URI + collection,"admin",null);
 		if(col == null) {
 			String[] splitted = collection.split("/");
             for(int i=0; i < splitted.length; i++)
@@ -147,6 +147,22 @@ public class DB_Controller {
         
         
         return returnVal;
+	}
+	public String getDriver() {
+		return driver;
+	}
+	public void setDriver(String driver) {
+		this.driver = driver;
+	}
+	public String getURI() {
+		return URI;
+	}
+	public void setURI(String uRI) {
+		URI = uRI;
+	}
+	public void putFile(String collection, File file) {
+		putFile(collection, file.getAbsolutePath());
+		
 	}
     
 }

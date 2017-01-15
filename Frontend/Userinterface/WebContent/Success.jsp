@@ -9,14 +9,23 @@
 </head>
 <body>
 <%
+<<<<<<< HEAD
 
+=======
+out.println(getServletContext().getRealPath("."));
+>>>>>>> 95a98dc65c089a552c14898b5ee4bdf19b68c3e6
 String eingabe = request.getParameter("Id_Flugzeug");
 Map<String,String[]> params = request.getParameterMap();
 
 out.println("Sie haben folgende ID eingegeben: " + eingabe);
 AppController controller = AppController.getInstance();
+try{
 controller.handleInputData(params);
-
+}
+catch(Exception e)
+{
+	e.printStackTrace();
+}
 //response.sendRedirect("FilterOutput.jsp");
 
 %>
