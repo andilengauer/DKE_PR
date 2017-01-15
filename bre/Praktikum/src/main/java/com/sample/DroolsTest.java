@@ -16,8 +16,10 @@ import com.frequentis.semnotam.pr.FlightPathPropertyType;
 import com.frequentis.semnotam.pr.FlightPathType;
 import com.frequentis.semnotam.pr.SegmentPropertyType;
 import com.frequentis.semnotam.pr.SegmentType;
+import com.google.protobuf.Extension.MessageType;
 
 import aero.aixm.message.AIXMBasicMessageType;
+import aero.aixm.message.BasicMessageMemberAIXMPropertyType;
 import net.opengis.gml.*;
 import net.opengis.wfs._2.FeatureCollectionType;
 import net.opengis.wfs._2.MemberPropertyType;
@@ -61,8 +63,10 @@ public class DroolsTest {
         	
         	List<AIXMBasicMessageType> messages = JaxbHelper.getMessages(collection);
     		
+        	
     		// Print the ID of all DNOTAMs contained in the FeatureCollection
     		for (AIXMBasicMessageType m : messages) {
+    			
     			System.out.println(m.getId());
     		}
         	

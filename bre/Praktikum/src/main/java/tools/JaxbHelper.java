@@ -159,7 +159,7 @@ public class JaxbHelper {
 			//  1. entry = whitespace/returns before AIXMBasicMessage element
 			//  2. entry = AIXMBasicMessage Element
 			//  3. entry = whitespace/returns after AIXMBasicMessage element
-			AIXMBasicMessageType message = (AIXMBasicMessageType) JAXBIntrospector.getValue(member.getContent().get(1));
+			AIXMBasicMessageType message =(AIXMBasicMessageType) JAXBIntrospector.getValue(member.getContent().get(1));
 			list.add(message);
 		}
 		return list;
