@@ -1,0 +1,116 @@
+<message:AIXMBasicMessage xmlns:message="http://www.aixm.aero/schema/5.1/message" xmlns:gml="http://www.opengis.net/gml/3.2" gml:id="FNS_ID_c51e3152-af55-4af9-97af-b83a831f0daa">
+    <gml:boundedBy xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+    <message:hasMember>
+        <event:Event xmlns:event="http://www.aixm.aero/schema/5.1/event" gml:id="Event_28716e4a-4fee-4998-a35a-ac15b00124f2">
+            <gml:boundedBy xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+            <event:timeSlice>
+                <event:EventTimeSlice gml:id="Event_TS_77947c0d-4bb3-4756-af6e-20c22c64d75b">
+                    <gml:validTime>
+                        <gml:TimeInstant gml:id="Event_TS_TP_TI_7d5d0c57-6b24-47bd-8391-8df52b58c85f">
+                            <gml:timePosition>2017-03-02T00:42:01Z</gml:timePosition>
+                        </gml:TimeInstant>
+                    </gml:validTime>
+                    <aixm:interpretation xmlns:aixm="http://www.aixm.aero/schema/5.1">PERMDELTA</aixm:interpretation>
+                    <aixm:sequenceNumber xmlns:aixm="http://www.aixm.aero/schema/5.1">1</aixm:sequenceNumber>
+                    <aixm:featureLifetime xmlns:aixm="http://www.aixm.aero/schema/5.1">
+                        <gml:TimePeriod gml:id="Event_TS_TP_43deb2ef-6479-411e-8d15-948527d76785">
+                            <gml:beginPosition>2017-03-02T00:42:01Z</gml:beginPosition>
+                            <gml:endPosition>2017-03-03T16:54:21Z</gml:endPosition>
+                        </gml:TimePeriod>
+                    </aixm:featureLifetime>
+                    <event:encoding>DIGITAL</event:encoding>
+                    <event:scenario>AD.CLS</event:scenario>
+                    <event:version>2.0</event:version>
+                    <event:revision>2014-11-22T22:00:00Z</event:revision>
+                    <event:textNOTAM>
+                        <event:NOTAM gml:id="NOTAM_517e43a6-0e86-4860-9f60-6dad57a1ca12">
+                            <event:series>A</event:series>
+                            <event:number>26</event:number>
+                            <event:year>2017</event:year>
+                            <event:type>N</event:type>
+                            <event:issued>2017-02-28T05:44:28Z</event:issued>
+                            <event:traffic>IV</event:traffic>
+                            <event:purpose>NBO</event:purpose>
+                            <event:scope>A</event:scope>
+                            <event:location>EBBR</event:location>
+                            <event:effectiveStart>201703011000</event:effectiveStart>
+                            <event:effectiveEnd>201704011000</event:effectiveEnd>
+                            <event:text>AD CLOSED.</event:text>
+                        </event:NOTAM>
+                    </event:textNOTAM>
+                </event:EventTimeSlice>
+            </event:timeSlice>
+        </event:Event>
+    </message:hasMember>
+    <message:hasMember>
+        <event:Event xmlns:event="http://www.aixm.aero/schema/5.1/event" gml:id="Event_d185724e-3a0b-4573-b1f5-24592f10e413">
+            <gml:boundedBy xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+            <event:timeSlice>
+                <event:EventTimeSlice gml:id="Event_TSB_f93016e5-c111-4d75-9df7-95de46a09b3b">
+                    <gml:validTime>
+                        <gml:TimePeriod gml:id="Event_TS_TP_TI_B_7fbe99c3-3383-400d-8ea3-1a729cb67cad">
+                            <gml:beginPosition>2017-03-02T00:42:01Z</gml:beginPosition>
+                            <gml:endPosition>2017-03-03T16:54:21Z</gml:endPosition>
+                        </gml:TimePeriod>
+                    </gml:validTime>
+                    <aixm:interpretation xmlns:aixm="http://www.aixm.aero/schema/5.1">BASELINE</aixm:interpretation>
+                    <aixm:sequenceNumber xmlns:aixm="http://www.aixm.aero/schema/5.1">1</aixm:sequenceNumber>
+                    <aixm:featureLifetime xmlns:aixm="http://www.aixm.aero/schema/5.1">
+                        <gml:TimePeriod gml:id="Event_TS_TP_B_1e6ef630-d104-4936-bfb8-07d0cf3da528">
+                            <gml:beginPosition>2017-03-02T00:42:01Z</gml:beginPosition>
+                            <gml:endPosition>2017-03-03T16:54:21Z</gml:endPosition>
+                        </gml:TimePeriod>
+                    </aixm:featureLifetime>
+                    <event:encoding>DIGITAL</event:encoding>
+                    <event:scenario>AD.CLS</event:scenario>
+                    <event:version>2.0</event:version>
+                    <event:revision>2014-11-22T22:00:00Z</event:revision>
+                    <event:textNOTAM>
+                        <event:NOTAM gml:id="NOTAM_B_65057cd1-e131-45e3-bf12-0d419de31f94">
+                            <event:series>A</event:series>
+                            <event:number>26</event:number>
+                            <event:year>2017</event:year>
+                            <event:type>N</event:type>
+                            <event:issued>2017-02-28T05:44:28Z</event:issued>
+                            <event:traffic>IV</event:traffic>
+                            <event:purpose>NBO</event:purpose>
+                            <event:scope>A</event:scope>
+                            <event:location>EBBR</event:location>
+                            <event:effectiveStart>201703011000</event:effectiveStart>
+                            <event:effectiveEnd>201704011000</event:effectiveEnd>
+                            <event:text>AD CLOSED.</event:text>
+                        </event:NOTAM>
+                    </event:textNOTAM>
+                </event:EventTimeSlice>
+            </event:timeSlice>
+        </event:Event>
+    </message:hasMember>
+    <message:hasMember>
+        <aixm:AirportHeliport xmlns:aixm="http://www.aixm.aero/schema/5.1" gml:id="AD_10bfbf77-9c06-4129-881a-ac35ed90a709">
+            <gml:boundedBy xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+            <aixm:timeSlice>
+                <aixm:AirportHeliportTimeSlice gml:id="Airport_TS_52c593bf-75a9-4c96-a2f9-58dd08778f3d">
+                    <gml:validTime>
+                        <gml:TimePeriod gml:id="AD_TS_TP_48b57e73-fe27-49f4-a021-7437fbb6f667">
+                            <gml:beginPosition>2017-03-02T00:42:01Z</gml:beginPosition>
+                            <gml:endPosition>2017-03-03T16:54:21Z</gml:endPosition>
+                        </gml:TimePeriod>
+                    </gml:validTime>
+                    <aixm:interpretation>TEMPDELTA</aixm:interpretation>
+                    <aixm:sequenceNumber>1</aixm:sequenceNumber>
+                    <aixm:designator>EBBR</aixm:designator>
+                    <aixm:availability>
+                        <aixm:AirportHeliportAvailability gml:id="ADAvailability_a24b2b95-3976-4332-adf8-f95cddd21592">
+                            <aixm:operationalStatus>CLOSED</aixm:operationalStatus>
+                        </aixm:AirportHeliportAvailability>
+                    </aixm:availability>
+                    <aixm:extension>
+                        <event:AirportHeliportExtension xmlns:event="http://www.aixm.aero/schema/5.1/event" gml:id="AD_EX_52fcf8eb-8144-4a2a-9c07-a16d0498d06f">
+                            <event:theEvent xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xlink:href="#Event_28716e4a-4fee-4998-a35a-ac15b00124f2" xsi:nil="true"/>
+                        </event:AirportHeliportExtension>
+                    </aixm:extension>
+                </aixm:AirportHeliportTimeSlice>
+            </aixm:timeSlice>
+        </aixm:AirportHeliport>
+    </message:hasMember>
+</message:AIXMBasicMessage>

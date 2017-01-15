@@ -1,41 +1,16 @@
 package frontend;
 
 import java.io.File;
-import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
-import javax.print.attribute.standard.DateTimeAtCompleted;
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
-import javax.xml.datatype.XMLGregorianCalendar;
-import javax.xml.namespace.QName;
 
-import net.opengis.gml.DirectPositionType;
-import net.opengis.gml.PointPropertyType;
-import net.opengis.gml.PointType;
 import tools.JaxbHelper;
-import aero.aixm.CodeFlightRuleType;
-import aero.aixm.SurfacePropertyType;
 
-import com.frequentis.semnotam.pr.AerodromeType;
-import com.frequentis.semnotam.pr.AircraftPropertyType;
-import com.frequentis.semnotam.pr.AircraftType;
-import com.frequentis.semnotam.pr.AircraftTypeType;
-import com.frequentis.semnotam.pr.DepartureAerodromePropertyType;
-import com.frequentis.semnotam.pr.DestinationAerodromePropertyType;
 import com.frequentis.semnotam.pr.FilterInputType;
-import com.frequentis.semnotam.pr.FlightPathPropertyType;
-import com.frequentis.semnotam.pr.FlightPathType;
-import com.frequentis.semnotam.pr.SegmentPropertyType;
-import com.frequentis.semnotam.pr.SegmentType;
-import com.frequentis.semnotam.pr.TimePeriodPropertyType;
-import com.frequentis.semnotam.pr.TimePeriodType;
-import com.frequentis.semnotam.pr.jaxb.JaxbTest;
-import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 
 import db.DB_Controller;
 
@@ -43,6 +18,7 @@ public class AppController {
 	private static AppController controller = null;
 	//private static Map<String,String> map ;
 	private String currentId = null;
+	private List<FilterInputType> filterInputs = new ArrayList<FilterInputType>();
 	
 	public static AppController getInstance()
 	{
@@ -66,6 +42,7 @@ public class AppController {
 		
 		InputHandler inputHandler = new InputHandler();
 		FilterInputType filterInput = inputHandler.createFilterInput(inputData);
+		filterInputs.add(filterInput);
 		
 		Date now = new Date();
 		String fileName = "fi1.xml";
@@ -86,6 +63,10 @@ public class AppController {
 		existDb.initDB();
 		existDb.putFile("db/DKE_PR/FilterInput", outputFile);
 		
+	}
+
+	public List<FilterInputType> getFilterInputs() {
+		return filterInputs;
 	}
 	
 	
