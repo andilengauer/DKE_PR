@@ -19,6 +19,7 @@ public class AppController {
 	//private static Map<String,String> map ;
 	private String currentId = null;
 	private List<FilterInputType> filterInputs = new ArrayList<FilterInputType>();
+	public FilterInputType inputType;
 	
 	public static AppController getInstance()
 	{
@@ -39,10 +40,11 @@ public class AppController {
 	
 	public void handleInputData(Map<String,String[]> inputData)
 	{
-		
+		currentId = "TEST";
 		InputHandler inputHandler = new InputHandler();
 		FilterInputType filterInput = inputHandler.createFilterInput(inputData);
 		filterInputs.add(filterInput);
+		inputType = filterInput;
 		
 		Date now = new Date();
 		String fileName = "fi1.xml";

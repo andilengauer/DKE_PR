@@ -227,6 +227,7 @@ public class InputHandler {
 				.get("Minimalgewicht_Flugzeug")[0]));
 		aircraftType.setType(AircraftTypeType.fromValue(inputData
 				.get("Typ_Flugzeug")[0]));
+		aircraftType.setWingspanFt(new BigDecimal(inputData.get("Spannweite_Flugzeug")[0]));
 
 		aircraft.setAircraft(aircraftType);
 

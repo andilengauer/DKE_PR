@@ -215,7 +215,7 @@ pageEncoding="utf-8"%>
 					</select> 
 					<input type="hidden" name="Textfield_Auswahl_Wetterbedingungen_Segment"></input><br></br><br></br>
 					
-					<div id="Karte" class="Karte"></div><br>
+					<div id="SegmentKarte" class="Karte"></div><br>
 					<button type="button" id="Segment_speichern" onclick="addRow()">Segment hinzufügen</button><br></br>
 					<table id="Segment_Tab">
 					<input type="text" name="SegmentList" id="SegmentList"></input>
@@ -280,7 +280,7 @@ pageEncoding="utf-8"%>
 
   	    var map = new ol.Map({
     	     layers: [raster, vector],
-    	     target: 'Karte',
+    	     target: 'SegmentKarte',
     	     view: new ol.View({
     	     center: ol.proj.fromLonLat([16.37, 48.209]),
     	     zoom: 4

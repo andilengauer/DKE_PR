@@ -5,11 +5,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Success</title>
+<title>Submit</title>
 </head>
 <body>
 <%
-out.println(getServletContext().getRealPath("."));
 String eingabe = request.getParameter("Id_Flugzeug");
 Map<String,String[]> params = request.getParameterMap();
 
@@ -22,7 +21,7 @@ catch(Exception e)
 {
 	e.printStackTrace();
 }
-//response.sendRedirect("FilterOutput.jsp");
+response.sendRedirect("FilterOutput.jsp");
 
 %>
 </body>

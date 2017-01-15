@@ -2,14 +2,22 @@
 
 
 input {
-	margin: 0 0 1em 10em;
-	width: 250px;
 }
 
 label {
 	float: left;
 	text-align: right;
 	width: 1em;
+}
+.Flugzeug_Text
+{
+	margin: 0 0 1em 12em;
+	width: 10%;
+}
+.Flugroute_input
+{
+	margin: 0 0 1em 12em;
+	width: 120px;
 }
 
 table, th, td {
@@ -27,7 +35,7 @@ ul {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 2
+    z-index: 2;
 }
 #cmdFilterHead
 {
@@ -109,44 +117,10 @@ li a {
 	font-weight: bold;
 }
 
-#datepicker1_Abflugflughafen { 
-    vertical-align : top;
+.Datepicker {
+	vertical-align : top;
     width: 100px;
-}
-
-#datepicker2_Abflugflughafen { 
-    vertical-align : top;
-    width: 100px;
-}
-
-#datepicker3_Area { 
-    vertical-align : top;
-    width: 100px;
-}
-
-#datepicker4_Area { 
-    vertical-align : top;
-    width: 100px;
-}
-
-#datepicker5_Segment { 
-    vertical-align : top;
-    width: 100px;
-}
-
-#datepicker6_Segment { 
-    vertical-align : top;
-    width: 100px;
-}
-
-#datepicker7_Zielflughafen { 
-    vertical-align : top;
-    width: 100px;
-}
-
-#datepicker8_Zielflughafen { 
-    vertical-align : top;
-    width: 100px;
+	
 }
 
 #Label_Datum_Anfang_Abflugflughafen {
@@ -277,66 +251,32 @@ li a {
 	width: 100px;
 }
 
-#Auswahl_Flugregeln_Abflugflughafen {
+.Auswahl_Flugregel {
 	position: absolute;
-	left: 6cm;
+	left: 7cm;
 	width: 70px;
 }
 
-#Auswahl_Wetterbedingungen_Abflugflughafen {
+.Auswahl_Wetter {
 	position: absolute;
-	left: 6cm;
+	left: 7cm;
 	width: 70px;
 }
 
-#Auswahl_Flugregeln_Area {
-	position: absolute;
-	left: 6cm;
-	width: 70px;
-}
 
-#Auswahl_Wetterbedingungen_Area {
-	position: absolute;
-	left: 6cm;
-	width: 70px;
-}
 
-#Auswahl_Flugregeln_Segment {
-	position: absolute;
-	left: 6cm;
-	width: 70px;
-}
-
-#Auswahl_Wetterbedingungen_Segment {
-	position: absolute;
-	left: 6cm;
-	width: 70px;
-}
-
-#Auswahl_Flugregeln_Zielflughafen {
-	position: absolute;
-	left: 6cm;
-	width: 70px;
-}
-
-#Auswahl_Wetterbedingungen_Zielflughafen {
-	position: absolute;
-	left: 6cm;
-	width: 70px;
-}
 #Auswahl_Optionen_Karte {
 	position: absolute;
-	left: 11cm;
+	left: 13cm;
 	width: 100px;
 }
 
-#SegmentKarte {
+#Karte {
 	height: 400px;
 	width: 40%;
-	position: absolute;
-	left: 20cm;
-	top: 26cm;
-	z-index: 0;
+	position: relative;
+	left: 700px;
+	
 }
 
 #Label_Optionen_Karte {
@@ -347,7 +287,7 @@ li a {
 	height: 50px;
 	width: 100px;
 	font-weight: bold;
-	font-size: 150%;
+	font-size: 200%;
 	left: 1cm;
 	position: absolute;
 	margin: 0 0 1em 1em;
@@ -400,11 +340,7 @@ li a {
 	left: 2cm;
 	width: 70px;
 }
-#Typ_Flugzeug {
-	margin: 0 0 1em 10em;
-	width: 250px;
-	
-}
+
 
 #Startpunkt_Segment {
 	width: 60px;
@@ -417,6 +353,13 @@ li a {
 #Startseite {
 	font-weight: bold;
 }
+
+#Segment_Tab {
+	position: relative;
+	top: -420px;
+}
+
+
 
 
 

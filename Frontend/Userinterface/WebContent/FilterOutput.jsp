@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
+<%@page import="com.frequentis.semnotam.pr.SegmentPropertyType"%>
+<%@page import="com.frequentis.semnotam.pr.FilterInputType"%>
+<%@page import="com.frequentis.semnotam.pr.AircraftTypeType"%>
+<%@page import="com.frequentis.semnotam.pr.AerodromeType"%>
 <%@page import="frontend.AppController"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%>
@@ -10,7 +14,7 @@ pageEncoding="ISO-8859-1"%>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FilterOutput</title>
-<link rel="stylesheet" href="Design.css">
+<link rel="stylesheet" href="OutputDesign.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <link rel="stylesheet" href="https://openlayers.org/en/v3.20.1/css/ol.css" type="text/css">
@@ -19,194 +23,156 @@ pageEncoding="ISO-8859-1"%>
 <script src="https://openlayers.org/en/v3.20.1/build/ol.js"></script>
 
 <%
-	//Flugzeuginformationen
-	String idflugzeug = "";
-	String typflugzeug = "";
-	String spannweiteflugzeug = "";
-	String maximalgewichtflugzeug = "";
-	String minimalgewichtflugzeug = "";
-	
-	//Abflugflughafen
-	String idabflughafen = "";
-	String datepicker1abflughafen ="";
-	String startuhrzeitabflughafen = "";
-	String datepicker2abflughafen = "";
-	String endeuhrzeitabflughafen ="";
-	String flugregelnabflugflughafen = "";
-	String wetterbedingungenabflugflughafen = "";
+FilterInputType input = AppController.getInstance().inputType;
 
-	//Area
-	String idarea = "";
-	String datepicker3area ="";
-	String startuhrzeitarea = "";
-	String datepicker4area = "";
-	String endeuhrzeitarea ="";
-	String flugregelnarea = "";
-	String wetterbedingungenarea ="";
-	
-	//Segment
-	String idsegment = "";
-	String datepicker5segment ="";
-	String startuhrzeitsegment = "";
-	String datepicker6segment = "";
-	String endeuhrzeitsegment ="";
-	String flugregelnsegment = "";
-	String wetterbedingungensegment ="";
-	
-	//Zielflughafen
-	String idzielflughafen = "";
-	String datepicker7zielflughafen ="";
-	String startuhrzeitzielflughafen = "";
-	String datepicker8zielflughafen = "";
-	String endeuhrzeitzielflughafen = "";
-	String flugregelnzielflughafen = "";
-	String wetterbedingungenzielflughafen = "";
-	
-	if (request.getParameter("Submit") != null)
-	{
-		//Flugzeuginformationen
-		idflugzeug = request.getParameter("Id_Flugzeug");
-		typflugzeug = request.getParameter("Typ_Flugzeug");
-		spannweiteflugzeug = request.getParameter("Spannweite_Flugzeug");
-		maximalgewichtflugzeug = request.getParameter("Maximalgewicht_Flugzeug");
-		minimalgewichtflugzeug = request.getParameter("Minimalgewicht_Flugzeug");
-		
-		//Abflugflughafen
-		idabflughafen = request.getParameter("Id_Abflugflughafen");
-		datepicker1abflughafen = request.getParameter("datepicker1_Abflugflughafen");
-		startuhrzeitabflughafen = request.getParameter("Textfield_Uhrzeit_Anfang_Abflugflughafen");
-	 	datepicker2abflughafen = request.getParameter("datepicker2_Abflugflughafen");
-	 	endeuhrzeitabflughafen = request.getParameter("Textfield_Uhrzeit_Ende_Abflugflughafen");
-	 	flugregelnabflugflughafen = request.getParameter("Textfield_Auswahl_Flugregeln_Ablugflughafen");
-	 	wetterbedingungenabflugflughafen = request.getParameter("Textfield_Auswahl_Wetterbedingungen_Ablugflughafen");
-	 	
-	 	//Area
-	 	idarea = request.getParameter("Id_Area");
-		datepicker3area = request.getParameter("datepicker3_Area");
-		startuhrzeitarea = request.getParameter("Textfield_Uhrzeit_Anfang_Area");
-	 	datepicker4area = request.getParameter("datepicker4_Area");
-	 	endeuhrzeitarea = request.getParameter("Textfield_Uhrzeit_Ende_Area");
-	 	flugregelnarea = request.getParameter("Textfield_Auswahl_Flugregeln_Area");
-	 	wetterbedingungenarea = request.getParameter("Textfield_Auswahl_Wetterbedingungen_Area");
-	 	
-	 	//Segment
-	 	idsegment = request.getParameter("Id_Segment");
-		datepicker5segment = request.getParameter("datepicker5_Segment");
-		startuhrzeitsegment = request.getParameter("Textfield_Uhrzeit_Anfang_Segment");
-	 	datepicker6segment = request.getParameter("datepicker6_Segment");
-	 	endeuhrzeitsegment = request.getParameter("Textfield_Uhrzeit_Ende_Segment");
-	 	flugregelnsegment = request.getParameter("Textfield_Auswahl_Flugregeln_Segment");
-	 	wetterbedingungensegment = request.getParameter("Textfield_Auswahl_Wetterbedingungen_Segment");
-	 	
-	 	//Zielflughafen
-	 	idzielflughafen = request.getParameter("Id_Zielflughafen");
-		datepicker7zielflughafen = request.getParameter("datepicker7_Zielflughafen");
-		startuhrzeitzielflughafen = request.getParameter("Textfield_Uhrzeit_Anfang_Zielflughafen");
-	 	datepicker8zielflughafen = request.getParameter("datepicker8_Zielflughafen");
-	 	endeuhrzeitzielflughafen = request.getParameter("Textfield_Uhrzeit_Ende_Zielflughafen");
-	 	flugregelnzielflughafen = request.getParameter("Textfield_Auswahl_Flugregeln_Zielflughafen");
-	 	wetterbedingungenzielflughafen = request.getParameter("Textfield_Auswahl_Wetterbedingungen_Zielflughafen");
-	}
+
 %>
 
 </head>
 <body>
-	<%
-	out.println("ID des Flugzeuges" + AppController.getInstance().getCurrentId());
-	%>
-	<form>
+	
+	<ul>
+			<li><a href="FilterInput.jsp">neue Filterung</a></li>
+			</ul><br></br><br></br>
+		
 		<fieldset id="Fieldset_Flugzeuginformationen">
 			<legend id="Legend_Flugzeuginformationen">Flugzeuginformationen</legend><br>
 			<label>ID:</label> 
-			<input type="text" name="Id_Flugzeug" id="Id_Flugzeug" value=<%=idflugzeug %>><br>
+			<input type="text" name="Flugzeug_ID" id="Flugzeug_ID" class="Flugzeug_Text" value=<%=input.getHasAircraft().getAircraft().getDesignator() %>></input><br>
 			<label>Typ:</label>
-			<input type="text" name="Typ_Flugzeug" id="Typ_Flugzeug" value=<%=typflugzeug %>><br>
+			<select name="Typ_Flugzeug" id="Typ_Flugzeug" class="Flugzeug_Text" disabled>
+ 				<option value=<%=AircraftTypeType.HELICOPTER %>><%=AircraftTypeType.HELICOPTER %></option>
+  				<option value=<%=AircraftTypeType.LANDPLANE %>><%=AircraftTypeType.LANDPLANE %></option>
+			</select><br>
 			<label>Spannweite:</label>
-			<input type="text" name="Spannweite_Flugzeug" id="Spannweite_Flugzeug" value=<%=spannweiteflugzeug %>><br>
+			<input type="text" name="Spannweite_Flugzeug" id="Spannweite_Flugzeug" class="Flugzeug_Text" value=<%=input.getHasAircraft().getAircraft().getWingspanFt() %>><br>
 			<label>Maximalgewicht:</label>
-			<input type="text" name="Maximalgewicht_Flugzeug" id="Maximalgewicht_Flugzeug" value=<%=maximalgewichtflugzeug %>><br>
+			<input type="text" name="Maximalgewicht_Flugzeug" id="Maximalgewicht_Flugzeug" class="Flugzeug_Text"><br>
 			<label>Minimalgewicht:</label>
-			<input type="text" name="Minimalgewicht_Flugzeug" id="Minimalgewicht_Flugzeug" value=<%=minimalgewichtflugzeug %>><br>
+			<input type="text" name="Minimalgewicht_Flugzeug" id="Minimalgewicht_Flugzeug" class="Flugzeug_Text"><br>
 		</fieldset><br>
 		
 		<fieldset id="Fieldset_Flugroute">
 			<legend id="Legend_Flugroute">Flugroute</legend><br>
-			
+			<label>Routenname:</label><input type="text" name="Route_name" class="Flugroute_input"></input>
 				<fieldset id="Fieldset_Abflugflughafen">
 					<legend id="Legend_Abflugflughafen">Abflugflughafen</legend><br>
-					<label> ID:</label>	
-					<input type="text" name="Id_Abflugflughafen" id="Id_Abflugflughafen" value=<%=idabflughafen %>><br>
+					<label>ID:</label>
+					<input type="text" name="Id_Abflugflughafen" id="Id_Abflugflughafen" class="Flugroute_input"><br>
 					<label name="Label_Datum_Anfang_Abflugflughafen" id="Id_Abflugflughafen">Startdatum:</label>
-					<input type="text" name="datepicker1_Abflugflughafen" id="datepicker1_Abflugflughafen" value=<%=datepicker1abflughafen %>>
+					<input type="text" name="Datum_Anfang_Abflugflughafen" id="datepicker1_Abflugflughafen" class="Flugroute_input">
 					<label name="Label_Uhrzeit_Anfang_Abflugflughafen" id="Label_Uhrzeit_Anfang_Abflugflughafen">Startuhrzeit:</label>
-					<input type="text" name="Textfield_Uhrzeit_Anfang_Abflugflughafen" id="Textfield_Uhrzeit_Anfang_Abflugflughafen" placeholder="example: 15:30" value=<%=startuhrzeitabflughafen %> ><br>
+					<input type="text" name="Uhrzeit_Anfang_Abflugflughafen" id="Textfield_Uhrzeit_Anfang_Abflugflughafen" placeholder="example: 15:30" class="Flugroute_input"><br>
 					<label name="Label_Datum_Ende_Abflugflughafen" id="Label_Datum_Ende_Abflugflughafen">Endedatum:</label>
-					<input type="text" name="datepicker2_Abflugflughafen" id="datepicker2_Abflugflughafen" value=<%=datepicker2abflughafen %>>
+					<input type="text" name="Datum_Ende_Abflugflughafen" id="datepicker2_Abflugflughafen" class="Flugroute_input">
 					<label name="Label_Uhrzeit_Ende_Abflugflughafen" id="Label_Uhrzeit_Ende_Abflugflughafen">Endeuhrzeit:</label>
-					<input type="text" name="Textfield_Uhrzeit_Ende_Abflugflughafen" id="Textfield_Uhrzeit_Ende_Abflugflughafen" placeholder="example: 17:30" value=<%=endeuhrzeitabflughafen %>><br>
+					<input type="text" name="Uhrzeit_Ende_Abflugflughafen" id="Textfield_Uhrzeit_Ende_Abflugflughafen" placeholder="example: 17:30" class="Flugroute_input"><br>
 					<label name="Flugregeln_Abflugflughafen" id="Flugregeln_Abflugflughafen">Flugregeln:</label>
-					<input type="text" name="Textfield_Auswahl_Flugregeln_Ablugflughafen" id="Textfield_Auswahl_Flugregeln_Ablugflughafen" value=<%=flugregelnabflugflughafen %>></input><br></br>
+					<select name="Flugregel_Abflugflughafen" id="Auswahl_Flugregeln_Abflugflughafen" class="Auswahl_Flugregel">
+ 						<option value="IFR">IFR</option>
+  						<option value="VFR">VFR</option>
+					</select><br><br>
+					<input type="hidden" name="Textfield_Auswahl_Flugregeln_Ablugflughafen"></input>
 					<label name="Wetterbedingungen_Abflugflughafen" id="Wetterbedingungen_Abflugflughafen">Wetterbedingungen:</label>
-					<input type="text" name="Textfield_Auswahl_Wetterbedingungen_Ablugflughafen" id="Textfield_Auswahl_Wetterbedingungen_Ablugflughafen" value=<%=wetterbedingungenabflugflughafen %>></input><br></br>
+					<select name="Wetter_Abflugflughafen" id="Auswahl_Wetterbedingungen_Abflugflughafen" class="Auswahl_Wetter">
+ 						<option value="IMC">IMC</option>
+  						<option value="VMC">VMC</option>
+					</select> 
+					<input type="hidden" name="Textfield_Auswahl_Wetterbedingungen_Ablugflughafen"></input>
 				</fieldset><br>
 				
 				<fieldset id="Fieldset_Area">
 					<legend id="Legend_Area">Area</legend><br>
 					<label> ID:</label>
-					<input type="text" name="Id_Area" id="Id_Area" value=<%=idarea %>><br>
+					<input type="text" name="Id_Area" id="Id_Area" class="Flugroute_input"><br>
 					<label name="Label_Datum_Anfang_Area" id="Label_Datum_Anfang_Area">Startdatum:</label>
-					<input type="text" name="datepicker3_Area" id="datepicker3_Area" value=<%=datepicker3area %>>
+					<input type="text" name="Datum_Anfang_Area" id="datepicker3_Area" class="Flugroute_input">
 					<label name="Label_Uhrzeit_Anfang_Area" id="Label_Uhrzeit_Anfang_Area">Startuhrzeit:</label>
-					<input type="text" name="Textfield_Uhrzeit_Anfang_Area" id="Textfield_Uhrzeit_Anfang_Area" placeholder="example: 15:30" value=<%=startuhrzeitarea %>><br>
+					<input type="text" name="Uhrzeit_Anfang_Area" id="Textfield_Uhrzeit_Anfang_Area" placeholder="example: 15:30" class="Flugroute_input"><br>
 					<label name="Label_Datum_Ende_Area" id="Label_Datum_Ende_Area">Endedatum:</label>
-					<input type="text" name="datepicker4_Area" id="datepicker4_Area" value=<%=datepicker4area %>>
+					<input type="text" name="Datum_Ende_Area" id="datepicker4_Area" class="Flugroute_input">
 					<label name="Label_Uhrzeit_Ende_Area" id="Label_Uhrzeit_Ende_Area">Endeuhrzeit:</label>
-					<input type="text" name="Textfield_Uhrzeit_Ende_Area" id="Textfield_Uhrzeit_Ende_Area" placeholder="example: 17:30" value=<%=endeuhrzeitarea %>><br>
+					<input type="text" name="Uhrzeit_Ende_Area" id="Textfield_Uhrzeit_Ende_Area" placeholder="example: 17:30" class="Flugroute_input"><br>
 					<label name="Flugregeln_Area" id="Flugregeln_Area">Flugregeln:</label>
-					<input type="text" name="Textfield_Auswahl_Flugregeln_Area" id="Textfield_Auswahl_Flugregeln_Area" value=<%=flugregelnarea %>></input><br></br>
+					<select name="Flugregeln_Area" id="Auswahl_Flugregeln_Area" class="Auswahl_Flugregel">
+ 						<option value="IFR">IFR</option>
+  						<option value="VFR">VFR</option>
+					</select><br><br>
+					<input type="hidden" name="Textfield_Auswahl_Flugregeln_Area"></input>
 					<label name="Wetterbedingungen_Area" id="Wetterbedingungen_Area">Wetterbedingungen:</label>
-					<input type="text" name="Textfield_Auswahl_Wetterbedingungen_Area" id="Textfield_Auswahl_Wetterbedingungen_Area" value=<%=wetterbedingungenarea %>></input><br></br>
+					<select name="Wetterbedingungen_Area" id="Auswahl_Wetterbedingungen_Area" class="Auswahl_Wetter">
+ 						<option value="IMC">IMC</option>
+  						<option value="VMC">VMC</option>
+					</select> 
+					<input type="hidden" name="Textfield_Auswahl_Wetterbedingungen_Area"></input>
 				</fieldset><br>
 					
 				<fieldset id="Fieldset_Segment">
 					<legend id="Legend_Segment">Segment</legend><br>
-					<label> ID:</label>		
-					<input type="text" name="Id_Segment" id="Id_Segment" value=<%=idsegment %>><br>
-					<label name="Label_Datum_Anfang_Segment" id="Label_Datum_Anfang_Segment">Startdatum:</label>
-					<input type="text" name="datepicker5_Segment" id="datepicker5_Segment" value=<%=datepicker5segment %>>
-					<label name="Label_Uhrzeit_Anfang_Segment" id="Label_Uhrzeit_Anfang_Segment">Startuhrzeit:</label>
-					<input type="text" name="Textfield_Uhrzeit_Anfang_Segment" id="Textfield_Uhrzeit_Anfang_Segment" placeholder="example: 15:30" value=<%=startuhrzeitsegment %>><br>
-					<label name="Label_Datum_Ende_Segment" id="Label_Datum_Ende_Segment">Endedatum:</label>
-					<input type="text" name="datepicker6_Segment" id="datepicker6_Segment" value=<%=datepicker6segment %>>
-					<label name="Label_Uhrzeit_Ende_Segment" id="Label_Uhrzeit_Ende_Segment">Endeuhrzeit:</label>
-					<input type="text" name="Textfield_Uhrzeit_Ende_Segment" id="Textfield_Uhrzeit_Ende_Segment" placeholder="example: 17:30" value=<%=endeuhrzeitsegment %>><br>
-					<label name="Flugregeln_Segment" id="Flugregeln_Segment">Flugregeln:</label>
-					<input type="text" name="Textfield_Auswahl_Flugregeln_Segment" id="Textfield_Auswahl_Flugregeln_Segment" value=<%=flugregelnsegment %>></input><br></br>
-					<label name="Wetterbedingungen_Segment" id="Wetterbedingungen_Segment">Wetterbedingungen:</label>
-					<input type="text" name="Textfield_Auswahl_Wetterbedingungen_Segment" id="Textfield_Auswahl_Wetterbedingungen_Segment" value=<%=wetterbedingungensegment %>></input><br></br>
+					<div id="Karte" class="Karte"></div><br>
+					<table id="Segment_Tab">
+					<tr>
+						<th>ID</th>
+						<th>Startpunkt</th>
+						<th>Endpunkt</th>
+					</tr>
+					<%for(SegmentPropertyType s :input.getHasFlightPath().getFlightPath().getHasSegment()) 
+					{
+						String startPoint;
+						String endPoint;
+						
+						startPoint = s.getSegment().getStartPoint().getPoint().getValue().getPos().getValue().toString();
+						endPoint = s.getSegment().getEndPoint().getPoint().getValue().getPos().getValue().toString();
+						
+					%>
+					<tr>
+					<td><%=s.getSegment().getDesignator() %></td>
+					<td><%=startPoint %></td>
+					<td><%=endPoint %></td>
+					</tr>
+					<%}
+					%>
+					</table>
 				</fieldset><br>
 					
 				<fieldset id="Fieldset_Zielflughafen">
-					<legend id="Legend_Zielflughafen">Zielflughafen</legend><br>
+					<legend id="Legend_Zielflughafen">Zielflughafen</legend><br/>
 					<label> ID:</label>
-					<input type="text" name="Id_Zielflughafen" id="Id_Zielflughafen" value=<%=idzielflughafen %>><br>
+					<input type="text" name="Id_Zielflughafen" id="Id_Zielflughafen"/ class="Flugroute_input"><br/>
 					<label name="Label_Datum_Anfang_Zielflughafen" id="Label_Datum_Anfang_Zielflughafen">Startdatum:</label>
-					<input type="text" name="datepicker7_Zielflughafen" id="datepicker7_Zielflughafen" value=<%=datepicker7zielflughafen %>>
+					<input type="text" name="Datum_Anfang_Zielflughafen" id="datepicker7_Zielflughafen" class="Flugroute_input">
 					<label name="Label_Uhrzeit_Anfang_Zielflughafen" id="Label_Uhrzeit_Anfang_Zielflughafen">Startuhrzeit:</label>
-					<input type="text" name="Textfield_Uhrzeit_Anfang_Zielflughafen" id="Textfield_Uhrzeit_Anfang_Zielflughafen" placeholder="example: 15:30" value=<%=startuhrzeitzielflughafen %>><br>
+					<input type="text" name="Uhrzeit_Anfang_Zielflughafen" id="Textfield_Uhrzeit_Anfang_Zielflughafen" placeholder="example: 15:30" class="Flugroute_input"><br>
 					<label name="Label_Datum_Ende_Zielflughafen" id="Label_Datum_Ende_Zielflughafen">Endedatum:</label>
-					<input type="text" name="datepicker8_Zielflughafen" id="datepicker8_Zielflughafen" value=<%=datepicker8zielflughafen %>>
+					<input type="text" name="Datum_Ende_Zielflughafen" id="datepicker8_Zielflughafen" class="Flugroute_input">
 					<label name="Label_Uhrzeit_Ende_Zielflughafen" id="Label_Uhrzeit_Ende_Zielflughafen">Endeuhrzeit:</label>
-					<input type="text" name="Textfield_Uhrzeit_Ende_Zielflughafen" id="Textfield_Uhrzeit_Ende_Zielflughafen" placeholder="example: 17:30" value=<%=endeuhrzeitzielflughafen %>><br>
+					<input type="text" name="Uhrzeit_Ende_Zielflughafen" id="Textfield_Uhrzeit_Ende_Zielflughafen" placeholder="example: 17:30" class="Flugroute_input"><br>
 					<label name="Flugregeln_Zielflughafen" id="Flugregeln_Zielflughafen">Flugregeln:</label>
-					<input type="text" name="Textfield_Auswahl_Flugregeln_Zielflughafen" id="Textfield_Auswahl_Flugregeln_Zielflughafen" value=<%=flugregelnzielflughafen %>></input><br></br>
+					<select name="Flugregel_Zielflughafen" id="Auswahl_Flugregeln_Zielflughafen" class="Auswahl_Flugregel">
+ 						<option value="IFR">IFR</option>
+  						<option value="VFR">VFR</option>
+					</select><br><br>
+					<input type="hidden" name="Textfield_Auswahl_Flugregeln_Zielflughafen"></input>
 					<label name="Wetterbedingungen_Zielflughafen" id="Wetterbedingungen_Zielflughafen">Wetterbedingungen:</label>
-					<input type="text" name="Textfield_Auswahl_Wetterbedingungen_Zielflughafen" id="Textfield_Auswahl_Wetterbedingungen_Zielflughafen" value=<%=wetterbedingungenzielflughafen %>></input><br></br>
+					<select name="Wetter_Zielflughafen" id="Auswahl_Wetterbedingungen_Zielflughafen" class="Auswahl_Wetter">
+ 						<option value="IMC">IMC</option>
+  						<option value="VMC">VMC</option>
+					</select> 
+					<input type="hidden" name="Textfield_Auswahl_Wetterbedingungen_Zielflughafen"></input>
 				</fieldset><br>
 				
-			<div id="Karte" class="Karte"></div>
+			
+			<label name="Label_Optionen_Karte" id="Label_Optionen_Karte">Wählen&nbsp;Sie&nbsp;bitte&nbsp;die&nbsp;gewünschte&nbsp;Option&nbsp;aus:</label>
+      		<select name="Auswahl_Optionen_Karte" id="Auswahl_Optionen_Karte">  
+        		<option value="LineString">Linie</option>
+        		<option value="Polygon">Polygon</option>
+        		<option value="Circle">Kreis</option>
+        		<option value="None">None</option>
+      		</select>
      	</fieldset><br>
-    </form>
+     	
+     	<input type="submit" name="Submit" id="Submit" value="Filtern">
+    
     
     <script>
     	var raster = new ol.layer.Tile({
@@ -228,7 +194,7 @@ pageEncoding="ISO-8859-1"%>
     	     })
     	});
 
-    	var typeSelect = document.getElementById('Auswahl_Optionen');
+    	var typeSelect = document.getElementById('Auswahl_Optionen_Karte');
 
     	var draw;
     	function addInteraction() {
@@ -248,7 +214,58 @@ pageEncoding="ISO-8859-1"%>
    		};
 
     	addInteraction();
+    	
+    	/**
+       	* Add a click handler to the map to render the popup.
+       */
+       
+       
+      	map.on('click', function(evt) {
+        	var coordinate = evt.coordinate;
+        	var lonlat = ol.coordinate.toStringXY(ol.proj.toLonLat(
+            coordinate, 'EPSG:3857', 'EPSG:4326'));
+			if(document.getElementById('Startpunkt_Segment').value != "")
+			{    		
+				document.getElementById('Endpunkt_Segment').value = lonlat;
+			}
+			else 
+			{
+			    document.getElementById('Startpunkt_Segment').value = lonlat;
+			}	
+      	});
+       
    	</script>	
-
+   	
+   	<script>
+   	var segments = [];
+   	
+   	function addRow() {
+   			var tabelle = document.getElementById("Segment_Tab");
+   	   		var reihe = tabelle.insertRow(-1);
+   	   		var id = reihe.insertCell(0);
+   	   		var startpunkt = reihe.insertCell(1);
+   	 		var endpunkt = reihe.insertCell(2);
+   	   		
+   	 		var inputId = document.getElementById("Id_Segment").value;
+   	 		var inputStart = document.getElementById("Startpunkt_Segment").value;
+   	 		var inputEnd = document.getElementById("Endpunkt_Segment").value;
+   	 		
+   	 		//push into segment array
+   	 		var segment = {"id":inputId,start:inputStart,end:inputEnd};
+   	   		segments.push(segment);
+   	   		document.getElementById("SegmentList").value = JSON.stringify(segments);
+   	   		
+   	   		id.innerHTML = document.getElementById("Id_Segment").value;
+   	   		startpunkt.innerHTML = document.getElementById("Startpunkt_Segment").value;
+   	 		endpunkt.innerHTML = document.getElementById("Endpunkt_Segment").value;
+   	 		
+   	 		
+   	 		document.getElementById("Id_Segment").value = "";
+   	 		document.getElementById("Startpunkt_Segment").value = "";
+   	 		document.getElementById("Endpunkt_Segment").value = "";
+   		}
+   		
+   		
+   	</script>
 </body>
 </html>
