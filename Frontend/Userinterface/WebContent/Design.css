@@ -39,9 +39,18 @@ ul {
 }
 
 li {
+    float:left;
     position: relative;
     left: 4cm;
 }
+
+li a {
+    display: block;
+    color: white;
+    padding: 16px;
+    text-decoration: none;
+}
+
 
 #Fieldset_Flugzeuginformationen {
 	border: 2px solid green;	
@@ -324,39 +333,31 @@ li {
 	display: none;
 }
 
-<<<<<<< HEAD
-#SegmentKarte {
-	height: 400px;
-	width: 40%;
+#Karte_Segment {
+	height: 40%;
+	width: 30%;
 	position: absolute;
-	left: 20cm;
-	top: 26cm;
-	z-index: 0;
-=======
+	left: 17cm;
+	top: 29cm;
+	z-index:0;
+}
+
 #Auswahl_Optionen_Karte_Segment {
 	position: absolute;
 	left: 11cm;
 	width: 100px;
 	display: none;
->>>>>>> 72c66fa457ac21936771239a742112d81fa95bf2
 }
 
-#Karte_Segment {
-	height: 60%;
-	width: 60%;
-	position: absolute;
-	left: 1cm;
-	top: 48cm;
-	z-index: -1;
-}
 
 #Karte_Area {
-	height: 60%;
-	width: 60%;
+	height: 40%;
+	width: 30%;
 	position: absolute;
-	left: 1cm;
-	top: 28cm;
-	z-index: -1;
+	left: 17cm;
+	top: 19cm;
+	z-index:0;
+
 }
 
 #Label_Optionen_Karte_Area {
@@ -449,29 +450,11 @@ li {
 	font-size: 100%;
 }
 
-#Karte_oeffnen {
-	font-weight: bold;
-}
-
-#Segment_speichern {
-	font-weight: bold;
-}
-
-#Area_speichern {
-	font-weight: bold;
-}
 
 #Segment_Tab {
 	display: none;
 }
 
-#Karte_Segment {
-	display: none;
-}
-
-#Karte_Area {
-	display: none;
-}
 
 
 

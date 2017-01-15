@@ -103,32 +103,18 @@ $(function() {
 </script>
 </head>
 <body>
-<<<<<<< HEAD
+
 <!-- 	Im nachfolgenden wird ein Fieldset generiert.
 		In diesem Fieldset werden die Eingabefelder, Labels, Auswahllisten, Datepickers und Buttons definiert.
 		Der Datepicker ist eine Hilfestellung zur leichteren Auswahl eines Datums. Der Datepicker wird über ein CSS-File
 		und ein Java-Script-File im Header eingebunden.
 -->
-	
-		<form action="Success.jsp" method ="get">
-		
-		<ul>
-			<li><input type="submit" name="Filtern" id="Filtern" value="Filtern"></input></li>
-
-		</ul><br></br><br>
-=======
 
 		<form action="Submit.jsp" method ="get" id="InputForm">
 		
 		<ul>
-			<li><a href="Flugzeuginformationen.jsp">Flugzeuginformationen</a></li>
-			<li><a href="Abflugflughafen.jsp">Abflugflughafen</a></li>
-			<li><a href="Zielflughafen.jsp">Zielflughafen</a></li>
-			<li><a href="Area.jsp">Area</a></li>
-			<li><a href="Segment.jsp">Segment</a></li>
 			<li><a href="javascript:{}" onclick="document.getElementById('InputForm').submit()">Filterung abschließen</a></li>
 		</ul><br></br><br></br>
->>>>>>> 1894c283ba220a68e695235244f730db0cd78b43
 		
 		<fieldset id="Fieldset_Flugzeuginformationen">
 			<legend id="Legend_Flugzeuginformationen">Flugzeuginformationen</legend><br>
@@ -201,13 +187,7 @@ $(function() {
   						<option value="VMC">VMC</option>
 					</select> 
 					<input type="hidden" name="Textfield_Auswahl_Wetterbedingungen_Area"></input><br></br><br>
-					<button type="button" id="Karte_oeffnen" onClick="anzeigenAreaKarte()">Karte öffnen</button><br></br>
-					<label name="Label_Optionen_Karte_Area" id="Label_Optionen_Karte_Area">Wählen&nbsp;Sie&nbsp;bitte&nbsp;die&nbsp;gewünschte&nbsp;Option&nbsp;aus:</label>
-      				<select name="Auswahl_Optionen_Karte_Area" id="Auswahl_Optionen_Karte_Area">  
-        				<option value="Polygon">Polygon</option>
-        				<option value="None">None</option>
-      				</select><br>
-					<div id="Karte_Area" class="Karte_Area"></div><br><br></br><br></br><br></br><br></br><br><br><br>
+					<div id="Karte_Area" class="Karte_Area"></div><br>
 					<label>Startpunkt:</label>
 					<input type="text" name="Startpunkt_Area" id="Startpunkt_Area"></input><br>
 					<label>Endpunkt:</label>
@@ -240,38 +220,31 @@ $(function() {
   						<option value="VMC">VMC</option>
 					</select> 
 					<input type="hidden" name="Textfield_Auswahl_Wetterbedingungen_Segment"></input><br></br><br>
-					<button type="button" id="Karte_oeffnen" onClick="anzeigenSegmentKarte()">Karte öffnen</button><br></br>
-					<label name="Label_Optionen_Karte_Segment" id="Label_Optionen_Karte_Segment">Wählen&nbsp;Sie&nbsp;bitte&nbsp;die&nbsp;gewünschte&nbsp;Option&nbsp;aus:</label>
-      				<select name="Auswahl_Optionen_Karte_Segment" id="Auswahl_Optionen_Karte_Segment">  
-        				<option value="LineString">Linie</option>
-        				<option value="None">None</option>
-      				</select><br></br>
+					
       				<!--	Es wird eine Karte eingefügt.
 						Es kann in einer Auswahlliste eine Option ausgewählt werden.
 						Mit Auswahl einer der folgenden Optionen kann dann auf der Karte gezeichnet werden.
 						Optionen sind: Zeichnen von Linie, Polygon und nichts zeichnen
 				 	-->
-					<div id="Karte_Segment" class="Karte_Segment"></div><br><br></br><br></br><br></br><br></br><br><br><br>
+					<div id="Karte_Segment" class="Karte_Segment"></div><br>
 					<label>Startpunkt:</label>
 					<input type="text" name="Startpunkt_Segment" id="Startpunkt_Segment"></input><br>
 					<label>Endpunkt:</label>
 					<input type="text" name="Endpunkt_Segment" id="Endpunkt_Segment"></input><br></br>
-					
-<<<<<<< HEAD
-					<div id="SegmentKarte" class="Karte"></div><br>
-					<button type="button" id="Segment_speichern" onclick="addRow()">Segment hinzufügen</button><br></br>
-					<table id="Segment_Tab">
-					<input type="text" name="SegmentList" id="SegmentList"></input>
-=======
 					<!--	Es wird eine Tabelle generiert.
 							Diese Tabelle enthält Informationen über die eingefügten Segmente.
 							Es werden die Tectfelder befüllt und mit anschließendenm Klick auf den Button werden die 
 							Informationen in einer Tabelle gespeichert. Diese Tabelle wird dann an die Business Rule Engine übergeben
 					 -->
-					<button type="button" id="Segment_speichern" onclick="addRow(), anzeigenSegmentTabelle()">Segment speichern</button><br></br>
+					 <select name="Segmentkarte_type" id="Segmentkarte_type">  
+        		<option value="LineString">Linie</option>
+        		<option value="Polygon">Polygon</option>
+        		<option value="Circle">Kreis</option>
+        		<option value="None">None</option>
+      		</select>
+					<button type="button" id="Segment_speichern" onclick="addRow(), anzeigenSegmentTabelle()">Segment hinzufügen</button><br></br>
 					<table id="Segment_Tab" name="Segment_Tab">
 					<input type="hidden" name="SegmentList" id="SegmentList"></input>
->>>>>>> 72c66fa457ac21936771239a742112d81fa95bf2
 					<tr>
 						<th>ID</th>
 						<th>Startpunkt</th>
@@ -323,37 +296,28 @@ $(function() {
             source: source	
  	    });
 
-<<<<<<< HEAD
-  	    var map = new ol.Map({
-    	     layers: [raster, vector],
-    	     target: 'SegmentKarte',
-    	     view: new ol.View({
-    	     center: ol.proj.fromLonLat([16.37, 48.209]),
-    	     zoom: 4
-=======
     	//Hier wird die Map erstellt
-  	    var map = new ol.Map({	//Ein neues Map - Objekt wird erstellt
+  	    var map1 = new ol.Map({	//Ein neues Map - Objekt wird erstellt
     	     layers: [raster, vector],	//Hier werden die vorher definierten Objekte (Raster und Vector) dem Layer zugewiesen
     	     target: 'Karte_Segment',	//Mit "target" wird das Ziel, wo dann die Karte eingefügt wird, festgelegt. Im Body - Bereich wird dann mit dem namen "Karte-Segment" die Karte eingefügt.
     	     view: new ol.View({	//Eine sich wird eingefügt, d.h.  welcher Punkt in der Map beim Laden angezeogt wird
     	     center: ol.proj.fromLonLat([16.37, 48.209]),	//In diesem Fall habe ich alternativ die Stadt Wien als view gewählt
     	     zoom: 4	//Der Zoomfaktor, welcher beim Laden angezeigt wird
->>>>>>> 72c66fa457ac21936771239a742112d81fa95bf2
     	     })
     	});
 
-  	  var typeSelect = document.getElementById('Auswahl_Optionen_Karte_Segment');	//Es wird das Option von der Auswahlliste in die Variable "typeSelect" gespeichert
-		
+  	  var typeSelect = document.getElementById('Segmentkarte_type');	//Es wird das Option von der Auswahlliste in die Variable "typeSelect" gespeichert
+	//typeSelect.value = "LineString";
   	//Mit Hilfe dieser Function kann dann auf der Karte gezeichnet werden
   	var draw;
   	function addInteraction() {
-   		var value = typeSelect.value;
+   		var value = "LineString"
   	    if (value !== 'None') {	//Es wird überprüft, ob die Option nicht "None" ist
   	    	draw = new ol.interaction.Draw({	//Bei einer anderen Auswahl als "None" kann auf der Karte gezeichnet werden
   	       		source: source,
-  	        	type: (typeSelect.value)
+  	        	type: "LineString"
   	        });
-  	        map.addInteraction(draw);
+  	        map1.addInteraction(draw);
   	    }
   	}
 
@@ -371,7 +335,8 @@ $(function() {
         	var coordinate = evt.coordinate;
         	var lonlat = ol.coordinate.toStringXY(ol.proj.toLonLat(
             coordinate, 'EPSG:3857', 'EPSG:4326'));	//Mit einem Klick auf die Karte werden die Koordinaten in die Variable "lonlat" gespeichert
-			if(document.getElementById('Startpunkt_Segment').value != "")
+			
+            if(document.getElementById('Startpunkt_Segment').value != "")
 			{    		
 				document.getElementById('Endpunkt_Segment').value = lonlat;	//Die Koordinaten werden in das Textfeld geschrieben
 			}
@@ -383,6 +348,7 @@ $(function() {
        
    	</script>	
    	
+   	<!--  
    	<script>
    	//Karte Area
    	var raster = new ol.layer.Tile({
@@ -405,7 +371,7 @@ $(function() {
 	});
 
 	var typeSelect = document.getElementById('Auswahl_Optionen_Karte_Area');
-
+	typeSelect = "LineString";
 	var draw;
 	function addInteraction() {
  		var value = typeSelect.value;
@@ -440,7 +406,7 @@ $(function() {
 		}	
   	});
    	</script>
-   	
+   	-->
    	<script>
    	var segments = [];
   	//Mit Hilfe dieser Function wird eine neue Zeile in einer Tabelle hinzugefügt und die Zellen mit den Werten von der Textbox befüllt
