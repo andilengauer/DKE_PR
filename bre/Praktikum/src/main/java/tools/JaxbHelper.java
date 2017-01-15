@@ -1,6 +1,8 @@
 package tools;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -20,6 +22,7 @@ import com.frequentis.semnotam.pr.ResultPropertyType;
 
 import aero.aixm.message.AIXMBasicMessageType;
 import net.opengis.wfs._2.FeatureCollectionType;
+import net.opengis.wfs._2.MemberPropertyType;
 
 /**
  * Test class for showing some examples of using JAXB to marshal and unmarshal
@@ -143,6 +146,23 @@ public class JaxbHelper {
 		AIXMBasicMessageType message = (AIXMBasicMessageType) JAXBIntrospector.getValue(aixmUnmarshaller.unmarshal(input));
 		System.out.println(message.getClass());
 		return message;
+	}
+	
+	public static List<AIXMBasicMessageType> getMessages(FeatureCollectionType collection) {
+		List<AIXMBasicMessageType> list = new ArrayList<AIXMBasicMessageType>();
+		
+		// For each MemberPropertyTyp ~ <wfs:member> Element
+		for (MemberPropertyType member : collection.getMember()) {
+			// Get the element at list index 1 = AIXMBasicMessage
+			// Due to the structure of the sample DNOTAM files the content list
+			// has always 3 entries:
+			//  1. entry = whitespace/returns before AIXMBasicMessage element
+			//  2. entry = AIXMBasicMessage Element
+			//  3. entry = whitespace/returns after AIXMBasicMessage element
+			AIXMBasicMessageType message = (AIXMBasicMessageType) JAXBIntrospector.getValue(member.getContent().get(1));
+			list.add(message);
+		}
+		return list;
 	}
 
 	/**
