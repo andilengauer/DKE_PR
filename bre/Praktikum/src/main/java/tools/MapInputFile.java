@@ -47,8 +47,11 @@ public class MapInputFile {
 		String routeName = flightpath.getRouteName();
 		String depatureAerodrome = flightpath.getHasDepartureAerodrome().getDepartureAerodrome().getDesignator();
 		String destinationAerodrome = flightpath.getHasDestinationAerodrome().getDestinationAerodrome().getDesignator();
-		// String altnernateAerodrome = flightpath.getHasAlternateAerodrome().
+		 //String altnernateAerodrome = flightpath.getHasAlternateAerodrome().get(0).getAlternateAerodrome().getDesignator();
 
+		 
+		 
+		 
 		LinkedList<Segment> segments = new LinkedList<>();
 
 		for (SegmentPropertyType st : flightpath.getHasSegment()) {

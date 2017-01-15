@@ -7,6 +7,8 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.namespace.QName;
 
+import org.w3.xlink.v1999.TypeType;
+
 import aero.aixm.message.AIXMBasicMessageType;
 
 import com.frequentis.semnotam.pr.AIXMBasicMessagePropertyType;
@@ -30,6 +32,8 @@ public class DNOTAMReader {
     	
     	System.out.println(m2.getHasMember().get(0).getTitleAttribute());
 		
+    	
+    	
 	}
 	
 
