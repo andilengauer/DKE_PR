@@ -153,10 +153,6 @@
 	<classpathentry kind="lib" path="lib/drools lib/xstream-1.4.9.jar"/>
 	<classpathentry kind="lib" path="lib/JAXB/jaxb_dke_pr.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v9.0"/>
-	<classpathentry kind="lib" path="lib/java-json.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="lib" path="lib/JSON/java-json.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
