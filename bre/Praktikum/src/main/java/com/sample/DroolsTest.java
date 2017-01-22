@@ -67,6 +67,8 @@ public class DroolsTest {
     		// Print the ID of all DNOTAMs contained in the FeatureCollection
     		for (AIXMBasicMessageType m : messages) {
     			
+    			
+    			
     			System.out.println(m.getId());
     		}
         	
