@@ -20,7 +20,9 @@ import com.frequentis.semnotam.pr.ImportanceClassificationType;
 import com.frequentis.semnotam.pr.ImportanceClassificationValueType;
 import com.frequentis.semnotam.pr.ResultPropertyType;
 
+import aero.aixm.AirportHeliportType;
 import aero.aixm.message.AIXMBasicMessageType;
+import aero.aixm.message.BasicMessageMemberAIXMPropertyType;
 import net.opengis.wfs._2.FeatureCollectionType;
 import net.opengis.wfs._2.MemberPropertyType;
 
@@ -45,6 +47,21 @@ public class JaxbHelper {
 		// Test unmarshalling of sample DNOTAM set
 		input = new File("src/main/resources/samples/sample_dnotams.xml");
 		FeatureCollectionType collection = unmarshalFeatureCollection(input);
+		
+		//Beispiel zur Verarbeitung von Messages
+		List<AIXMBasicMessageType> messages = getMessages(collection); //Liste von Messages
+		AIXMBasicMessageType m = messages.get(0); //erste Message
+		BasicMessageMemberAIXMPropertyType member = m.getHasMember().get(0); //erster Member der message
+		member.getAbstractAIXMFeature();
+		if(member.getAbstractAIXMFeature().getValue() instanceof AirportHeliportType) //Überprüfung von welchen Typ das Feature ist
+		{
+			//wichtig AirPortHeliportType extends AbstractAixmFeature
+			//dies muss für alle gelten da sonst kein Typecast erfolgen kann
+			AirportHeliportType airHeliType = (AirportHeliportType)member.getAbstractAIXMFeature().getValue() ;
+			airHeliType.getTimeSlice().get(0).getAirportHeliportTimeSlice().getValidTime();
+		}
+		
+		
 		
 		// Test unmarshalling of aerodromes		
 		input = new File("src/main/resources/samples/AD.CLS2.0-ADclosedexceptforspecialflights.xml");
