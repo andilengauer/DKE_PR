@@ -45,7 +45,7 @@ public class JaxbHelper {
 		unmarshalFeatureCollection(input);
 		
 		// Test unmarshalling of sample DNOTAM set
-		input = new File("src/main/resources/samples/sample_dnotams.xml");
+		input = new File("src/main/resources/samples/DNOTAMS.xml");
 		FeatureCollectionType collection = unmarshalFeatureCollection(input);
 		
 		//Beispiel zur Verarbeitung von Messages
@@ -184,32 +184,39 @@ public class JaxbHelper {
 
 	/**
 	 * Unmarshal the specified file into a FeatureCollectionType object.
+	 * 
 	 * @param input
 	 * @return
 	 * @throws JAXBException
 	 */
 	public static FeatureCollectionType unmarshalFeatureCollection(File input) throws JAXBException {
-		Unmarshaller wfsUnmarshaller = getWfsContext().createUnmarshaller();		
-						
-		FeatureCollectionType collection = (FeatureCollectionType) JAXBIntrospector.getValue(wfsUnmarshaller.unmarshal(input));
-		System.out.println(collection.getClass());	
+		Unmarshaller wfsUnmarshaller = getCombinedContext().createUnmarshaller();
+
+		FeatureCollectionType collection = (FeatureCollectionType) JAXBIntrospector
+				.getValue(wfsUnmarshaller.unmarshal(input));
+
 		return collection;
 	}
+	private static JAXBContext getCombinedContext() throws JAXBException {
+		return JAXBContext.newInstance(aero.aixm.ObjectFactory.class, net.opengis.wfs._2.ObjectFactory.class);
+	}
+	
 		
 	/**
-	 * Marshal the specified FeatureCollectionType object as FeatureCollection into the 
-	 * specified file.
+	 * Marshal the specified FeatureCollectionType object as FeatureCollection
+	 * into the specified file.
+	 * 
 	 * @param collection
 	 * @param outputFile
 	 * @throws JAXBException
 	 */
-	public static void marshalFeatureCollection(FeatureCollectionType collection, File outputFile) throws JAXBException {			
+	public static void marshalFeatureCollection(FeatureCollectionType collection, File outputFile)
+			throws JAXBException {
 		Marshaller wfsMarshaller = getWfsContext().createMarshaller();
-		
-		wfsMarshaller.setProperty(javax.xml.bind.Marshaller.JAXB_ENCODING, "UTF-8"); //NOI18N
+
+		wfsMarshaller.setProperty(javax.xml.bind.Marshaller.JAXB_ENCODING, "UTF-8"); // NOI18N
 		wfsMarshaller.setProperty(javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-		
-		
+
 		wfsMarshaller.marshal(
 				new JAXBElement<FeatureCollectionType>(new QName("http://www.opengis.net/wfs/2.0", "FeatureCollection"),
 						FeatureCollectionType.class, collection),
