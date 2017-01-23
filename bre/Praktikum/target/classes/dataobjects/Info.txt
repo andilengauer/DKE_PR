@@ -1,0 +1,9 @@
+messageID - ID des Dnotams	<message:AIXMBasicMessage gml:id="FNS_ID_c51e3152-af55-4af9-97af-b83a831f0daa">
+memberID - ID des Members innerhalb des Dnotams 	<event:Event gml:id="Event_28716e4a-4fee-4998-a35a-ac15b00124f2">
+memberType - z.b. Event, AirportHeliport Enumeration
+validTime - Liste von Timeslices z.b. 02:00 - 06:00; 14:00 - 18:00; VALID TIME bei timeinstant anfang = ende
+	Anfang	02:00
+	Ende 06:00
+
+scenarioType - Beschaffenheit des events z.b. AD.CLS muss zum PDF passen
+eventlocation - Flughafen z.b EBBR 
