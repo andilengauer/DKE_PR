@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
+<%@page import="com.frequentis.semnotam.pr.AircraftType"%>
 <%@page import="com.frequentis.semnotam.pr.SegmentPropertyType"%>
 <%@page import="com.frequentis.semnotam.pr.FilterInputType"%>
 <%@page import="com.frequentis.semnotam.pr.AircraftTypeType"%>
@@ -25,6 +26,16 @@ pageEncoding="ISO-8859-1"%>
 <%
 FilterInputType input = AppController.getInstance().inputType;
 
+AircraftType flugzeug;
+if (input != null)
+	flugzeug = input.getHasAircraft().getAircraft();
+
+
+
+
+//---- get values from FilterOutput -----
+
+AppController.getInstance().getFilterOutput();
 
 %>
 
@@ -38,14 +49,14 @@ FilterInputType input = AppController.getInstance().inputType;
 		<fieldset id="Fieldset_Flugzeuginformationen">
 			<legend id="Legend_Flugzeuginformationen">Flugzeuginformationen</legend><br>
 			<label>ID:</label> 
-			<input type="text" name="Flugzeug_ID" id="Flugzeug_ID" class="Flugzeug_Text" value=<%=input.getHasAircraft().getAircraft().getDesignator() %>></input><br>
+			<input type="text" name="Flugzeug_ID" id="Flugzeug_ID" class="Flugzeug_Text" value=<%= ""%>></input><br>
 			<label>Typ:</label>
 			<select name="Typ_Flugzeug" id="Typ_Flugzeug" class="Flugzeug_Text" disabled>
  				<option value=<%=AircraftTypeType.HELICOPTER %>><%=AircraftTypeType.HELICOPTER %></option>
   				<option value=<%=AircraftTypeType.LANDPLANE %>><%=AircraftTypeType.LANDPLANE %></option>
 			</select><br>
 			<label>Spannweite:</label>
-			<input type="text" name="Spannweite_Flugzeug" id="Spannweite_Flugzeug" class="Flugzeug_Text" value=<%=input.getHasAircraft().getAircraft().getWingspanFt() %>><br>
+			<input type="text" name="Spannweite_Flugzeug" id="Spannweite_Flugzeug" class="Flugzeug_Text" value=<%= "" %>><br>
 			<label>Maximalgewicht:</label>
 			<input type="text" name="Maximalgewicht_Flugzeug" id="Maximalgewicht_Flugzeug" class="Flugzeug_Text"><br>
 			<label>Minimalgewicht:</label>
@@ -116,7 +127,10 @@ FilterInputType input = AppController.getInstance().inputType;
 						<th>Startpunkt</th>
 						<th>Endpunkt</th>
 					</tr>
-					<%for(SegmentPropertyType s :input.getHasFlightPath().getFlightPath().getHasSegment()) 
+					<%
+					if(input != null && input.getHasFlightPath().getFlightPath() != null && input.getHasFlightPath().getFlightPath().getHasSegment() != null)
+					{
+					for(SegmentPropertyType s :input.getHasFlightPath().getFlightPath().getHasSegment()) 
 					{
 						String startPoint;
 						String endPoint;
@@ -131,6 +145,7 @@ FilterInputType input = AppController.getInstance().inputType;
 					<td><%=endPoint %></td>
 					</tr>
 					<%}
+					}
 					%>
 					</table>
 				</fieldset><br>
@@ -170,6 +185,9 @@ FilterInputType input = AppController.getInstance().inputType;
         		<option value="None">None</option>
       		</select>
      	</fieldset><br>
+     	
+     	<fieldset id="Ouput_fieldset">
+			<legend id="Legend_Output">Filter Output</legend><br>
      	
      	<input type="submit" name="Submit" id="Submit" value="Filtern">
     

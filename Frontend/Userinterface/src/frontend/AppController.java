@@ -1,6 +1,8 @@
 package frontend;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,6 +13,7 @@ import javax.xml.bind.JAXBException;
 import tools.JaxbHelper;
 
 import com.frequentis.semnotam.pr.FilterInputType;
+import com.frequentis.semnotam.pr.FilterOutputType;
 
 import db.DB_Controller;
 
@@ -20,6 +23,10 @@ public class AppController {
 	private String currentId = null;
 	private List<FilterInputType> filterInputs = new ArrayList<FilterInputType>();
 	public FilterInputType inputType;
+	private DB_Controller existDb = new DB_Controller();
+	
+	private final String dbOutputCollection = "db/DKE_PR/FilterOutput";
+	private final String dbInputCollection = "db/DKE_PR/FilterInput";
 	
 	public static AppController getInstance()
 	{
@@ -61,14 +68,40 @@ public class AppController {
 		
 		
 		//push file into exist database
-		DB_Controller existDb = new DB_Controller();
+		
 		existDb.initDB();
-		existDb.putFile("db/DKE_PR/FilterInput", outputFile);
+		existDb.putFile(dbInputCollection, outputFile);
 		
 	}
 
 	public List<FilterInputType> getFilterInputs() {
 		return filterInputs;
+	}
+	
+	public FilterOutputType getFilterOutput()
+	{
+		String filterOutput = "";
+		existDb.initDB();
+		filterOutput = existDb.getData(dbOutputCollection, "output_ex1.xml");
+		System.out.println(filterOutput);
+		File filterOutputFile = new File("fo1.xml");
+		FileWriter writer = null;
+		try {
+			writer = new FileWriter(filterOutputFile);
+			writer.write(filterOutput);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(writer != null)
+				writer.close();
+		}
+		
+		//JaxbHelper.unmarshalFilterOutput(input)
+		
+		return null;
 	}
 	
 	
