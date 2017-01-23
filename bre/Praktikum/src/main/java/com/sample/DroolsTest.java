@@ -18,6 +18,9 @@ import com.frequentis.semnotam.pr.SegmentPropertyType;
 import com.frequentis.semnotam.pr.SegmentType;
 import com.google.protobuf.Extension.MessageType;
 
+import aero.aixm.AirportHeliportType;
+import aero.aixm.event.EventTimeSlicePropertyType;
+import aero.aixm.event.EventType;
 import aero.aixm.message.AIXMBasicMessageType;
 import aero.aixm.message.BasicMessageMemberAIXMPropertyType;
 import net.opengis.gml.*;
@@ -66,8 +69,25 @@ public class DroolsTest {
         	
     		// Print the ID of all DNOTAMs contained in the FeatureCollection
     		for (AIXMBasicMessageType m : messages) {
-    			
-    			
+    			BasicMessageMemberAIXMPropertyType member = m.getHasMember().get(0); //erster Member der message
+    			member.getAbstractAIXMFeature();
+    		
+    			if(member.getAbstractAIXMFeature().getValue() instanceof EventType) //Überprüfung von welchen Typ das Feature ist
+    			{
+    				EventType eventType = (EventType)member.getAbstractAIXMFeature().getValue() ;
+    				
+    				List<EventTimeSlicePropertyType> listTimeslices = eventType.getTimeSlice();
+    				
+    				AbstractTimePrimitiveType dummy = listTimeslices.get(0).getEventTimeSlice().getValidTime().getAbstractTimePrimitive().getValue();
+    				if(dummy instanceof TimeInstantType){
+    					TimeInstantType x =(TimeInstantType) dummy;
+    					System.out.println(x.toString());
+    				}
+    				
+    				if(dummy instanceof TimePeriodType){
+    					
+    				}
+    			}
     			
     			System.out.println(m.getId());
     		}
