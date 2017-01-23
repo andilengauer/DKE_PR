@@ -1,6 +1,8 @@
 package com.sample;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,10 +21,15 @@ import com.frequentis.semnotam.pr.SegmentType;
 import com.google.protobuf.Extension.MessageType;
 
 import aero.aixm.AirportHeliportType;
+import aero.aixm.TextDesignatorType;
 import aero.aixm.event.EventTimeSlicePropertyType;
 import aero.aixm.event.EventType;
+import aero.aixm.event.TextNOTAMType;
 import aero.aixm.message.AIXMBasicMessageType;
 import aero.aixm.message.BasicMessageMemberAIXMPropertyType;
+import dataobjects.AixmMessage;
+import dataobjects.Member;
+import dataobjects.ValidTime;
 import net.opengis.gml.*;
 import net.opengis.wfs._2.FeatureCollectionType;
 import net.opengis.wfs._2.MemberPropertyType;
@@ -66,32 +73,98 @@ public class DroolsTest {
         	
         	List<AIXMBasicMessageType> messages = JaxbHelper.getMessages(collection);
     		
+        	LinkedList<AixmMessage> aixmMessages = new LinkedList<>();
+        	LinkedList<Member> members = new LinkedList<>();
         	
     		// Print the ID of all DNOTAMs contained in the FeatureCollection
     		for (AIXMBasicMessageType m : messages) {
-    			BasicMessageMemberAIXMPropertyType member = m.getHasMember().get(0); //erster Member der message
-    			member.getAbstractAIXMFeature();
+    			
+    			for(BasicMessageMemberAIXMPropertyType member : m.getHasMember()){
+    		
+    				Member mem= new Member();
+    				
     		
     			if(member.getAbstractAIXMFeature().getValue() instanceof EventType) //Überprüfung von welchen Typ das Feature ist
     			{
     				EventType eventType = (EventType)member.getAbstractAIXMFeature().getValue() ;
     				
+    				LinkedList<ValidTime> validTimes = new LinkedList<>();
+    				
     				List<EventTimeSlicePropertyType> listTimeslices = eventType.getTimeSlice();
+    				 
+    				mem.setMemberId(eventType.getId());
+    				mem.setMemberType("EventType");
     				
     				AbstractTimePrimitiveType dummy = listTimeslices.get(0).getEventTimeSlice().getValidTime().getAbstractTimePrimitive().getValue();
+    				
+    				TextDesignatorType scenario=listTimeslices.get(0).getEventTimeSlice().getScenario().getValue();
+    				String test = scenario.getValue();
+    				
+    				mem.setScenarioType(test);
+    				
+    				TextNOTAMType loc = listTimeslices.get(0).getEventTimeSlice().getTextNOTAM().get(0).getNOTAM().getLocation().getValue();
+    				String location = loc.getValue();
+    				
+    				mem.setEventLocation(location);
+    					
+    						
+    				System.out.println(location);
+    				
+    				
+    				
     				if(dummy instanceof TimeInstantType){
     					TimeInstantType x =(TimeInstantType) dummy;
     					x.getTimePosition().getValue();
+    					
+    					
     				}
     				
     				if(dummy instanceof TimePeriodType){
-    					((TimePeriodType) dummy).getBeginPosition();
+    					TimePositionType begin = ((TimePeriodType) dummy).getBeginPosition();
+    					TimePositionType end = ((TimePeriodType) dummy).getEndPosition();
+    					
+    					List<String>endPos = end.getValue();
+    					List<String> beginPos = begin.getValue();
+    					
+    					 SimpleDateFormat sdfToDate = new SimpleDateFormat(
+    			                    "yyyy-MM-dd'T'HH:mm:ss'Z'");
+    					 
+    					 Date beginDate = sdfToDate.parse(beginPos.get(0));
+    					 Date endDate = sdfToDate.parse(endPos.get(0));
+    					
+    					 ValidTime validTime = new ValidTime();
+    					 validTime.setBegin(beginDate);
+    					 validTime.setEnd(endDate);
+    					 
+    					 validTimes.add(validTime);
+    					 
+    					 
+    					/*TODO String in Date umwandeln
+    					 * 2014-11-22T22:00:00Z
+    					 * yyyy-MM-dd'T'HH:mm:ss.SSSZ
+    					 */
+    					
+    					 
+    					 
+    					System.out.println(beginPos.get(0));
+    					
+    					
     				}
+    				
+    				
+    				mem.setValidTimeList(validTimes);
     			}
     			
-    			System.out.println(m.getId());
+    			
+    			members.add(mem);
     		}
-        	
+    			
+    		AixmMessage mess = new AixmMessage();
+    		mess.setMessageId(m.getId());
+    		mess.setMembers(members);
+    		aixmMessages.add(mess);	
+    	}
+    		
         	//System.out.println(members.get(0).getContent().get(0).toString());
         	
         	
