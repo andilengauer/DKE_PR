@@ -83,9 +83,11 @@ public class AppController {
 		String filterOutput = "";
 		existDb.initDB();
 		filterOutput = existDb.getData(dbOutputCollection, "output_ex1.xml");
-		System.out.println(filterOutput);
+		//System.out.println(filterOutput);
 		File filterOutputFile = new File("fo1.xml");
 		FileWriter writer = null;
+		FilterOutputType outputType = null;
+		
 		try {
 			writer = new FileWriter(filterOutputFile);
 			writer.write(filterOutput);
@@ -96,12 +98,19 @@ public class AppController {
 		finally
 		{
 			if(writer != null)
-				writer.close();
+				try {
+					writer.close();
+				} catch (IOException e) {}
 		}
 		
-		//JaxbHelper.unmarshalFilterOutput(input)
+		try {
+			outputType = JaxbHelper.unmarshalFilterOutput(filterOutputFile);
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		return null;
+		return outputType;
 	}
 	
 	

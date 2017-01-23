@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
+<%@page import="aero.aixm.event.TextNOTAMType"%>
+<%@page import="aero.aixm.event.EventType"%>
+<%@page import="aero.aixm.AbstractAIXMFeatureType"%>
+<%@page import="javax.xml.bind.JAXBElement"%>
 <%@page import="com.frequentis.semnotam.pr.AircraftType"%>
 <%@page import="com.frequentis.semnotam.pr.SegmentPropertyType"%>
 <%@page import="com.frequentis.semnotam.pr.FilterInputType"%>
 <%@page import="com.frequentis.semnotam.pr.AircraftTypeType"%>
 <%@page import="com.frequentis.semnotam.pr.AerodromeType"%>
+<%@page import="com.frequentis.semnotam.pr.*"%>
+<%@page import="java.util.*"%>
+<%@page import="net.opengis.gml.AbstractTimePrimitiveType"%>
 <%@page import="frontend.AppController"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%>
@@ -35,7 +42,7 @@ if (input != null)
 
 //---- get values from FilterOutput -----
 
-AppController.getInstance().getFilterOutput();
+FilterOutputType output = AppController.getInstance().getFilterOutput();
 
 %>
 
@@ -186,9 +193,56 @@ AppController.getInstance().getFilterOutput();
       		</select>
      	</fieldset><br>
      	
+     	
+     	
      	<fieldset id="Ouput_fieldset">
 			<legend id="Legend_Output">Filter Output</legend><br>
-     	
+			<%
+     	if(output != null)
+     	{
+     		List<ResultPropertyType> results = output.getHasResultSet().getResultSet().getHasResult();
+     		
+     	%>
+			
+			<table>
+			<tr>
+			<th>Notam-Id</th>
+			<th>Notam-Text</th>
+			<th>Begin</th>
+			<th>End</th>
+			<th>Importance</th>
+			</tr>
+			<%
+			for(ResultPropertyType r: results)
+			{
+				ResultType result = r.getResult();
+				AbstractAIXMFeatureType a = result.getDnotam().getAIXMBasicMessage().getHasMember().get(0).getAbstractAIXMFeature().getValue();
+				EventType event;
+				String text = "";
+				String begin = "";
+				String end = "";
+				
+				if(a instanceof EventType)
+				{
+					event = (EventType) a;
+					text = ((TextNOTAMType)event.getTimeSlice().get(0).getEventTimeSlice().getTextNOTAM().get(0).getNOTAM().getText().getValue()).getValue();
+					AbstractTimePrimitiveType abstractTime = event.getTimeSlice().get(0).getEventTimeSlice().getValidTime().getAbstractTimePrimitive().getValue();
+					if(abstractTime instanceof TimeInstandType)
+					{
+						
+					}
+				}
+				
+				
+			%>
+			<tr>
+			<td><%=result.getDnotam().getAIXMBasicMessage().getId() %></td>
+			<td><%=text %></td>
+			</tr>
+			
+			<%} %>
+			</table>
+     	<%} %>
      	<input type="submit" name="Submit" id="Submit" value="Filtern">
     
     
