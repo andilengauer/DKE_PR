@@ -81,11 +81,11 @@ public class DroolsTest {
     				AbstractTimePrimitiveType dummy = listTimeslices.get(0).getEventTimeSlice().getValidTime().getAbstractTimePrimitive().getValue();
     				if(dummy instanceof TimeInstantType){
     					TimeInstantType x =(TimeInstantType) dummy;
-    					System.out.println(x.toString());
+    					x.getTimePosition().getValue();
     				}
     				
     				if(dummy instanceof TimePeriodType){
-    					
+    					((TimePeriodType) dummy).getBeginPosition();
     				}
     			}
     			
