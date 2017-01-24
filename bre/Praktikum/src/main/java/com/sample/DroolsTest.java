@@ -34,6 +34,7 @@ import net.opengis.gml.*;
 import net.opengis.wfs._2.FeatureCollectionType;
 import net.opengis.wfs._2.MemberPropertyType;
 import tools.Aircraft;
+import tools.DNOTAMReader;
 import tools.Flightpath;
 import tools.JaxbHelper;
 import tools.MapInputFile;
@@ -68,103 +69,15 @@ public class DroolsTest {
         	Flightpath flightpath = MapInputFile.getFlightPath(input);
         	
         	
-        	FeatureCollectionType collection = JaxbHelper.unmarshalFeatureCollection(new File("src/main/resources/samples/sample_dnotams.xml"));
+        	
         	//List<MemberPropertyType> members = collection.getMember();
         	
-        	List<AIXMBasicMessageType> messages = JaxbHelper.getMessages(collection);
+        	LinkedList<AixmMessage> aixmMessages = (LinkedList<AixmMessage>) DNOTAMReader.getAixmMessages();
     		
-        	LinkedList<AixmMessage> aixmMessages = new LinkedList<>();
-        	LinkedList<Member> members = new LinkedList<>();
+        	for(AixmMessage m : aixmMessages){
+        		kSession.insert(m);
+        	}
         	
-    		// Print the ID of all DNOTAMs contained in the FeatureCollection
-    		for (AIXMBasicMessageType m : messages) {
-    			
-    			for(BasicMessageMemberAIXMPropertyType member : m.getHasMember()){
-    		
-    				Member mem= new Member();
-    				
-    		
-    			if(member.getAbstractAIXMFeature().getValue() instanceof EventType) //Überprüfung von welchen Typ das Feature ist
-    			{
-    				EventType eventType = (EventType)member.getAbstractAIXMFeature().getValue() ;
-    				
-    				LinkedList<ValidTime> validTimes = new LinkedList<>();
-    				
-    				List<EventTimeSlicePropertyType> listTimeslices = eventType.getTimeSlice();
-    				 
-    				mem.setMemberId(eventType.getId());
-    				mem.setMemberType("EventType");
-    				
-    				AbstractTimePrimitiveType dummy = listTimeslices.get(0).getEventTimeSlice().getValidTime().getAbstractTimePrimitive().getValue();
-    				
-    				TextDesignatorType scenario=listTimeslices.get(0).getEventTimeSlice().getScenario().getValue();
-    				String test = scenario.getValue();
-    				
-    				mem.setScenarioType(test);
-    				
-    				TextNOTAMType loc = listTimeslices.get(0).getEventTimeSlice().getTextNOTAM().get(0).getNOTAM().getLocation().getValue();
-    				String location = loc.getValue();
-    				
-    				mem.setEventLocation(location);
-    					
-    						
-    				System.out.println(location);
-    				
-    				
-    				
-    				if(dummy instanceof TimeInstantType){
-    					TimeInstantType x =(TimeInstantType) dummy;
-    					x.getTimePosition().getValue();
-    					
-    					
-    				}
-    				
-    				if(dummy instanceof TimePeriodType){
-    					TimePositionType begin = ((TimePeriodType) dummy).getBeginPosition();
-    					TimePositionType end = ((TimePeriodType) dummy).getEndPosition();
-    					
-    					List<String>endPos = end.getValue();
-    					List<String> beginPos = begin.getValue();
-    					
-    					 SimpleDateFormat sdfToDate = new SimpleDateFormat(
-    			                    "yyyy-MM-dd'T'HH:mm:ss'Z'");
-    					 
-    					 Date beginDate = sdfToDate.parse(beginPos.get(0));
-    					 Date endDate = sdfToDate.parse(endPos.get(0));
-    					
-    					 ValidTime validTime = new ValidTime();
-    					 validTime.setBegin(beginDate);
-    					 validTime.setEnd(endDate);
-    					 
-    					 validTimes.add(validTime);
-    					 
-    					 
-    					/*TODO String in Date umwandeln
-    					 * 2014-11-22T22:00:00Z
-    					 * yyyy-MM-dd'T'HH:mm:ss.SSSZ
-    					 */
-    					
-    					 
-    					 
-    					System.out.println(beginPos.get(0));
-    					
-    					
-    				}
-    				
-    				
-    				mem.setValidTimeList(validTimes);
-    			}
-    			
-    			
-    			members.add(mem);
-    		}
-    			
-    		AixmMessage mess = new AixmMessage();
-    		mess.setMessageId(m.getId());
-    		mess.setMembers(members);
-    		aixmMessages.add(mess);	
-    	}
-    		
         	//System.out.println(members.get(0).getContent().get(0).toString());
         	
         	
