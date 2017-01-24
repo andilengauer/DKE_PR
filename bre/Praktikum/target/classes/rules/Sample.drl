@@ -20,6 +20,14 @@ rule "Test2"
 	System.out.println("rule erfolgreich AIXM");
  end
  
+ rule "Zeitliche Filterung"
+ 	when
+ 	$member : Member (memberId == "Event_28716e4a-4fee-4998-a35a-ac15b00124f2")
+ 	
+ 	then
+ 	System.out.println("Zeitliche Filterung");
+ end
+ 
 /*rule "Hello World"
     when
         m : Message( status == Message.HELLO, myMessage : message )

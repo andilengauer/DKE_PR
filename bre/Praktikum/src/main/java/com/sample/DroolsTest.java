@@ -2,6 +2,7 @@ package com.sample;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
@@ -72,10 +73,19 @@ public class DroolsTest {
         	
         	//List<MemberPropertyType> members = collection.getMember();
         	
-        	LinkedList<AixmMessage> aixmMessages = (LinkedList<AixmMessage>) DNOTAMReader.getAixmMessages();
+
+    		FeatureCollectionType collection = JaxbHelper.unmarshalFeatureCollection(new File("src/main/resources/samples/sample_dnotams.xml"));
+    		
+    		List<AIXMBasicMessageType> messages = JaxbHelper.getMessages(collection);
+        	
+        	ArrayList<AixmMessage> aixmMessages = (ArrayList<AixmMessage>) DNOTAMReader.getAixmMessages(messages);
     		
         	for(AixmMessage m : aixmMessages){
         		kSession.insert(m);
+        		
+        		for(Member mem : m.getMembers()){
+        			kSession.insert(mem);
+        		}
         	}
         	
         	//System.out.println(members.get(0).getContent().get(0).toString());

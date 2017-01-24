@@ -28,8 +28,10 @@ import dataobjects.ValidTime;
 public class DNOTAMReader {
 	
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		try{
+			
+			
 			List<AixmMessage> messages = getAixmMessages();
 			
 			System.out.println("--------------");
@@ -41,19 +43,16 @@ public class DNOTAMReader {
 					System.out.println(member.getMemberId());
 				}
 			}
-		}
+		} 
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
 		
 	}
-	
-	public static List<AixmMessage> getAixmMessages() throws JAXBException, ParseException{
+	*/
+	public static List<AixmMessage> getAixmMessages(List<AIXMBasicMessageType> messages) {
 		
-		FeatureCollectionType collection = JaxbHelper.unmarshalFeatureCollection(new File("src/main/resources/samples/sample_dnotams.xml"));
-		
-		List<AIXMBasicMessageType> messages = JaxbHelper.getMessages(collection);
 		
     	List<AixmMessage> aixmMessages = new ArrayList<>();
     	
@@ -95,7 +94,7 @@ public class DNOTAMReader {
 					mem.setEventLocation(location);
 						
 							
-					System.out.println(location);
+				//	System.out.println(location);
 					
 					
 					
@@ -116,8 +115,16 @@ public class DNOTAMReader {
 						 SimpleDateFormat sdfToDate = new SimpleDateFormat(
 				                    "yyyy-MM-dd'T'HH:mm:ss'Z'");
 						 
-						 Date beginDate = sdfToDate.parse(beginPos.get(0));
-						 Date endDate = sdfToDate.parse(endPos.get(0));
+						 Date beginDate = null;
+						 Date endDate = null;
+						try {
+							beginDate = sdfToDate.parse(beginPos.get(0));
+							 endDate = sdfToDate.parse(endPos.get(0));
+						} catch (ParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
 						
 						 ValidTime validTime = new ValidTime();
 						 validTime.setBegin(beginDate);
@@ -131,7 +138,7 @@ public class DNOTAMReader {
 						 * yyyy-MM-dd'T'HH:mm:ss.SSSZ
 						 */
 						
-						System.out.println(beginPos.get(0));
+						System.out.println(beginDate);
 						mem.setValidTimeList(validTimes);
 						
 					}
