@@ -6,6 +6,9 @@
         <dependent-module archiveName="jaxb_dke_pr.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/Userinterface/lib/JAXB/jaxb_dke_pr.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="java-json.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/Userinterface/lib/JSON/java-json.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="java-output-path" value="/Userinterface/build/classes"/>
         <property name="context-root" value="Userinterface"/>
     </wb-module>

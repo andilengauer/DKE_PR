@@ -46,6 +46,14 @@ public class InputHandler {
 
 			filterInput.setHasAircraft(getPreparedAircraft(inputData));
 			filterInput.setHasFlightPath(getPreparedFlightPath(inputData));
+			
+			String begindate, begintime, enddate, endtime;
+			begindate = inputData.get("Zeitintervall_Begindate")[0].toString();
+			begintime = inputData.get("Zeitintervall_Begintime")[0].toString();
+			enddate = inputData.get("Zeitintervall_Enddate")[0].toString();
+			endtime = inputData.get("Zeitintervall_Endtime")[0].toString();
+			
+			filterInput.setHasTimePeriod(getPreparedTimePeriod(begindate, begintime, enddate, endtime));
 
 		} catch (Exception e) {
 			System.out.println("createFilterInput: " + e.toString());
@@ -55,6 +63,7 @@ public class InputHandler {
 		return filterInput;
 
 	}
+
 
 	private FlightPathPropertyType getPreparedFlightPath(
 			Map<String, String[]> inputData) {
@@ -220,7 +229,8 @@ public class InputHandler {
 		AircraftType aircraftType = new AircraftType();
 
 		aircraftType.setDesignator(inputData.get("Id_Flugzeug")[0]);
-		aircraftType.setId("ID not set");
+		aircraftType.setId("ac1");
+		System.out.println("maximalgewicht flugzeug" + inputData.get("Maximalgewicht_Flugzeug")[0]);
 		aircraftType.setMaxWeightLb(new BigDecimal(inputData
 				.get("Maximalgewicht_Flugzeug")[0]));
 		aircraftType.setMinWeightLb(new BigDecimal(inputData

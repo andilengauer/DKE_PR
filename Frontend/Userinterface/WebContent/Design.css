@@ -57,6 +57,28 @@ li a {
 	font-size: 120%;
 }
 
+.fieldset {
+	border: 2px solid green;	
+	font-size: 120%;
+}
+
+.legend {
+	font-size: 140%;
+	font-weight: bold;
+}
+
+.datepicker { 
+    vertical-align : top;
+    width: 100px;
+}
+
+.uhrzeit {
+	position: relative;
+	vertical-align : top;
+	left: -3cm;
+	width: 60px;
+}
+
 #Legend_Flugzeuginformationen {
 	font-size: 140%;
 	font-weight: bold;
@@ -335,10 +357,10 @@ li a {
 
 #Karte_Segment {
 	height: 40%;
-	width: 30%;
-	position: absolute;
-	left: 17cm;
-	top: 29cm;
+	width: 80%;
+	position: relative;
+	left: 0cm;
+	top: 0cm;
 	z-index:0;
 }
 
@@ -352,7 +374,7 @@ li a {
 
 #Karte_Area {
 	height: 40%;
-	width: 30%;
+	width: 60%;
 	position: absolute;
 	left: 17cm;
 	top: 19cm;

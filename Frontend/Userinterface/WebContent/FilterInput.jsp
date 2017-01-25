@@ -100,6 +100,26 @@ $(function() {
          dateFormat: 'dd-mm-yy'  
      });
  });
+ 
+ $(function() {
+     $( "#Zeitintervall_Begindate" ).datepicker({
+    	 showOn: "both",
+         buttonImage: "Kalender.png",
+         buttonImageOnly: true,
+         buttonText: "Kalender",
+         dateFormat: 'dd-mm-yy'  
+     });
+ });
+ 
+ $(function() {
+     $( "#Zeitintervall_Enddate" ).datepicker({
+    	 showOn: "both",
+         buttonImage: "Kalender.png",
+         buttonImageOnly: true,
+         buttonText: "Kalender",
+         dateFormat: 'dd-mm-yy'  
+     });
+ });
 </script>
 </head>
 <body>
@@ -133,6 +153,20 @@ $(function() {
 			<input type="text" name="Minimalgewicht_Flugzeug" id="Minimalgewicht_Flugzeug"><br>
 		</fieldset><br>
 		
+		<fieldset class="fieldset">
+			<legend class="legend">Zeitintervall</legend>
+			<br></br>
+			<label style="position:relative; left:5.5cm; top:-0.5cm; ">Datum</label><label style="position:relative; left:7.5cm; top:-0.5cm; ">Uhrzeit</label>
+			<label>Anfang:</label>
+			<input type="text" name="Zeitintervall_Begindate" id="Zeitintervall_Begindate" class="datepicker">
+			<input type="text" name="Zeitintervall_Begintime" id="Zeitintervall_Begintime" class="uhrzeit" placeholder="example: 15:30" value="00:00">
+			<br></br>
+			<label style="position:relative; left:5.5cm; top:-0.5cm; ">Datum</label><label style="position:relative; left:7.5cm; top:-0.5cm; ">Uhrzeit</label>
+			<label>Ende:</label>
+			<input type="text" name="Zeitintervall_Enddate" id="Zeitintervall_Enddate" class="datepicker">
+			<input type="text" name="Zeitintervall_Endtime" id="Zeitintervall_Endtime" class="uhrzeit" placeholder="example: 15:30" value="00:00"><br>
+			
+		</fieldset>
 		<fieldset id="Fieldset_Flugroute">
 			<legend id="Legend_Flugroute">Flugroute</legend><br>
 			<label>Routenname:</label>
@@ -144,11 +178,11 @@ $(function() {
 					<label name="Label_Datum_Anfang_Abflugflughafen" id="Id_Abflugflughafen">Startdatum:</label>
 					<input type="text" name="Datum_Anfang_Abflugflughafen" id="datepicker1_Abflugflughafen">
 					<label name="Label_Uhrzeit_Anfang_Abflugflughafen" id="Label_Uhrzeit_Anfang_Abflugflughafen">Startuhrzeit:</label>
-					<input type="text" name="Uhrzeit_Anfang_Abflugflughafen" id="Textfield_Uhrzeit_Anfang_Abflugflughafen" placeholder="example: 15:30"><br>
+					<input type="text" name="Uhrzeit_Anfang_Abflugflughafen" id="Textfield_Uhrzeit_Anfang_Abflugflughafen" placeholder="example: 15:30" value="00:00"><br>
 					<label name="Label_Datum_Ende_Abflugflughafen" id="Label_Datum_Ende_Abflugflughafen">Endedatum:</label>
 					<input type="text" name="Datum_Ende_Abflugflughafen" id="datepicker2_Abflugflughafen">
 					<label name="Label_Uhrzeit_Ende_Abflugflughafen" id="Label_Uhrzeit_Ende_Abflugflughafen">Endeuhrzeit:</label>
-					<input type="text" name="Uhrzeit_Ende_Abflugflughafen" id="Textfield_Uhrzeit_Ende_Abflugflughafen" placeholder="example: 17:30"><br>
+					<input type="text" name="Uhrzeit_Ende_Abflugflughafen" id="Textfield_Uhrzeit_Ende_Abflugflughafen" placeholder="example: 17:30" value="00:00"><br>
 					<label name="Flugregeln_Abflugflughafen" id="Flugregeln_Abflugflughafen">Flugregeln:</label>
 					<select onClick="this.form.Textfield_Auswahl_Flugregeln_Ablugflughafen.value=this.options[this.selectedIndex].text;" name="Flugregel_Abflugflughafen" id="Auswahl_Flugregeln_Abflugflughafen">
  						<option value="IFR">IFR</option>
@@ -170,11 +204,11 @@ $(function() {
 					<label name="Label_Datum_Anfang_Area" id="Label_Datum_Anfang_Area">Startdatum:</label>
 					<input type="text" name="Datum_Anfang_Area" id="datepicker3_Area">
 					<label name="Label_Uhrzeit_Anfang_Area" id="Label_Uhrzeit_Anfang_Area">Startuhrzeit:</label>
-					<input type="text" name="Uhrzeit_Anfang_Area" id="Textfield_Uhrzeit_Anfang_Area" placeholder="example: 15:30"><br>
+					<input type="text" name="Uhrzeit_Anfang_Area" id="Textfield_Uhrzeit_Anfang_Area" placeholder="example: 15:30" value="00:00"><br>
 					<label name="Label_Datum_Ende_Area" id="Label_Datum_Ende_Area">Endedatum:</label>
 					<input type="text" name="Datum_Ende_Area" id="datepicker4_Area">
 					<label name="Label_Uhrzeit_Ende_Area" id="Label_Uhrzeit_Ende_Area">Endeuhrzeit:</label>
-					<input type="text" name="Uhrzeit_Ende_Area" id="Textfield_Uhrzeit_Ende_Area" placeholder="example: 17:30"><br>
+					<input type="text" name="Uhrzeit_Ende_Area" id="Textfield_Uhrzeit_Ende_Area" placeholder="example: 17:30" value="00:00"><br>
 					<label name="Flugregeln_Area" id="Flugregeln_Area">Flugregeln:</label>
 					<select onClick="this.form.Textfield_Auswahl_Flugregeln_Area.value=this.options[this.selectedIndex].text;"name="Flugregeln_Area" id="Auswahl_Flugregeln_Area">
  						<option value="IFR">IFR</option>
@@ -201,12 +235,12 @@ $(function() {
 					<label name="Label_Datum_Anfang_Segment" id="Label_Datum_Anfang_Segment">Startdatum:</label>
 					<input type="text" name="datepicker5_Segment" id="datepicker5_Segment">
 					<label name="Label_Uhrzeit_Anfang_Segment" id="Label_Uhrzeit_Anfang_Segment">Startuhrzeit:</label>
-					<input type="text" name="Textfield_Uhrzeit_Anfang_Segment" id="Textfield_Uhrzeit_Anfang_Segment" placeholder="example: 15:30"><br>
+					<input type="text" name="Textfield_Uhrzeit_Anfang_Segment" id="Textfield_Uhrzeit_Anfang_Segment" placeholder="example: 15:30" value="00:00"><br>
 					
 					<label name="Label_Datum_Ende_Segment" id="Label_Datum_Ende_Segment">Endedatum:</label>
 					<input type="text" name="datepicker6_Segment" id="datepicker6_Segment">
 					<label name="Label_Uhrzeit_Ende_Segment" id="Label_Uhrzeit_Ende_Segment">Endeuhrzeit:</label>
-					<input type="text" name="Textfield_Uhrzeit_Ende_Segment" id="Textfield_Uhrzeit_Ende_Segment" placeholder="example: 17:30"><br>
+					<input type="text" name="Textfield_Uhrzeit_Ende_Segment" id="Textfield_Uhrzeit_Ende_Segment" placeholder="example: 17:30" value="00:00"><br>
 					
 					<label name="Flugregeln_Segment" id="Flugregeln_Segment">Flugregeln:</label>
 					<select onClick="this.form.Textfield_Auswahl_Flugregeln_Segment.value=this.options[this.selectedIndex].text;" name="Auswahl_Flugregeln_Segment" id="Auswahl_Flugregeln_Segment">
@@ -260,11 +294,11 @@ $(function() {
 					<label name="Label_Datum_Anfang_Zielflughafen" id="Label_Datum_Anfang_Zielflughafen">Startdatum:</label>
 					<input type="text" name="Datum_Anfang_Zielflughafen" id="datepicker7_Zielflughafen">
 					<label name="Label_Uhrzeit_Anfang_Zielflughafen" id="Label_Uhrzeit_Anfang_Zielflughafen">Startuhrzeit:</label>
-					<input type="text" name="Uhrzeit_Anfang_Zielflughafen" id="Textfield_Uhrzeit_Anfang_Zielflughafen" placeholder="example: 15:30"><br>
+					<input type="text" name="Uhrzeit_Anfang_Zielflughafen" id="Textfield_Uhrzeit_Anfang_Zielflughafen" placeholder="example: 15:30" value="00:00"><br>
 					<label name="Label_Datum_Ende_Zielflughafen" id="Label_Datum_Ende_Zielflughafen">Endedatum:</label>
 					<input type="text" name="Datum_Ende_Zielflughafen" id="datepicker8_Zielflughafen">
 					<label name="Label_Uhrzeit_Ende_Zielflughafen" id="Label_Uhrzeit_Ende_Zielflughafen">Endeuhrzeit:</label>
-					<input type="text" name="Uhrzeit_Ende_Zielflughafen" id="Textfield_Uhrzeit_Ende_Zielflughafen" placeholder="example: 17:30"><br>
+					<input type="text" name="Uhrzeit_Ende_Zielflughafen" id="Textfield_Uhrzeit_Ende_Zielflughafen" placeholder="example: 17:30" value="00:00"><br>
 					<label name="Flugregeln_Zielflughafen" id="Flugregeln_Zielflughafen">Flugregeln:</label>
 					<select onClick="this.form.Textfield_Auswahl_Flugregeln_Zielflughafen.value=this.options[this.selectedIndex].text;" name="Flugregel_Zielflughafen" id="Auswahl_Flugregeln_Zielflughafen">
  						<option value="IFR">IFR</option>

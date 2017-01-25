@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
+<%@page import="net.opengis.gml.PointPropertyType"%>
 <%@page import="frontend.preparedobjects.PreparedOutput"%>
 <%@page import="aero.aixm.event.TextNOTAMType"%>
 <%@page import="aero.aixm.event.EventType"%>
@@ -33,18 +34,12 @@ pageEncoding="ISO-8859-1"%>
 <script src="https://openlayers.org/en/v3.20.1/build/ol.js"></script>
 
 <%
-FilterInputType input = AppController.getInstance().inputType;
-
-AircraftType flugzeug;
-if (input != null)
-	flugzeug = input.getHasAircraft().getAircraft();
-
-
 
 
 //---- get values from FilterOutput -----
 
 FilterOutputType output = AppController.getInstance().getFilterOutput();
+FilterInputType input = output.getHasInput().getFilterInput();
 
 PreparedOutput preparedOutput = AppController.getInstance().getPreparedOutput();
 
@@ -160,7 +155,11 @@ PreparedOutput preparedOutput = AppController.getInstance().getPreparedOutput();
 						String startPoint;
 						String endPoint;
 						
-						startPoint = s.getSegment().getStartPoint().getPoint().getValue().getPos().getValue().toString();
+						PointPropertyType startPointProperty = s.getSegment().getStartPoint();
+						if(startPointProperty.getHref() != null)
+							startPoint = startPointProperty.getHref();
+						else
+							startPoint = startPointProperty.getPoint().getValue().getPos().getValue().toString();
 						endPoint = s.getSegment().getEndPoint().getPoint().getValue().getPos().getValue().toString();
 						
 					%>
