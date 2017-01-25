@@ -2,6 +2,7 @@ package com.sample;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
@@ -72,10 +73,17 @@ public class DroolsTest {
         	
         	//List<MemberPropertyType> members = collection.getMember();
         	
-        	LinkedList<AixmMessage> aixmMessages = (LinkedList<AixmMessage>) DNOTAMReader.getAixmMessages();
+
+    		FeatureCollectionType collection = JaxbHelper.unmarshalFeatureCollection(new File("src/main/resources/samples/sample_dnotams.xml"));
+    		
+    		List<AIXMBasicMessageType> messages = JaxbHelper.getMessages(collection);
+        	
+        	ArrayList<AixmMessage> aixmMessages = (ArrayList<AixmMessage>) DNOTAMReader.getAixmMessages(messages);
     		
         	for(AixmMessage m : aixmMessages){
         		kSession.insert(m);
+        		
+        		
         	}
         	
         	//System.out.println(members.get(0).getContent().get(0).toString());
@@ -87,9 +95,14 @@ public class DroolsTest {
             //Message message = new Message();
             //message.setMessage("Hello World");
             //message.setStatus(Message.HELLO);
-            kSession.insert(aircraft);
-            kSession.insert(timePeriod);
-            kSession.insert(flightpath);
+        	
+        	kSession.setGlobal("Aircraft", aircraft);
+        	kSession.setGlobal("TimePeriod", timePeriod);
+        	kSession.setGlobal("FlightPath", flightpath);
+        	
+           // kSession.insert(aircraft);
+           // kSession.insert(timePeriod);
+           // kSession.insert(flightpath);
             //kSession.insert(message);
             kSession.fireAllRules();
         } catch (Throwable t) {

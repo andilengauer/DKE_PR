@@ -1,12 +1,14 @@
 package com.sample
- 
+global tools.Aircraft Aircraft
+global tools.TimePeriod TimePeriod
+global tools.Flightpath FlightPath
 
-import tools.Aircraft;
+import tools.*;
 import dataobjects.*
  
 rule "Test"
 	when
-		$a : Aircraft (wingSpan == 213.0)
+		Aircraft (wingSpan == 213.0)
 		
 		then
 		System.out.println("rule erfolgreich"); 
@@ -14,10 +16,21 @@ end
 
 rule "Test2"
 	when
-	$aixm : AixmMessage (messageId == "FNS_ID_c51e3152-af55-4af9-97af-b83a831f0daa")
+	aixm : AixmMessage( $member : getmembers().get(0))
+	Member( MemberId == "Event_28716e4a-4fee-4998-a35a-ac15b00124f2") from $member
 	
 	then
-	System.out.println("rule erfolgreich AIXM");
+	System.out.println(Aircraft);
+ end
+ 
+ rule "Zeitliche Filterung"
+ 	when
+ 		
+ 	
+ 	
+ 	then
+ 	
+ 
  end
  
 /*rule "Hello World"
