@@ -16,20 +16,23 @@ end
 
 rule "Test2"
 	when
-	aixm : AixmMessage( $member : getmembers().get(0))
+	aixm : AixmMessage( $member : getmembers())
 	Member( MemberId == "Event_28716e4a-4fee-4998-a35a-ac15b00124f2") from $member
 	
 	then
 	System.out.println(Aircraft);
  end
  
- rule "Zeitliche Filterung"
+ rule "Örtliche Filterung"
+ 	salience 10
  	when
- 		
+ 		m : AixmMessage ( location != FlightPath.getDepatureAerodrome() || location != FlightPath.getDestinationAerodrome())
  	
  	
  	then
- 	
+ 		System.out.println("not relevant at " + m.getScenario());
+ 		m.setRelevant(false);
+ 		retract(m);
  
  end
  

@@ -69,7 +69,7 @@ public class DroolsTest {
         	//get Flight Path
         	Flightpath flightpath = MapInputFile.getFlightPath(input);
         	
-        	
+        	System.out.println("Flightpath" + flightpath.getDepatureAerodrome());
         	
         	//List<MemberPropertyType> members = collection.getMember();
         	
@@ -81,6 +81,7 @@ public class DroolsTest {
         	ArrayList<AixmMessage> aixmMessages = (ArrayList<AixmMessage>) DNOTAMReader.getAixmMessages(messages);
     		
         	for(AixmMessage m : aixmMessages){
+        		System.out.println(m.getMessageId() + " /// " + m.getBegintime() + " /// " + m.getScenario());
         		kSession.insert(m);
         		
         		

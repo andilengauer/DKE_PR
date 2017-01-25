@@ -17,6 +17,7 @@ import net.opengis.gml.TimePositionType;
 import net.opengis.wfs._2.FeatureCollectionType;
 import aero.aixm.TextDesignatorType;
 import aero.aixm.event.EventTimeSlicePropertyType;
+import aero.aixm.event.EventTimeSliceType;
 import aero.aixm.event.EventType;
 import aero.aixm.event.TextNOTAMType;
 import aero.aixm.message.AIXMBasicMessageType;
@@ -51,7 +52,7 @@ public class DNOTAMReader {
 		
 	}
 	*/
-	public static List<AixmMessage> getAixmMessages(List<AIXMBasicMessageType> messages) {
+	public static List<AixmMessage> getAixmMessagesOLD(List<AIXMBasicMessageType> messages) {
 		
 		
     	List<AixmMessage> aixmMessages = new ArrayList<>();
@@ -92,6 +93,8 @@ public class DNOTAMReader {
 					String location = loc.getValue();
 					
 					mem.setEventLocation(location);
+					
+					
 						
 							
 				//	System.out.println(location);
@@ -157,4 +160,76 @@ public class DNOTAMReader {
 		
 	}
 
+
+public static List<AixmMessage> getAixmMessages(List<AIXMBasicMessageType> messages) {
+	
+	
+	List<AixmMessage> aixmMessages = new ArrayList<>();
+	
+	
+	// Print the ID of all DNOTAMs contained in the FeatureCollection
+	for (AIXMBasicMessageType m : messages) 
+	{
+		AixmMessage mess = new AixmMessage();
+		mess.setMessageId(m.getId());
+		
+		
+		for(BasicMessageMemberAIXMPropertyType member : m.getHasMember())
+		{
+			
+			if(member.getAbstractAIXMFeature().getValue() instanceof EventType) //Überprüfung von welchen Typ das Feature ist
+			{
+				EventType eventType = (EventType)member.getAbstractAIXMFeature().getValue() ;
+				
+				EventTimeSliceType timeslice= eventType.getTimeSlice().get(0).getEventTimeSlice();
+				if(timeslice.getInterpretation().equals("BASELINE"))
+				{
+					String location = timeslice.getTextNOTAM().get(0).getNOTAM().getLocation().getValue().getValue();
+					String scenario = timeslice.getScenario().getValue().getValue();
+					
+					mess.setLocation(location);
+					mess.setScenario(scenario);
+					
+					AbstractTimePrimitiveType abstractTime = timeslice.getValidTime().getAbstractTimePrimitive().getValue();
+					
+					if(abstractTime instanceof TimePeriodType)
+					{
+						TimePositionType begin = ((TimePeriodType) abstractTime).getBeginPosition();
+						TimePositionType end = ((TimePeriodType) abstractTime).getEndPosition();
+						
+						List<String>endPos = end.getValue();
+						List<String> beginPos = begin.getValue();
+						
+						 SimpleDateFormat sdfToDate = new SimpleDateFormat(
+				                    "yyyy-MM-dd'T'HH:mm:ss'Z'");
+						 
+						 Date beginDate = null;
+						 Date endDate = null;
+						try {
+							beginDate = sdfToDate.parse(beginPos.get(0));
+							 endDate = sdfToDate.parse(endPos.get(0));
+						} catch (ParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						mess.setBegintime(beginDate);
+						mess.setEndtime(endDate);
+						
+					}
+					continue;
+					
+				}
+			}// if EventType
+				
+			
+		} //foreach member
+		
+		
+	aixmMessages.add(mess);	
 }
+	return aixmMessages;
+	
+}
+
+}
+
