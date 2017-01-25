@@ -368,7 +368,7 @@ $(function() {
       	map1.on('click', function(evt) {
         	var coordinate = evt.coordinate;
         	var lonlat = ol.coordinate.toStringXY(ol.proj.toLonLat(
-            coordinate, 'EPSG:3857', 'EPSG:4326'));	//Mit einem Klick auf die Karte werden die Koordinaten in die Variable "lonlat" gespeichert
+            coordinate, 'EPSG:3857', 'EPSG:4326'),7);	//Mit einem Klick auf die Karte werden die Koordinaten in die Variable "lonlat" gespeichert
 			
             if(document.getElementById('Startpunkt_Segment').value != "")
 			{    		

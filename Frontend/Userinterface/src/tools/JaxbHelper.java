@@ -1,8 +1,13 @@
 package tools;
 
 import java.io.File;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -10,7 +15,15 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.JAXBIntrospector;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.Duration;
+import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.namespace.QName;
+
+import org.apache.poi.hssf.record.chart.BeginRecord;
+import org.apache.xmlbeans.XmlCalendar;
+import org.drools.core.process.core.datatype.DataTypeFactory;
 
 import com.frequentis.semnotam.pr.AircraftTypeType;
 import com.frequentis.semnotam.pr.FilterInputType;
@@ -19,6 +32,9 @@ import com.frequentis.semnotam.pr.ImportanceClassificationPropertyType;
 import com.frequentis.semnotam.pr.ImportanceClassificationType;
 import com.frequentis.semnotam.pr.ImportanceClassificationValueType;
 import com.frequentis.semnotam.pr.ResultPropertyType;
+import com.frequentis.semnotam.pr.TimePeriodPropertyType;
+import com.frequentis.semnotam.pr.TimePeriodType;
+import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 
 import aero.aixm.AirportHeliportType;
 import aero.aixm.message.AIXMBasicMessageType;
@@ -39,7 +55,7 @@ public class JaxbHelper {
 
 	public static void main(String[] args) throws JAXBException {
 		//testUnmarshalFeatureCollection();
-		
+		/*
 		// Test unmarhsalling of simple feature collection
 		File input = new File("src/main/resources/samples/sample_notams.xml");
 		unmarshalFeatureCollection(input);
@@ -80,12 +96,34 @@ public class JaxbHelper {
 		collection.setNumberMatched("3");
 		output = new File("src/main/resources/samples/wfsMarshal.xml");
 		marshalFeatureCollection(collection, output);
-		
+		*/
 		// Test marshalling of FilterInput
-		filterInput.getHasAircraft().getAircraft().setType(AircraftTypeType.HELICOPTER);
-		output = new File("src/main/resources/samples/filterInputMarshal.xml");
+		FilterInputType filterInput = new FilterInputType();
+		//filterInput.getHasAircraft().getAircraft().setType(AircraftTypeType.HELICOPTER);
+		//filterInput.getHasTimePeriod().getTimePeriod().setBeginPosition(XMLGregorianCalendarImpl.createDate(2017, 3, 25, 1));
+		
+		TimePeriodPropertyType timeproperty = new TimePeriodPropertyType();
+		TimePeriodType timeType = new TimePeriodType();
+		XMLGregorianCalendar xmlCal = new XMLGregorianCalendarImpl();
+		
+		try {
+			xmlCal = DatatypeFactory.newInstance().newXMLGregorianCalendar(2017, 3, 11, 0, 0, 0, 0, 1);
+		} catch (DatatypeConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		timeType.setBeginPosition(xmlCal);
+		System.out.println(XMLGregorianCalendarImpl.createDate(2017, 3, 25, 1).isValid());
+		timeproperty.setTimePeriod(timeType);
+		
+		filterInput.setHasTimePeriod(timeproperty);
+		
+		File output = new File("filterInputMarshal.xml");
 		marshalFilterInput(filterInput, output);
 		
+		/*
 		// Test marshalling of FilterOutput
 		for (ResultPropertyType r : filterOutput.getHasResultSet().getResultSet().getHasResult()) {
 			ImportanceClassificationType ip = new ImportanceClassificationType();
@@ -96,7 +134,7 @@ public class JaxbHelper {
 		}
 		output = new File("src/main/resources/samples/filterOutputMarshal.xml");
 		marshalFilterOutput(filterOutput, output);
-		
+		*/
 		
 	}
 	

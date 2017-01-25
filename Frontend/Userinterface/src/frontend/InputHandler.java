@@ -5,10 +5,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 
 import javax.xml.bind.JAXBElement;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.namespace.QName;
 
@@ -192,30 +195,40 @@ public class InputHandler {
 		TimePeriodType p = new TimePeriodType();
 		XMLGregorianCalendar beginCal = new XMLGregorianCalendarImpl();
 		XMLGregorianCalendar endCal = new XMLGregorianCalendarImpl();
-		Calendar c = Calendar.getInstance();
+		GregorianCalendar c = new GregorianCalendar();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy-HH:mm");
-
+		
+		
 		try {
 			c.setTimeInMillis(sdf.parse(begindate + "-" + begintime).getTime());
+			beginCal = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
+			/*
 			beginCal.setYear(c.get(Calendar.YEAR));
 			beginCal.setMonth(c.get(Calendar.MONTH) + 1);
 			beginCal.setDay(c.get(Calendar.DAY_OF_MONTH));
 			beginCal.setHour(c.get(Calendar.HOUR));
 			beginCal.setMinute(c.get(Calendar.MINUTE));
-
+			*/
+			
 			c.setTimeInMillis(sdf.parse(enddate + "-" + endtime).getTime());
+			endCal = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
+			/*
 			endCal.setYear(c.get(Calendar.YEAR));
 			endCal.setMonth(c.get(Calendar.MONTH) + 1);
 			endCal.setDay(c.get(Calendar.DAY_OF_MONTH));
 			endCal.setHour(c.get(Calendar.HOUR));
 			endCal.setMinute(c.get(Calendar.MINUTE));
-
+			*/
 			p.setBeginPosition(beginCal);
 			p.setEndPosition(endCal);
 
 			timePeriod.setTimePeriod(p);
 
 		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (DatatypeConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
