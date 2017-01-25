@@ -1,32 +1,16 @@
 package com.sample
-global tools.Aircraft Aircraft
-global tools.TimePeriod TimePeriod
-global tools.Flightpath FlightPath
+global tools.Aircraft aircraft
+global tools.TimePeriod timeperiod
+global tools.Flightpath flightpath
 
 import tools.*;
 import dataobjects.*
- 
-rule "Test"
-	when
-		Aircraft (wingSpan == 213.0)
-		
-		then
-		System.out.println("rule erfolgreich"); 
-end
 
-rule "Test2"
-	when
-	aixm : AixmMessage( $member : getmembers())
-	Member( MemberId == "Event_28716e4a-4fee-4998-a35a-ac15b00124f2") from $member
-	
-	then
-	System.out.println(Aircraft);
- end
  
  rule "Örtliche Filterung"
  	salience 10
  	when
- 		m : AixmMessage ( location != FlightPath.getDepatureAerodrome() || location != FlightPath.getDestinationAerodrome())
+ 		m : AixmMessage ( location != flightpath.getDepatureAerodrome() && location != flightpath.getDestinationAerodrome())
  	
  	
  	then
@@ -36,31 +20,15 @@ rule "Test2"
  
  end
  
- /*
+ 
  rule "Zeitliche Filterung"
  	salience 11
  	when
- 		m: AixmMessage ( (begintime < TimePeriod.getBeginPosition() && endtime < TimePeriod.getBeginPosition()) || (begintime > TimePeriod.getEndPosition() && endtime > TimePeriod.getEndPosition()))  
+ 		m: AixmMessage ( endtime < timeperiod.getBeginPosition() || begintime > "27-Oct-2018" )  
  	then
- 		System.out.println("not relevant at " + m.getScenario());
+ 		System.out.println("not relevant Zeit " + m.getScenario());
  		m.setRelevant(false);
  		retract(m);
  end
- */
-/*rule "Hello World"
-    when
-        m : Message( status == Message.HELLO, myMessage : message )
-    then
-        System.out.println( myMessage );
-        m.setMessage( "Goodbye cruel world" );
-        m.setStatus( Message.GOODBYE );
-        update( m );
-end
+ 
 
-rule "GoodBye"
-    when
-        Message( status == Message.GOODBYE, myMessage : message )
-    then
-        System.out.println( myMessage );
-end
-*/

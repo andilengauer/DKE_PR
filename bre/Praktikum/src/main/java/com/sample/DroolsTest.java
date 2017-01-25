@@ -96,9 +96,11 @@ public class DroolsTest {
             //message.setMessage("Hello World");
             //message.setStatus(Message.HELLO);
         	
-        	kSession.setGlobal("Aircraft", aircraft);
-        	kSession.setGlobal("TimePeriod", timePeriod);
-        	kSession.setGlobal("FlightPath", flightpath);
+        	timePeriod.setBeginPosition(new Date());
+        	timePeriod.setEndPosition(new Date());
+        	kSession.setGlobal("aircraft", aircraft);
+        	kSession.setGlobal("timeperiod", timePeriod);
+        	kSession.setGlobal("flightpath", flightpath);
         	
            // kSession.insert(aircraft);
            // kSession.insert(timePeriod);
@@ -111,6 +113,7 @@ public class DroolsTest {
             for(AixmMessage fMess : aixmMessages){
             	if(fMess.isRelevant()){
             		
+            		
             		for(AIXMBasicMessageType relevant : messages){
             			
             			if(relevant.getId().equals(fMess.getMessageId())){
@@ -119,6 +122,8 @@ public class DroolsTest {
             			}
             			
             		}
+            		
+            		System.out.println("relevantMessage" + fMess.getMessageId());
             		
             	}
             }
