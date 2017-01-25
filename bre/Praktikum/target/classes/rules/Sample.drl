@@ -36,6 +36,17 @@ rule "Test2"
  
  end
  
+ /*
+ rule "Zeitliche Filterung"
+ 	salience 11
+ 	when
+ 		m: AixmMessage ( (begintime < TimePeriod.getBeginPosition() && endtime < TimePeriod.getBeginPosition()) || (begintime > TimePeriod.getEndPosition() && endtime > TimePeriod.getEndPosition()))  
+ 	then
+ 		System.out.println("not relevant at " + m.getScenario());
+ 		m.setRelevant(false);
+ 		retract(m);
+ end
+ */
 /*rule "Hello World"
     when
         m : Message( status == Message.HELLO, myMessage : message )

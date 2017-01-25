@@ -14,12 +14,10 @@ import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
-import com.frequentis.semnotam.pr.FilterInputType;
-import com.frequentis.semnotam.pr.FlightPathPropertyType;
-import com.frequentis.semnotam.pr.FlightPathType;
-import com.frequentis.semnotam.pr.SegmentPropertyType;
-import com.frequentis.semnotam.pr.SegmentType;
+import com.frequentis.semnotam.pr.*;
+import com.frequentis.semnotam.pr.ResultType;
 import com.google.protobuf.Extension.MessageType;
+import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 
 import aero.aixm.AirportHeliportType;
 import aero.aixm.TextDesignatorType;
@@ -34,6 +32,7 @@ import dataobjects.ValidTime;
 import net.opengis.gml.*;
 import net.opengis.wfs._2.FeatureCollectionType;
 import net.opengis.wfs._2.MemberPropertyType;
+import net.opengis.wfs._2.OutputFormatListType;
 import tools.Aircraft;
 import tools.DNOTAMReader;
 import tools.Flightpath;
@@ -106,6 +105,79 @@ public class DroolsTest {
            // kSession.insert(flightpath);
             //kSession.insert(message);
             kSession.fireAllRules();
+            
+            List<AIXMBasicMessageType> relevantDnotams = new ArrayList<>();
+            
+            for(AixmMessage fMess : aixmMessages){
+            	if(fMess.isRelevant()){
+            		
+            		for(AIXMBasicMessageType relevant : messages){
+            			
+            			if(relevant.getId().equals(fMess.getMessageId())){
+            				relevantDnotams.add(relevant);
+            				continue;
+            			}
+            			
+            		}
+            		
+            	}
+            }
+            
+            
+            
+           FilterOutputType output = new FilterOutputType();
+          
+          
+           FilterInputPropertyType inputPropT= new FilterInputPropertyType();
+           inputPropT.setFilterInput(input);
+           
+           output.setHasInput(inputPropT);
+           
+           
+           
+           List<AIXMBasicMessagePropertyType> propTypes = new ArrayList<>();
+           
+           
+           for(AIXMBasicMessageType x : relevantDnotams){
+        	   AIXMBasicMessagePropertyType prop = new AIXMBasicMessagePropertyType();
+        	   prop.setAIXMBasicMessage(x);
+        	   propTypes.add(prop);
+           }
+           
+           
+           List<ResultType> resTypes = new ArrayList<>();
+           
+           for (AIXMBasicMessagePropertyType y : propTypes){
+        	   ResultType re= new ResultType();
+        	   re.setDnotam(y);
+        	   resTypes.add(re);
+           }
+           
+           
+         List<ResultPropertyType> resPropTypes = new ArrayList<>();
+         
+          for(ResultType rType : resTypes){
+        	  ResultPropertyType re = new ResultPropertyType();
+        	  re.setResult(rType);
+        	  resPropTypes.add(re);
+          }
+          
+          
+          
+        ResultSetPropertyType rsp = new ResultSetPropertyType();
+       ResultSetType rpt = new ResultSetType();
+       
+       rpt.getHasResult().addAll(resPropTypes);
+       
+       rsp.setResultSet(rpt);
+       
+       output.setHasResultSet(rsp);
+       
+       File outputFile = new File("output1.xml");
+       
+       JaxbHelper.marshalFilterOutput(output, outputFile);
+            
+            
         } catch (Throwable t) {
             t.printStackTrace();
         }

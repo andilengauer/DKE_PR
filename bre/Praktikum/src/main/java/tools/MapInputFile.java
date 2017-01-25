@@ -49,7 +49,7 @@ public class MapInputFile {
 		String destinationAerodrome = flightpath.getHasDestinationAerodrome().getDestinationAerodrome().getDesignator();
 		 //String altnernateAerodrome = flightpath.getHasAlternateAerodrome().get(0).getAlternateAerodrome().getDesignator();
 
-		 
+		
 		 
 		 
 		LinkedList<Segment> segments = new LinkedList<>();
