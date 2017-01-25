@@ -16,6 +16,7 @@ import com.frequentis.semnotam.pr.FilterInputType;
 import com.frequentis.semnotam.pr.FilterOutputType;
 
 import db.DB_Controller;
+import frontend.preparedobjects.PreparedOutput;
 
 public class AppController {
 	private static AppController controller = null;
@@ -113,5 +114,9 @@ public class AppController {
 		return outputType;
 	}
 	
+	public PreparedOutput getPreparedOutput()
+	{
+		return OutputHandler.getPreparedOutput(getFilterOutput());
+	}
 	
 }

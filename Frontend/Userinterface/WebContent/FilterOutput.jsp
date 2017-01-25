@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
+<%@page import="frontend.preparedobjects.PreparedOutput"%>
 <%@page import="aero.aixm.event.TextNOTAMType"%>
 <%@page import="aero.aixm.event.EventType"%>
 <%@page import="aero.aixm.AbstractAIXMFeatureType"%>
@@ -10,6 +11,7 @@
 <%@page import="com.frequentis.semnotam.pr.AerodromeType"%>
 <%@page import="com.frequentis.semnotam.pr.*"%>
 <%@page import="java.util.*"%>
+<%@page import="frontend.preparedobjects.*"%>
 <%@page import="net.opengis.gml.AbstractTimePrimitiveType"%>
 <%@page import="frontend.AppController"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -44,7 +46,21 @@ if (input != null)
 
 FilterOutputType output = AppController.getInstance().getFilterOutput();
 
+PreparedOutput preparedOutput = AppController.getInstance().getPreparedOutput();
+
 %>
+
+<script type="text/javascript">
+  function toggle(id){
+    var e = document.getElementById(id);
+     
+    if (e.style.display == "none"){
+       e.style.display = "";
+    } else {
+       e.style.display = "none";
+    }
+  }
+</script>
 
 </head>
 <body>
@@ -52,7 +68,9 @@ FilterOutputType output = AppController.getInstance().getFilterOutput();
 	<ul>
 			<li><a href="FilterInput.jsp">neue Filterung</a></li>
 			</ul><br></br><br></br>
-		
+		<a href="javascript:toggle('FilterInput')">FilterInput auf-/zuklappen</a>
+		<br></br>
+		<div id="FilterInput" style="display:none;" >
 		<fieldset id="Fieldset_Flugzeuginformationen">
 			<legend id="Legend_Flugzeuginformationen">Flugzeuginformationen</legend><br>
 			<label>ID:</label> 
@@ -193,7 +211,7 @@ FilterOutputType output = AppController.getInstance().getFilterOutput();
       		</select>
      	</fieldset><br>
      	
-     	
+     	</div>
      	
      	<fieldset id="Ouput_fieldset">
 			<legend id="Legend_Output">Filter Output</legend><br>
@@ -204,46 +222,41 @@ FilterOutputType output = AppController.getInstance().getFilterOutput();
      		
      	%>
 			
-			<table>
+			<table class="NotamTable">
 			<tr>
 			<th>Notam-Id</th>
 			<th>Notam-Text</th>
 			<th>Begin</th>
 			<th>End</th>
 			<th>Importance</th>
+			<th>Eventscenario</th>
+			<th>Location</th>
 			</tr>
 			<%
-			for(ResultPropertyType r: results)
+			for(PreparedResult r: preparedOutput.getResults())
 			{
-				ResultType result = r.getResult();
-				AbstractAIXMFeatureType a = result.getDnotam().getAIXMBasicMessage().getHasMember().get(0).getAbstractAIXMFeature().getValue();
-				EventType event;
-				String text = "";
-				String begin = "";
-				String end = "";
 				
-				if(a instanceof EventType)
-				{
-					event = (EventType) a;
-					text = ((TextNOTAMType)event.getTimeSlice().get(0).getEventTimeSlice().getTextNOTAM().get(0).getNOTAM().getText().getValue()).getValue();
-					AbstractTimePrimitiveType abstractTime = event.getTimeSlice().get(0).getEventTimeSlice().getValidTime().getAbstractTimePrimitive().getValue();
-					if(abstractTime instanceof TimeInstandType)
-					{
-						
-					}
-				}
 				
 				
 			%>
 			<tr>
-			<td><%=result.getDnotam().getAIXMBasicMessage().getId() %></td>
-			<td><%=text %></td>
+			<td><%=r.getMessage().getId() %></td>
+			<td><%=r.getMessage().getNotams().get(0).getText() %></td>
+			<td><%=r.getMessage().getNotams().get(0).getBegin() %></td>
+			<td><%=r.getMessage().getNotams().get(0).getEnd() %></td>
+			<td><%=r.getImportance() %></td>
+			<td><%=r.getEventscenario() %></td>
+			<td><%=r.getLocation() %></td>
 			</tr>
 			
 			<%} %>
 			</table>
      	<%} %>
-     	<input type="submit" name="Submit" id="Submit" value="Filtern">
+     	
+     	<br></br>
+     	<div id="outputmap">
+     	
+     	</div>
     
     
     <script>
@@ -259,39 +272,30 @@ FilterOutputType output = AppController.getInstance().getFilterOutput();
 
   	    var map = new ol.Map({
     	     layers: [raster, vector],
-    	     target: 'Karte',
+    	     target: 'outputmap',
     	     view: new ol.View({
     	     center: ol.proj.fromLonLat([16.37, 48.209]),
     	     zoom: 4
     	     })
     	});
 
-    	var typeSelect = document.getElementById('Auswahl_Optionen_Karte');
+  	  var exampleLoc = ol.proj.transform(
+  		    [16.37, 48.209], 'EPSG:4326', 'EPSG:3857');
 
-    	var draw;
-    	function addInteraction() {
-     		var value = typeSelect.value;
-    	    if (value !== 'None') {
-    	    	draw = new ol.interaction.Draw({
-    	        source: source,
-    	        type: (typeSelect.value)
-    	        });
-    	        map.addInteraction(draw);
-    	    }
-    	}
+  		
 
-    	typeSelect.onchange = function() {
-    	map.removeInteraction(draw);
-    	addInteraction();
-   		};
-
-    	addInteraction();
+  		map.addOverlay(new ol.Overlay({
+  		  position: exampleLoc,
+  		  element: $('<img src="Kalender.png">')
+  		      .css({marginTop: '-200%', marginLeft: '-50%', cursor: 'pointer'})
+  		      .tooltip({title: 'Hello, world!', trigger: 'click'})
+  		}));
     	
     	/**
        	* Add a click handler to the map to render the popup.
        */
        
-       
+       /*
       	map.on('click', function(evt) {
         	var coordinate = evt.coordinate;
         	var lonlat = ol.coordinate.toStringXY(ol.proj.toLonLat(
@@ -304,7 +308,7 @@ FilterOutputType output = AppController.getInstance().getFilterOutput();
 			{
 			    document.getElementById('Startpunkt_Segment').value = lonlat;
 			}	
-      	});
+      	});*/
        
    	</script>	
    	
