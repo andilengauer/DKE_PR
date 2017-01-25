@@ -1,6 +1,7 @@
 package com.sample;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,6 +35,7 @@ import net.opengis.wfs._2.FeatureCollectionType;
 import net.opengis.wfs._2.MemberPropertyType;
 import net.opengis.wfs._2.OutputFormatListType;
 import tools.Aircraft;
+import tools.DB_Controller;
 import tools.DNOTAMReader;
 import tools.Flightpath;
 import tools.JaxbHelper;
@@ -54,8 +56,27 @@ public class DroolsTest {
         	KieSession kSession = kContainer.newKieSession("ksession-rules");
         	
         	
+        	DB_Controller db = new DB_Controller();
+        	db.initDB();
+        	
+        	 String dbOutputCollection = "db/DKE_PR/FilterOutput";
+        	 String dbInputCollection = "db/DKE_PR/FilterInput";
+        	 
+        	
+        	 
+        	 File InputFile = new File("src/main/resources/samples/input_ex1.xml");
+        	 
+        	 String result = db.getData(dbInputCollection, "src/main/resources/samples/input_ex1.xml");
+        	 
+        	 File inputFile = new File("input.xml");
+        	 FileWriter writer = new FileWriter(inputFile);
+        	 
+        	 writer.write(result);
+        	 
+        	 writer.close();
+        	 
         	//unmarshall InputFile
-        	FilterInputType input = JaxbHelper.unmarshalFilterInput(new File("src/main/resources/samples/input_ex1.xml"));
+        	FilterInputType input = JaxbHelper.unmarshalFilterInput(inputFile);
         	
         	//get Aircraft Properties
         	Aircraft aircraft = MapInputFile.getAircraftProperties(input);
@@ -181,7 +202,9 @@ public class DroolsTest {
        File outputFile = new File("output1.xml");
        
        JaxbHelper.marshalFilterOutput(output, outputFile);
-            
+       
+       db.putFile(dbOutputCollection, outputFile);
+       
             
         } catch (Throwable t) {
             t.printStackTrace();
