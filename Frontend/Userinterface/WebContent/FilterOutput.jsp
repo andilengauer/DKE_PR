@@ -73,33 +73,31 @@ PreparedOutput preparedOutput = AppController.getInstance().getPreparedOutput(ou
 		<fieldset id="Fieldset_Flugzeuginformationen">
 			<legend id="Legend_Flugzeuginformationen">Flugzeuginformationen</legend><br>
 			<label>ID:</label> 
-			<input type="text" name="Flugzeug_ID" id="Flugzeug_ID" class="Flugzeug_Text" value=<%= ""%>></input><br>
+			<input type="text" name="Flugzeug_ID" id="Flugzeug_ID" class="Flugzeug_Text" value=<%=input.getHasAircraft().getAircraft().getDesignator()%>></input><br>
 			<label>Typ:</label>
-			<select name="Typ_Flugzeug" id="Typ_Flugzeug" class="Flugzeug_Text" disabled>
- 				<option value=<%=AircraftTypeType.HELICOPTER %>><%=AircraftTypeType.HELICOPTER %></option>
-  				<option value=<%=AircraftTypeType.LANDPLANE %>><%=AircraftTypeType.LANDPLANE %></option>
-			</select><br>
+			<input type="text" name="Spannweite_Flugzeug" id="Spannweite_Flugzeug" class="Flugzeug_Text" value=<%=input.getHasAircraft().getAircraft().getType().value()%>><br>
+			<br>
 			<label>Spannweite:</label>
-			<input type="text" name="Spannweite_Flugzeug" id="Spannweite_Flugzeug" class="Flugzeug_Text" value=<%= "" %>><br>
+			<input type="text" name="Spannweite_Flugzeug" id="Spannweite_Flugzeug" class="Flugzeug_Text" value=<%=input.getHasAircraft().getAircraft().getWingspanFt().toString()%>><br>
 			<label>Maximalgewicht:</label>
-			<input type="text" name="Maximalgewicht_Flugzeug" id="Maximalgewicht_Flugzeug" class="Flugzeug_Text"><br>
+			<input type="text" name="Maximalgewicht_Flugzeug" id="Maximalgewicht_Flugzeug" class="Flugzeug_Text" value=<%=input.getHasAircraft().getAircraft().getMaxWeightLb().toString()%>><br>
 			<label>Minimalgewicht:</label>
-			<input type="text" name="Minimalgewicht_Flugzeug" id="Minimalgewicht_Flugzeug" class="Flugzeug_Text"><br>
+			<input type="text" name="Minimalgewicht_Flugzeug" id="Minimalgewicht_Flugzeug" class="Flugzeug_Text" value=<%=input.getHasAircraft().getAircraft().getMinWeightLb().toString()%>><br>
 		</fieldset><br>
 		
 		<fieldset id="Fieldset_Flugroute">
 			<legend id="Legend_Flugroute">Flugroute</legend><br>
-			<label>Routenname:</label><input type="text" name="Route_name" class="Flugroute_input"></input>
+			<label>Routenname:</label><input type="text" name="Route_name" class="Flugroute_input" value=<%=input.getHasFlightPath().getFlightPath().getRouteName()%>></input>
 				<fieldset id="Fieldset_Abflugflughafen">
 					<legend id="Legend_Abflugflughafen">Abflugflughafen</legend><br>
 					<label>ID:</label>
-					<input type="text" name="Id_Abflugflughafen" id="Id_Abflugflughafen" class="Flugroute_input"><br>
+					<input type="text" name="Id_Abflugflughafen" id="Id_Abflugflughafen" class="Flugroute_input" value=<%=input.getHasFlightPath().getFlightPath().getHasDepartureAerodrome().getDepartureAerodrome().getDesignator()%>><br>
 					<label name="Label_Datum_Anfang_Abflugflughafen" id="Id_Abflugflughafen">Startdatum:</label>
-					<input type="text" name="Datum_Anfang_Abflugflughafen" id="datepicker1_Abflugflughafen" class="Flugroute_input">
+					<input type="text" name="Datum_Anfang_Abflugflughafen" id="datepicker1_Abflugflughafen" class="Flugroute_input" value=<%=input.getHasFlightPath().getFlightPath().getHasDepartureAerodrome().getDepartureAerodrome().getTime().getTimePeriod().getBeginPosition().toString()%>>
 					<label name="Label_Uhrzeit_Anfang_Abflugflughafen" id="Label_Uhrzeit_Anfang_Abflugflughafen">Startuhrzeit:</label>
 					<input type="text" name="Uhrzeit_Anfang_Abflugflughafen" id="Textfield_Uhrzeit_Anfang_Abflugflughafen" placeholder="example: 15:30" class="Flugroute_input"><br>
 					<label name="Label_Datum_Ende_Abflugflughafen" id="Label_Datum_Ende_Abflugflughafen">Endedatum:</label>
-					<input type="text" name="Datum_Ende_Abflugflughafen" id="datepicker2_Abflugflughafen" class="Flugroute_input">
+					<input type="text" name="Datum_Ende_Abflugflughafen" id="datepicker2_Abflugflughafen" class="Flugroute_input" value=<%=input.getHasFlightPath().getFlightPath().getHasDepartureAerodrome().getDepartureAerodrome().getTime().getTimePeriod().getEndPosition().toString()%>>
 					<label name="Label_Uhrzeit_Ende_Abflugflughafen" id="Label_Uhrzeit_Ende_Abflugflughafen">Endeuhrzeit:</label>
 					<input type="text" name="Uhrzeit_Ende_Abflugflughafen" id="Textfield_Uhrzeit_Ende_Abflugflughafen" placeholder="example: 17:30" class="Flugroute_input"><br>
 					<label name="Flugregeln_Abflugflughafen" id="Flugregeln_Abflugflughafen">Flugregeln:</label>
@@ -181,13 +179,13 @@ PreparedOutput preparedOutput = AppController.getInstance().getPreparedOutput(ou
 				<fieldset id="Fieldset_Zielflughafen">
 					<legend id="Legend_Zielflughafen">Zielflughafen</legend><br/>
 					<label> ID:</label>
-					<input type="text" name="Id_Zielflughafen" id="Id_Zielflughafen"/ class="Flugroute_input"><br/>
+					<input type="text" name="Id_Zielflughafen" id="Id_Zielflughafen"/ class="Flugroute_input" value=<%=input.getHasFlightPath().getFlightPath().getHasDestinationAerodrome().getDestinationAerodrome().getDesignator()%>><br/>
 					<label name="Label_Datum_Anfang_Zielflughafen" id="Label_Datum_Anfang_Zielflughafen">Startdatum:</label>
-					<input type="text" name="Datum_Anfang_Zielflughafen" id="datepicker7_Zielflughafen" class="Flugroute_input">
+					<input type="text" name="Datum_Anfang_Zielflughafen" id="datepicker7_Zielflughafen" class="Flugroute_input" value=<%=input.getHasFlightPath().getFlightPath().getHasDestinationAerodrome().getDestinationAerodrome().getTime().getTimePeriod().getBeginPosition().toString()%>>
 					<label name="Label_Uhrzeit_Anfang_Zielflughafen" id="Label_Uhrzeit_Anfang_Zielflughafen">Startuhrzeit:</label>
 					<input type="text" name="Uhrzeit_Anfang_Zielflughafen" id="Textfield_Uhrzeit_Anfang_Zielflughafen" placeholder="example: 15:30" class="Flugroute_input"><br>
 					<label name="Label_Datum_Ende_Zielflughafen" id="Label_Datum_Ende_Zielflughafen">Endedatum:</label>
-					<input type="text" name="Datum_Ende_Zielflughafen" id="datepicker8_Zielflughafen" class="Flugroute_input">
+					<input type="text" name="Datum_Ende_Zielflughafen" id="datepicker8_Zielflughafen" class="Flugroute_input" value=<%=input.getHasFlightPath().getFlightPath().getHasDestinationAerodrome().getDestinationAerodrome().getTime().getTimePeriod().getEndPosition().toString()%>>
 					<label name="Label_Uhrzeit_Ende_Zielflughafen" id="Label_Uhrzeit_Ende_Zielflughafen">Endeuhrzeit:</label>
 					<input type="text" name="Uhrzeit_Ende_Zielflughafen" id="Textfield_Uhrzeit_Ende_Zielflughafen" placeholder="example: 17:30" class="Flugroute_input"><br>
 					<label name="Flugregeln_Zielflughafen" id="Flugregeln_Zielflughafen">Flugregeln:</label>

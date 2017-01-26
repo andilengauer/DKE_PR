@@ -24,7 +24,7 @@ import dataobjects.*
  rule "Zeitliche Filterung"
  	salience 11
  	when
- 		m: AixmMessage ( endtime < timeperiod.getBeginPosition() || begintime > "27-Oct-2018" )  
+ 		m: AixmMessage ( endtime < timeperiod.getBeginPosition() || begintime > timeperiod.getEndPosition() )  
  	then
  		System.out.println("not relevant Zeit " + m.getScenario());
  		m.setRelevant(false);
