@@ -66,7 +66,7 @@ public class DroolsTest {
         	 
         	 File InputFile = new File("src/main/resources/samples/input_ex1.xml");
         	 
-        	 String result = db.getData(dbInputCollection, "src/main/resources/samples/input_ex1.xml");
+        	 String result = db.getData(dbInputCollection, "fi1.xml");
         	 
         	 File inputFile = new File("input.xml");
         	 FileWriter writer = new FileWriter(inputFile);
@@ -199,7 +199,7 @@ public class DroolsTest {
        
        output.setHasResultSet(rsp);
        
-       File outputFile = new File("output1.xml");
+       File outputFile = new File("fo1.xml");
        
        JaxbHelper.marshalFilterOutput(output, outputFile);
        

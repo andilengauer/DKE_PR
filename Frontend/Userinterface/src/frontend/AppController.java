@@ -79,11 +79,14 @@ public class AppController {
 		return filterInputs;
 	}
 	
-	public FilterOutputType getFilterOutput()
+	public FilterOutputType getFilterOutput(int nr)
 	{
 		String filterOutput = "";
 		existDb.initDB();
-		filterOutput = existDb.getData(dbOutputCollection, "output_ex1.xml");
+		//filterOutput = existDb.getData(dbOutputCollection, "output_ex1.xml");
+		filterOutput = existDb.getData(dbOutputCollection, "fo" + nr + ".xml");
+		if( filterOutput == null || filterOutput == "")
+			return null;
 		//System.out.println(filterOutput);
 		File filterOutputFile = new File("fo1.xml");
 		FileWriter writer = null;
@@ -111,12 +114,14 @@ public class AppController {
 			e.printStackTrace();
 		}
 		
+		filterOutputFile.delete();
+		
 		return outputType;
 	}
 	
-	public PreparedOutput getPreparedOutput()
+	public PreparedOutput getPreparedOutput(FilterOutputType filteroutput)
 	{
-		return OutputHandler.getPreparedOutput(getFilterOutput());
+		return OutputHandler.getPreparedOutput(filteroutput);
 	}
 	
 }

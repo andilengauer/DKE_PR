@@ -38,10 +38,14 @@ pageEncoding="ISO-8859-1"%>
 
 //---- get values from FilterOutput -----
 
-FilterOutputType output = AppController.getInstance().getFilterOutput();
+int inputNr = Integer.parseInt(request.getParameter("inputNr"));
+FilterOutputType output = AppController.getInstance().getFilterOutput(inputNr);
+if(output == null)
+	response.sendRedirect("FilterOutput.jsp?inputNr="+inputNr);
+
 FilterInputType input = output.getHasInput().getFilterInput();
 
-PreparedOutput preparedOutput = AppController.getInstance().getPreparedOutput();
+PreparedOutput preparedOutput = AppController.getInstance().getPreparedOutput(output);
 
 %>
 
@@ -256,6 +260,9 @@ PreparedOutput preparedOutput = AppController.getInstance().getPreparedOutput();
      	<div id="outputmap">
      	
      	</div>
+     	
+     	<div id="marker" class="marker">FN001</div>
+     	<div id="marker2" class="marker">FN002</div>
     
     
     <script>
@@ -278,17 +285,28 @@ PreparedOutput preparedOutput = AppController.getInstance().getPreparedOutput();
     	     })
     	});
 
-  	  var exampleLoc = ol.proj.transform(
-  		    [16.37, 48.209], 'EPSG:4326', 'EPSG:3857');
+  	  
+  	    var pos = ol.proj.fromLonLat([17.9013333, 40.4845]);
 
-  		
+      // Vienna marker
+      var marker = new ol.Overlay({
+        position: pos,
+        positioning: 'center-center',
+        element: document.getElementById('marker'),
+        stopEvent: false
+      });
+      map.addOverlay(marker);
+      
+      var pos = ol.proj.fromLonLat([16.3725, 47.208889]);
 
-  		map.addOverlay(new ol.Overlay({
-  		  position: exampleLoc,
-  		  element: $('<img src="Kalender.png">')
-  		      .css({marginTop: '-200%', marginLeft: '-50%', cursor: 'pointer'})
-  		      .tooltip({title: 'Hello, world!', trigger: 'click'})
-  		}));
+      // Vienna marker
+      var marker = new ol.Overlay({
+        position: pos,
+        positioning: 'center-center',
+        element: document.getElementById('marker2'),
+        stopEvent: false
+      });
+      map.addOverlay(marker);
     	
     	/**
        	* Add a click handler to the map to render the popup.

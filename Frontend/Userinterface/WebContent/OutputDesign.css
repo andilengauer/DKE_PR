@@ -1,6 +1,14 @@
 @CHARSET "ISO-8859-1";
 
-
+.marker {
+        width: 10px;
+        height: 10px;
+        border: 1px solid #088;
+        border-radius: 7px;
+        background-color: red;
+        opacity: 1;
+      }
+      
 input {
 }
 
