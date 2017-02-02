@@ -134,7 +134,7 @@ $(function() {
 		
 		<ul>
 			<li><a href="javascript:{}" onclick="document.getElementById('InputForm').submit()">Filterung abschließen</a></li>
-		</ul><br></br><br></br>
+		</ul><br></br><br>
 		
 		<fieldset id="Fieldset_Flugzeuginformationen">
 			<legend id="Legend_Flugzeuginformationen">Flugzeuginformationen</legend><br>
@@ -154,15 +154,14 @@ $(function() {
 		</fieldset><br>
 		
 		<fieldset class="fieldset">
-			<legend class="legend">Zeitintervall</legend>
-			<br></br>
-			<label style="position:relative; left:5.5cm; top:-0.5cm; ">Datum</label><label style="position:relative; left:7.5cm; top:-0.5cm; ">Uhrzeit</label>
-			<label>Anfang:</label>
+			<legend class="legend">Zeitintervall</legend><br>
+			<label style="position:relative; left:5.5cm; top:-0.5cm; ">Datum</label><label style="position:relative; left:8.5cm; top:-0.5cm; ">Uhrzeit</label>
+			<label style="position:absolute; left:1cm;">Anfang:</label>
 			<input type="text" name="Zeitintervall_Begindate" id="Zeitintervall_Begindate" class="datepicker">
 			<input type="text" name="Zeitintervall_Begintime" id="Zeitintervall_Begintime" class="uhrzeit" placeholder="example: 15:30" value="00:00">
 			<br></br>
-			<label style="position:relative; left:5.5cm; top:-0.5cm; ">Datum</label><label style="position:relative; left:7.5cm; top:-0.5cm; ">Uhrzeit</label>
-			<label>Ende:</label>
+			<label style="position:relative; left:5.5cm; top:-0.5cm; ">Datum</label><label style="position:relative; left:8.5cm; top:-0.5cm; ">Uhrzeit</label>
+			<label style="position:absolute; left:1cm;">Ende:</label>
 			<input type="text" name="Zeitintervall_Enddate" id="Zeitintervall_Enddate" class="datepicker">
 			<input type="text" name="Zeitintervall_Endtime" id="Zeitintervall_Endtime" class="uhrzeit" placeholder="example: 15:30" value="00:00"><br>
 			
@@ -273,7 +272,6 @@ $(function() {
 					 <select name="Segmentkarte_type" id="Segmentkarte_type">  
         		<option value="LineString">Linie</option>
         		<option value="Polygon">Polygon</option>
-        		<option value="Circle">Kreis</option>
         		<option value="None">None</option>
       		</select>
 					<button type="button" id="Segment_speichern" onclick="addRow(), anzeigenSegmentTabelle()">Segment hinzufügen</button><br></br>
@@ -345,11 +343,11 @@ $(function() {
   	//Mit Hilfe dieser Function kann dann auf der Karte gezeichnet werden
   	var draw;
   	function addInteraction() {
-   		var value = "LineString"
+   		var value = typeSelect.value;
   	    if (value !== 'None') {	//Es wird überprüft, ob die Option nicht "None" ist
   	    	draw = new ol.interaction.Draw({	//Bei einer anderen Auswahl als "None" kann auf der Karte gezeichnet werden
   	       		source: source,
-  	        	type: "LineString"
+  	        	type: (typeSelect.value)
   	        });
   	        map1.addInteraction(draw);
   	    }
