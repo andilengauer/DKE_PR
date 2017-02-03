@@ -14,6 +14,12 @@ public class AixmMessage {
 		private String scenario;
 		private boolean relevant = true;
 		
+		private String opStatus;
+		private String usageType;
+		private Wingspan wingspan;
+		private Weight weight;
+		private String flightMilitary;
+		private String importance;
 		
 		public String getMessageId() {
 			return messageId;
@@ -56,6 +62,42 @@ public class AixmMessage {
 		}
 		public void setRelevant(boolean relevant) {
 			this.relevant = relevant;
+		}
+		public String getOpStatus() {
+			return opStatus;
+		}
+		public void setOpStatus(String opStatus) {
+			this.opStatus = opStatus;
+		}
+		public String getUsageType() {
+			return usageType;
+		}
+		public void setUsageType(String usageType) {
+			this.usageType = usageType;
+		}
+		public Wingspan getWingspan() {
+			return wingspan;
+		}
+		public void setWingspan(Wingspan wingspan) {
+			this.wingspan = wingspan;
+		}
+		public Weight getWeight() {
+			return weight;
+		}
+		public void setWeight(Weight weight) {
+			this.weight = weight;
+		}
+		public String getFlightMilitary() {
+			return flightMilitary;
+		}
+		public void setFlightMilitary(String flightMilitary) {
+			this.flightMilitary = flightMilitary;
+		}
+		public String getImportance() {
+			return importance;
+		}
+		public void setImportance(String importance) {
+			this.importance = importance;
 		}
 		
 		
