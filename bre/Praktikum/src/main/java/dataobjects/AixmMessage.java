@@ -100,6 +100,19 @@ public class AixmMessage {
 			this.importance = importance;
 		}
 		
+		public String getPostfixScenario()
+		{
+			String postfix = "";
+			
+			if(this.scenario.contains("."))
+			{
+				String[] splitted = scenario.split("\\.");
+				postfix = splitted[1];
+			}
+			
+			return postfix;
+		}
+		
 		
 		
 		
