@@ -15,6 +15,13 @@ import net.opengis.gml.TimeInstantType;
 import net.opengis.gml.TimePeriodType;
 import net.opengis.gml.TimePositionType;
 import net.opengis.wfs._2.FeatureCollectionType;
+import aero.aixm.AircraftCharacteristicType;
+import aero.aixm.AirportHeliportAvailabilityType;
+import aero.aixm.AirportHeliportTimeSliceType;
+import aero.aixm.AirportHeliportType;
+import aero.aixm.AirportHeliportUsageType;
+import aero.aixm.CodeUsageLimitationType;
+import aero.aixm.ConditionCombinationType;
 import aero.aixm.TextDesignatorType;
 import aero.aixm.event.EventTimeSlicePropertyType;
 import aero.aixm.event.EventTimeSliceType;
@@ -25,33 +32,31 @@ import aero.aixm.message.BasicMessageMemberAIXMPropertyType;
 import dataobjects.AixmMessage;
 import dataobjects.Member;
 import dataobjects.ValidTime;
+import dataobjects.Weight;
+import dataobjects.Wingspan;
 
 public class DNOTAMReader {
 	
 	
-	/*public static void main(String[] args) {
-		try{
+	public static void main(String[] args) {
+		FeatureCollectionType collection;
+		try {
+			collection = JaxbHelper.unmarshalFeatureCollection(new File("src/main/resources/samples/sample_dnotams.xml"));
+			List<AIXMBasicMessageType> messages = JaxbHelper.getMessages(collection);
+	    	
+	    	ArrayList<AixmMessage> aixmMessages = (ArrayList<AixmMessage>) DNOTAMReader.getAixmMessages(messages);
+	    	
+	    	System.out.println(aixmMessages.get(0).getOpStatus());
 			
-			
-			List<AixmMessage> messages = getAixmMessages();
-			
-			System.out.println("--------------");
-			for(AixmMessage m: messages)
-			{
-				System.out.println(m.getMessageId());
-				for(Member member: m.getMembers())
-				{
-					System.out.println(member.getMemberId());
-				}
-			}
-		} 
-		catch(Exception e)
-		{
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		
+		
 	}
-	*/
+	
 	public static List<AixmMessage> getAixmMessagesOLD(List<AIXMBasicMessageType> messages) {
 		
 		
@@ -168,13 +173,13 @@ public static List<AixmMessage> getAixmMessages(List<AIXMBasicMessageType> messa
 	
 	
 	// Print the ID of all DNOTAMs contained in the FeatureCollection
-	for (AIXMBasicMessageType m : messages) 
+	for (AIXMBasicMessageType basicMessage : messages) 
 	{
-		AixmMessage mess = new AixmMessage();
-		mess.setMessageId(m.getId());
+		AixmMessage message = new AixmMessage();
+		message.setMessageId(basicMessage.getId());
 		
 		
-		for(BasicMessageMemberAIXMPropertyType member : m.getHasMember())
+		for(BasicMessageMemberAIXMPropertyType member : basicMessage.getHasMember())
 		{
 			
 			if(member.getAbstractAIXMFeature().getValue() instanceof EventType) //Überprüfung von welchen Typ das Feature ist
@@ -187,8 +192,8 @@ public static List<AixmMessage> getAixmMessages(List<AIXMBasicMessageType> messa
 					String location = timeslice.getTextNOTAM().get(0).getNOTAM().getLocation().getValue().getValue();
 					String scenario = timeslice.getScenario().getValue().getValue();
 					
-					mess.setLocation(location);
-					mess.setScenario(scenario);
+					message.setLocation(location);
+					message.setScenario(scenario);
 					
 					AbstractTimePrimitiveType abstractTime = timeslice.getValidTime().getAbstractTimePrimitive().getValue();
 					
@@ -212,20 +217,55 @@ public static List<AixmMessage> getAixmMessages(List<AIXMBasicMessageType> messa
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						mess.setBegintime(beginDate);
-						mess.setEndtime(endDate);
+						message.setBegintime(beginDate);
+						message.setEndtime(endDate);
 						
 					}
-					continue;
 					
 				}
 			}// if EventType
+			
+			else if(member.getAbstractAIXMFeature().getValue() instanceof AirportHeliportType) 
+			{
+				AirportHeliportType ahPort = (AirportHeliportType)member.getAbstractAIXMFeature().getValue();
 				
+				AirportHeliportTimeSliceType ahTimeslice = ahPort.getTimeSlice().get(0).getAirportHeliportTimeSlice();
+				if(ahTimeslice.getAvailability().size() > 0)
+				{
+					AirportHeliportAvailabilityType availability = ahTimeslice.getAvailability().get(0).getAirportHeliportAvailability();
+					message.setOpStatus(availability.getOperationalStatus().getValue().getValue());
+					if(!message.getOpStatus().equals("LIMITED"))
+						continue;
+					AirportHeliportUsageType usageType = availability.getUsage().get(0).getAirportHeliportUsage();
+					message.setUsageType(usageType.getType().getValue().getValue());
+					ConditionCombinationType conditionComb = usageType.getSelection().getValue().getConditionCombination();
+					if(conditionComb.getAircraft().size() > 0)
+					{
+						AircraftCharacteristicType aircraftCharact = conditionComb.getAircraft().get(0).getAircraftCharacteristic();
+						
+						if(aircraftCharact.getWingSpan() != null)
+						{
+							Wingspan wingspan = new Wingspan();
+							wingspan.setInterpretation(aircraftCharact.getWingSpanInterpretation().getValue().getValue());
+							wingspan.setValue(aircraftCharact.getWingSpan().getValue().getValue().doubleValue());
+							message.setWingspan(wingspan);
+						}
+						
+						Weight weight = new Weight();
+						if(aircraftCharact.getWeight() != null)
+						{
+							weight.setInterpretation(aircraftCharact.getWeightInterpretation().getValue().getValue());
+							weight.setValue(aircraftCharact.getWeight().getValue().getValue().doubleValue());
+							message.setWeight(weight);
+						}
+					}
+				}
+			}
 			
 		} //foreach member
 		
 		
-	aixmMessages.add(mess);	
+	aixmMessages.add(message);	
 }
 	return aixmMessages;
 	
