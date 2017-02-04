@@ -6,29 +6,175 @@ global tools.Flightpath flightpath
 import tools.*;
 import dataobjects.*
 
- 
- rule "Ã–rtliche Filterung"
- 	salience 10
+// RELEVANCE
+// Wing Span
+rule "Permit mit wingspan restriction die auf Fluggeraet zutrifft"
+	salience 10
+	when
+		m : AixmMessage ( m.getPostfixScenario().equals("CLS") && opStatus.equals("LIMITED") && usageType.equals("PERMIT") &&
+		((wingspan.getInterpretation().equals("BELOW") && wingspan.getValue() < aircraft.getWingSpan()) || 
+		(wingspan.getInterpretation().equals("ABOVE") && wingspan.getValue() > aircraft.getWingSpan())))
+	then
+		System.out.println("Permit - Wingspan Restriction "+m.getMessageId());
+		m.setRelevant(false);
+		retract(m);
+end
+
+rule "Forbid mit wingspan restriction die auf Fluggeraet nicht zutrifft"
+	salience 10
+	when
+		m : AixmMessage ( m.getPostfixScenario().equals("CLS") && opStatus.equals("LIMITED") && usageType.equals("FORBID") &&
+		((wingspan.getInterpretation().equals("BELOW") && wingspan.getValue() > aircraft.getWingSpan()) || 
+		(wingspan.getInterpretation().equals("ABOVE") && wingspan.getValue() < aircraft.getWingSpan())))
+	then
+		System.out.println("Forbid - Wingspan Restriction "+m.getMessageId());
+		m.setRelevant(false);
+		retract(m);
+end
+
+// Weight
+
+rule "Permit mit weight restriction die auf Fluggeraet zutrifft"
+	salience 10
+	when
+		m : AixmMessage ( m.getPostfixScenario().equals("CLS") && opStatus.equals("LIMITED") && usageType.equals("PERMIT") &&
+		((weight.getInterpretation().equals("AT_OR_BELOW") && weight.getValue() > aircraft.getMaxWeight()) || 
+		(weight.getInterpretation().equals("ABOVE") && weight.getValue() < aircraft.getMinWeight())))
+	then
+		System.out.println("Permit - Weight Restriction "+m.getMessageId());
+		m.setRelevant(false);
+		retract(m);
+end
+
+rule "Forbid mit weight restriction die auf Fluggeraet nicht zutrifft"
+	salience 10
+	when
+		m : AixmMessage ( m.getPostfixScenario().equals("CLS") && opStatus.equals("LIMITED") && usageType.equals("FORBID") &&
+		((weight.getInterpretation().equals("AT_OR_BELOW") && weight.getValue() < aircraft.getMaxWeight()) || 
+		(weight.getInterpretation().equals("ABOVE") && weight.getValue() > aircraft.getMinWeight())))
+	then
+		System.out.println("Forbid - Weight Restriction "+m.getMessageId());
+		m.setRelevant(false);
+		retract(m);
+end
+
+// Zivil
+
+rule "Permit für zivile Op"
+	salience 10
+	when
+		m : AixmMessage ( m.getPostfixScenario().equals("CLS") && opStatus.equals("LIMITED") && usageType.equals("PERMIT") && flightMilitary.equals("CIVIL"))
+	then
+		System.out.println("Permit - Zivile Operation "+m.getMessageId());
+		m.setRelevant(false);
+		retract(m);
+end
+
+// Military
+
+rule "Permit für militaerische Op"
+	salience 10
+	when
+		m : AixmMessage ( m.getPostfixScenario().equals("CLS") && opStatus.equals("LIMITED") && usageType.equals("FORBID") && flightMilitary.equals("MIL"))
+	then
+		System.out.println("Forbid - Militaerische Operation "+m.getMessageId());
+		m.setRelevant(false);
+		retract(m);
+end
+
+rule "Oertliche Filterung"
+ 	salience 11
  	when
  		m : AixmMessage ( location != flightpath.getDepatureAerodrome() && location != flightpath.getDestinationAerodrome())
  	
  	
  	then
- 		System.out.println("not relevant at " + m.getScenario());
+ 		System.out.println("Örtlich nicht relevant! "+m.getMessageId());
  		m.setRelevant(false);
  		retract(m);
  
- end
+end
  
  
- rule "Zeitliche Filterung"
- 	salience 11
+rule "Zeitliche Filterung"
+ 	salience 12
  	when
  		m: AixmMessage ( endtime < timeperiod.getBeginPosition() || begintime > timeperiod.getEndPosition() )  
  	then
- 		System.out.println("not relevant Zeit " + m.getScenario());
+ 		System.out.println("Zeitlich nicht relevant! "+m.getMessageId());
  		m.setRelevant(false);
  		retract(m);
- end
- 
+end
+
+// Importance
+// AD.CLS
+rule "AD.CLS Flugplan spezifiziert"
+	salience 9
+	when
+		m : AixmMessage ( m.isRelevant() && scenario.equals("AD.CLS") && ((flightpath.getDepatureAerodrome.equals(m.location)) || 
+		(flightpath.getDestinationAerodrome.equals(m.location)) || (flightpath.getAlternateAerodrome.equals(m.location))))
+	then
+		System.out.println("AD.CLS im Flugplan "+m.getMessageId());
+ 		m.setImportance("ESSENTIAL");
+end
+
+rule "AD.CLS Flugplan nicht spezifiziert"
+	salience 9
+	when
+		m : AixmMessage ( m.isRelevant() && scenario.equals("AD.CLS"))
+	then
+		System.out.println("Kein AD.CLS im Flugplan "+m.getMessageId());
+ 		m.setImportance("SUPPLEMENTARY");
+end
+
+// RWY.CLS
+rule "RWY.CLS Flugplan spezifiziert"
+	salience 9
+	when
+		m : AixmMessage ( m.isRelevant() && scenario.equals("RWY.CLS") && ((flightpath.getDepatureAerodrome.equals(m.location)) || 
+		(flightpath.getDestinationAerodrome.equals(m.location)) || (flightpath.getAlternateAerodrome.equals(m.location))))
+	then
+		System.out.println("RWY.CLS im Flugplan "+m.getMessageId());
+ 		m.setImportance("ESSENTIAL");
+end
+
+rule "RWY.CLS Flugplan nicht spezifiziert"
+	salience 9
+	when
+		m : AixmMessage ( m.isRelevant() && scenario.equals("RWY.CLS"))
+	then
+		System.out.println("Kein RWY.CLS im Flugplan "+m.getMessageId());
+ 		m.setImportance("SUPPLEMENTARY");
+end
+
+// TWY.CLS
+
+rule "TWY.CLS auf alternativen Aerodrome"
+	salience 9
+	when
+		m : AixmMessage ( m.isRelevant() && scenario.equals("TWY.CLS") && flightpath.getAlternateAerodrome.equals(m.location))
+	then
+		System.out.println("TWY.CLS auf alternativen Aerodrome "+m.getMessageId());
+ 		m.setImportance("SUPPLEMENTARY");
+end
+
+rule "TWY.CLS auf departure oder destination Aerodrome"
+	salience 9
+	when
+		m : AixmMessage ( m.isRelevant() && scenario.equals("TWY.CLS") && (flightpath.getDepatureAerodrome.equals(m.location) || 
+		flightpath.getDestinationAerodrome.equals(m.location)))
+	then
+		System.out.println("TWY.CLS auf Departure oder Destination Aerodrome "+m.getMessageId());
+ 		m.setImportance("ESSENTIAL");
+end 
+
+// Special Activity
+rule "SAA.ACT Special Activity"
+	salience 9
+	when
+		m : AixmMessage ( m.isRelevant() && scenario.equals("SAA.ACT"))
+	then
+		System.out.println("SAA.ACT "+m.getMessageId());
+ 		m.setImportance("ESSENTIAL");
+end
 
