@@ -1,6 +1,11 @@
+/dataobjects/
+/samples/
+/META-INF/
 /aero/
 /com/
+/dtables/
 /net/
 /org/
+/process/
+/rules/
 /tools/
-/samples/
