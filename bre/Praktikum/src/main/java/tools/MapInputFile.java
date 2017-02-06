@@ -32,7 +32,8 @@ public class MapInputFile {
 	public static TimePeriod getTimePeriod(FilterInputType input) {
 		GregorianCalendar beginTime = input.getHasTimePeriod().getTimePeriod().getBeginPosition().toGregorianCalendar();
 		GregorianCalendar endTime = input.getHasTimePeriod().getTimePeriod().getEndPosition().toGregorianCalendar();
-
+		
+		System.out.println(beginTime.toString());
 		Date eTime = endTime.getTime();
 		Date sTime = beginTime.getTime();
 

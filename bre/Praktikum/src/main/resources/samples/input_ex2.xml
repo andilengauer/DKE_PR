@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FilterInput id="fi1" 
+  xmlns:gml="http://www.opengis.net/gml/3.2" 
+  xmlns="http://semnotam.frequentis.com/pr" 
+  xmlns:xml="http://www.w3.org/XML/1998/namespace" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xsi:schemaLocation="./input.xsd">
+  <hasAircraft>
+    <Aircraft id="ac1">
+	  <designator>B747-400</designator>
+      <type>LANDPLANE</type>
+	  <wingspan_ft>213.0</wingspan_ft>
+	  <maxWeight_lb>875000.0</maxWeight_lb>
+	  <minWeight_lb>406900.0</minWeight_lb>
+    </Aircraft>
+  </hasAircraft>
+  <hasTimePeriod>
+    <TimePeriod>
+      <beginPosition>2017-01-01T12:00:00</beginPosition>
+      <endPosition>2017-04-30T18:00:00</endPosition>
+    </TimePeriod>
+  </hasTimePeriod>
+  <hasFlightPath>
+    <FlightPath id="fp1">
+	  <routeName>LOWW-to-EBBR</routeName>
+	  <hasDepartureAerodrome>
+	    <DepartureAerodrome id="ad1">
+		  <designator>LOWW</designator>		
+		</DepartureAerodrome>
+	  </hasDepartureAerodrome>
+	  <hasDestinationAerodrome>
+	    <DestinationAerodrome id="ad2">
+		  <designator>EBBR</designator>
+		</DestinationAerodrome>
+	  </hasDestinationAerodrome>
+	  <hasSegment>
+	    <Segment id="seg1">
+		  <designator>LOWW-to-LULAR</designator>
+		  <startPoint>
+		    <gml:Point srsDimension="2" srsName="urn:ogc:def:crs:EPSG::4326" gml:id="p1">
+              <gml:pos>48.1102778 016.5697222</gml:pos>
+			</gml:Point>
+		  </startPoint>
+		  <endPoint>
+		    <gml:Point srsDimension="2" srsName="urn:ogc:def:crs:EPSG::4326" gml:id="p2">
+              <gml:pos>49.3658333 012.7588333</gml:pos>
+			</gml:Point>
+		  </endPoint>
+		</Segment>
+	  </hasSegment>
+	  <hasSegment>
+	    <Segment id="seg2">
+		  <designator>LULAR-to-LOHRE</designator>
+		  <startPoint>
+		    <gml:Point srsDimension="2" srsName="urn:ogc:def:crs:EPSG::4326" gml:id="p3">
+              <gml:pos>49.3658333 012.7588333</gml:pos>
+			</gml:Point>
+		  </startPoint>
+		  <endPoint>
+		    <gml:Point srsDimension="2" srsName="urn:ogc:def:crs:EPSG::4326" gml:id="p4">
+              <gml:pos>50.0670000 009.4863333</gml:pos>
+			</gml:Point>
+		  </endPoint>
+		</Segment>
+	  </hasSegment>
+	  <hasSegment>
+	    <Segment id="seg3">
+		  <designator>LOHRE-to-TERLA</designator>
+		  <startPoint>
+		    <gml:Point srsDimension="2" srsName="urn:ogc:def:crs:EPSG::4326" gml:id="p5">
+              <gml:pos>50.0670000 009.4863333</gml:pos>
+			</gml:Point>
+		  </startPoint>
+		  <endPoint>
+		    <gml:Point srsDimension="2" srsName="urn:ogc:def:crs:EPSG::4326" gml:id="p6">
+              <gml:pos>50.6825000 005.6655000</gml:pos>
+			</gml:Point>
+		  </endPoint>
+		</Segment>
+	  </hasSegment>
+	  <hasSegment>
+	    <Segment id="seg4">
+		  <designator>TERLA-to-EBBR</designator>
+		  <startPoint>
+		    <gml:Point srsDimension="2" srsName="urn:ogc:def:crs:EPSG::4326" gml:id="p7">
+              <gml:pos>50.6825000 005.6655000</gml:pos>
+			</gml:Point>
+		  </startPoint>
+		  <endPoint>
+		    <gml:Point srsDimension="2" srsName="urn:ogc:def:crs:EPSG::4326" gml:id="p8">
+              <gml:pos>50.9013333 004.4845000 </gml:pos>
+			</gml:Point>
+		  </endPoint>
+		</Segment>
+	  </hasSegment>
+	</FlightPath>
+  </hasFlightPath>
+</FilterInput>

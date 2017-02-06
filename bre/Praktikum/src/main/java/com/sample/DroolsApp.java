@@ -47,7 +47,7 @@ import tools.TimePeriod;
  * This is a sample class to launch a rule.
  */
 public class DroolsApp {
-
+	private static List<AIXMBasicMessageType> dnotams;
     public static final void main(String[] args) {
         try {
             // load up the knowledge base
@@ -64,15 +64,19 @@ public class DroolsApp {
         	 
         	
         	 
-        	 File InputFile = new File("src/main/resources/samples/input_ex1.xml");
+        	 //File InputFile = new File("src/main/resources/samples/input_ex2.xml");
         	 
         	 String result = db.getData(dbInputCollection, "fi1.xml");
+        	 String dbDnotams = db.getData("db/DKE_PR","dnotams.xml" );
         	 
         	 File inputFile = new File("input.xml");
         	 FileWriter writer = new FileWriter(inputFile);
-        	 
         	 writer.write(result);
+        	 writer.close();
         	 
+        	 File dnotamFile = new File("dnotams.xml");
+        	 writer = new FileWriter(dnotamFile);
+        	 writer.write(dbDnotams);
         	 writer.close();
         	 
         	//unmarshall InputFile
@@ -94,10 +98,10 @@ public class DroolsApp {
         	//List<MemberPropertyType> members = collection.getMember();
         	
 
-    		FeatureCollectionType collection = JaxbHelper.unmarshalFeatureCollection(new File("src/main/resources/samples/sample_dnotams.xml"));
+    		FeatureCollectionType collection = JaxbHelper.unmarshalFeatureCollection(dnotamFile);
     		
     		List<AIXMBasicMessageType> messages = JaxbHelper.getMessages(collection);
-        	
+        	dnotams = messages;
         	ArrayList<AixmMessage> aixmMessages = (ArrayList<AixmMessage>) DNOTAMReader.getAixmMessages(messages);
     		
         	for(AixmMessage m : aixmMessages){
@@ -107,18 +111,7 @@ public class DroolsApp {
         		
         	}
         	
-        	//System.out.println(members.get(0).getContent().get(0).toString());
-        	
-        	
-        	
-        	
-            // go !
-            //Message message = new Message();
-            //message.setMessage("Hello World");
-            //message.setStatus(Message.HELLO);
-        	
-        	timePeriod.setBeginPosition(new Date());
-        	timePeriod.setEndPosition(new Date());
+
         	kSession.setGlobal("aircraft", aircraft);
         	kSession.setGlobal("timeperiod", timePeriod);
         	kSession.setGlobal("flightpath", flightpath);
@@ -139,78 +132,10 @@ public class DroolsApp {
             
             filterOutput = generateFilterOutput(filterInput,messages,aixmMessages);
             
-            
-            for(AixmMessage fMess : aixmMessages){
-            	if(fMess.isRelevant()){
-            		
-            		
-            		for(AIXMBasicMessageType relevant : messages){
-            			
-            			if(relevant.getId().equals(fMess.getMessageId())){
-            				relevantDnotams.add(relevant);
-            				continue;
-            			}
-            			
-            		}
-            		
-            		System.out.println("relevantMessage" + fMess.getMessageId());
-            		
-            	}
-            }
-            
-            
-            
-           FilterOutputType output = new FilterOutputType();
-          
-          
-           FilterInputPropertyType inputPropT= new FilterInputPropertyType();
-           inputPropT.setFilterInput(filterInput);
-           
-           output.setHasInput(inputPropT);
-           
-           
-           
-           List<AIXMBasicMessagePropertyType> propTypes = new ArrayList<>();
-           
-           
-           for(AIXMBasicMessageType x : relevantDnotams){
-        	   AIXMBasicMessagePropertyType prop = new AIXMBasicMessagePropertyType();
-        	   prop.setAIXMBasicMessage(x);
-        	   propTypes.add(prop);
-           }
-           
-           
-           List<ResultType> resTypes = new ArrayList<>();
-           
-           for (AIXMBasicMessagePropertyType y : propTypes){
-        	   ResultType re= new ResultType();
-        	   re.setDnotam(y);
-        	   resTypes.add(re);
-           }
-           
-           
-         List<ResultPropertyType> resPropTypes = new ArrayList<>();
-         
-          for(ResultType rType : resTypes){
-        	  ResultPropertyType re = new ResultPropertyType();
-        	  re.setResult(rType);
-        	  resPropTypes.add(re);
-          }
-          
-          
-          
-        ResultSetPropertyType rsp = new ResultSetPropertyType();
-       ResultSetType rpt = new ResultSetType();
-       
-       rpt.getHasResult().addAll(resPropTypes);
-       
-       rsp.setResultSet(rpt);
-       
-       output.setHasResultSet(rsp);
        
        File outputFile = new File("fo1.xml");
        
-       JaxbHelper.marshalFilterOutput(output, outputFile);
+       JaxbHelper.marshalFilterOutput(filterOutput, outputFile);
        
        db.putFile(dbOutputCollection, outputFile);
        
@@ -240,6 +165,33 @@ public class DroolsApp {
 				ResultPropertyType result = new ResultPropertyType();
 				ResultType resultType = new ResultType();
 				
+				
+				resultType.setDnotam(getAixmMessageForId(message.getMessageId()));
+				if(message.getImportance() != null && message.getImportance() != "")
+				{
+					ImportanceClassificationPropertyType importanceClassificationProperty = new ImportanceClassificationPropertyType();
+					ImportanceClassificationType importanceType = new ImportanceClassificationType();
+					importanceType.setValue(message.getImportance());
+					importanceClassificationProperty.setImportanceClassification(importanceType);
+					resultType.getHasImportanceClassification().add(importanceClassificationProperty);
+				}
+				if(message.getScenario() != null && message.getScenario() != "")
+				{
+					EventScenarioClassificationPropertyType scenarioProperty = new EventScenarioClassificationPropertyType();
+					EventScenarioClassificationType scenarioType = new EventScenarioClassificationType();
+					scenarioType.setValue(message.getScenario());
+					scenarioProperty.setEventScenarioClassification(scenarioType);
+					resultType.getHasEventScenarioClassification().add(scenarioProperty);
+				}
+				if(message.getLocation() != null && message.getLocation() != "")
+				{
+					LocationClassificationPropertyType locationProperty = new LocationClassificationPropertyType();
+					LocationClassificationType locationType = new LocationClassificationType();
+					locationType.setValue(message.getLocation());
+					locationProperty.setLocationClassification(locationType);
+					resultType.getHasLocationClassification().add(locationProperty);
+				}
+				result.setResult(resultType);
 				resultSetType.getHasResult().add(result);
 			}
 		}
@@ -247,34 +199,24 @@ public class DroolsApp {
 		resultSetPropertyType.setResultSet(resultSetType);
 		filterOutput.setHasResultSet(resultSetPropertyType);
 		
+		return filterOutput;
+	}
+
+	private static AIXMBasicMessagePropertyType getAixmMessageForId(
+			String messageId) {
+		if(dnotams != null)
+		{
+			for(AIXMBasicMessageType m :dnotams)
+			{
+				if(m.getId().equalsIgnoreCase(messageId))
+				{
+					AIXMBasicMessagePropertyType returnVal = new AIXMBasicMessagePropertyType();
+					returnVal.setAIXMBasicMessage(m);
+					return returnVal;
+				}
+			}
+		}
 		return null;
 	}
 
-   /* public static class Message {
-
-        public static final int HELLO = 0;
-        public static final int GOODBYE = 1;
-
-        private String message;
-
-        private int status;
-
-        public String getMessage() {
-            return this.message;
-        }
-
-        public void setMessage(String message) {
-            this.message = message;
-        }
-
-        public int getStatus() {
-            return this.status;
-        }
-
-        public void setStatus(int status) {
-            this.status = status;
-        }
-
-    }
-*/
 }

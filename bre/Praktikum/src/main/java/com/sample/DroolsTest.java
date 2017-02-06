@@ -45,6 +45,12 @@ import tools.TimePeriod;
 
 /**
  * This is a sample class to launch a rule.
+ * 
+ * WICHTIG:
+ * Diese Klasse wurde nur zum Testen von Drools verwendet
+ * 
+ * Die volle Funktionalität gibt es in der Klasse DroolsApp
+ *
  */
 public class DroolsTest {
 
@@ -64,7 +70,7 @@ public class DroolsTest {
         	 
         	
         	 
-        	 File InputFile = new File("src/main/resources/samples/input_ex1.xml");
+        	 File InputFile = new File("src/main/resources/samples/input_ex2.xml");
         	 
         	 //String result = db.getData(dbInputCollection, "input_ex1.xml");
         	 
@@ -85,7 +91,7 @@ public class DroolsTest {
         	
         	//get Time Period
         	TimePeriod timePeriod = MapInputFile.getTimePeriod(input);
-        	
+        	System.out.println("Timeperiod:" + timePeriod.getBeginPosition().toString());
         	//get Flight Path
         	Flightpath flightpath = MapInputFile.getFlightPath(input);
         	
@@ -117,8 +123,8 @@ public class DroolsTest {
             //message.setMessage("Hello World");
             //message.setStatus(Message.HELLO);
         	
-        	timePeriod.setBeginPosition(new Date());
-        	timePeriod.setEndPosition(new Date());
+        	//timePeriod.setBeginPosition(new Date());
+        	//timePeriod.setEndPosition(new Date());
         	kSession.setGlobal("aircraft", aircraft);
         	kSession.setGlobal("timeperiod", timePeriod);
         	kSession.setGlobal("flightpath", flightpath);
