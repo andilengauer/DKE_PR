@@ -1,7 +1,7 @@
 package dataobjects;
 
 public class Wingspan {
-	private String interpretation;
+	private String interpretation = "";
 	private double value;
 	public String getInterpretation() {
 		return interpretation;

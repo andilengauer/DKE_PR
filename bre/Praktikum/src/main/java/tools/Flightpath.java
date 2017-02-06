@@ -67,7 +67,9 @@ public class Flightpath {
 
 
 	public String getAlternateAerodrome() {
-		return alternateAerodrome;
+		if(alternateAerodrome != null)
+			return alternateAerodrome;
+		return "";
 	}
 
 

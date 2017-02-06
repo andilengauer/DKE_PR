@@ -66,17 +66,17 @@ public class DroolsTest {
         	 
         	 File InputFile = new File("src/main/resources/samples/input_ex1.xml");
         	 
-        	 String result = db.getData(dbInputCollection, "fi1.xml");
+        	 //String result = db.getData(dbInputCollection, "input_ex1.xml");
         	 
-        	 File inputFile = new File("input.xml");
-        	 FileWriter writer = new FileWriter(inputFile);
+        	 //File inputFile = new File("input.xml");
+        	 //FileWriter writer = new FileWriter(inputFile);
         	 
-        	 writer.write(result);
+        	 //writer.write(result);
         	 
-        	 writer.close();
+        	 //writer.close();
         	 
         	//unmarshall InputFile
-        	FilterInputType input = JaxbHelper.unmarshalFilterInput(inputFile);
+        	FilterInputType input = JaxbHelper.unmarshalFilterInput(InputFile);
         	
         	//get Aircraft Properties
         	Aircraft aircraft = MapInputFile.getAircraftProperties(input);

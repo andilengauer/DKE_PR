@@ -4,6 +4,8 @@ public class Weight {
 	private String interpretation;
 	private double value;
 	public String getInterpretation() {
+		if(interpretation == null)
+			return "";
 		return interpretation;
 	}
 	public void setInterpretation(String interpretation) {

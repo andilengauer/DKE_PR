@@ -14,12 +14,12 @@ public class AixmMessage {
 		private String scenario;
 		private boolean relevant = true;
 		
-		private String opStatus;
-		private String usageType;
+		private String opStatus = "";
+		private String usageType = "";
 		private Wingspan wingspan;
 		private Weight weight;
-		private String flightMilitary;
-		private String importance;
+		private String flightMilitary = "";
+		private String importance = "";
 		
 		public String getMessageId() {
 			return messageId;
@@ -76,18 +76,23 @@ public class AixmMessage {
 			this.usageType = usageType;
 		}
 		public Wingspan getWingspan() {
+			if(wingspan == null)
+				return new Wingspan();
 			return wingspan;
 		}
 		public void setWingspan(Wingspan wingspan) {
 			this.wingspan = wingspan;
 		}
 		public Weight getWeight() {
+			if(weight == null)
+				return new Weight();
 			return weight;
 		}
 		public void setWeight(Weight weight) {
 			this.weight = weight;
 		}
 		public String getFlightMilitary() {
+			
 			return flightMilitary;
 		}
 		public void setFlightMilitary(String flightMilitary) {
